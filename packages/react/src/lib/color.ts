@@ -72,19 +72,50 @@ export function readableForeground(background: string): string {
 export interface AccentPalette {
   /** Normalized #rrggbb accent. */
   accent: string;
-  /** Foreground for text and icons on the accent. Meets WCAG AA for normal text. */
+  /** Hover shade of the accent, computed here so the text check covers it. */
+  accentHover: string;
+  /** Foreground for text and icons on the accent and its hover shade. */
   accentForeground: string;
-  /** Contrast ratio of accentForeground on accent. */
+  /**
+   * Lowest contrast of accentForeground across the accent and its hover shade.
+   * Meets WCAG AA (4.5:1) for normal text when this is at least 4.5.
+   */
   contrast: number;
 }
 
-/** Derives the accent pair from one user-chosen color. */
+/** How far the hover shade moves from the accent toward its contrast target. */
+const HOVER_MIX = 0.12;
+
+function mixRgb(a: RGB, b: RGB, amount: number): RGB {
+  return [0, 1, 2].map((i) => a[i]! * (1 - amount) + b[i]! * amount) as unknown as RGB;
+}
+
+/**
+ * The hover shade moves away from the foreground, so text gets more contrast
+ * on hover, not less. White text darkens the accent. Dark text lightens it.
+ */
+function hoverFor(accent: string, foreground: string): string {
+  const target: RGB = foreground === "#ffffff" ? [0, 0, 0] : [255, 255, 255];
+  return toHex(mixRgb(parseHex(accent), target, HOVER_MIX));
+}
+
+/**
+ * Derives the accent pair from one user-chosen color. Picks the foreground
+ * (white or near-black) that gives the best worst-case contrast across the
+ * accent and its hover shade, so text stays readable in both states.
+ */
 export function getAccentPalette(input: string): AccentPalette {
   const accent = toHex(parseHex(input));
-  const accentForeground = readableForeground(accent);
-  return {
-    accent,
-    accentForeground,
-    contrast: contrastRatio(accent, accentForeground),
-  };
+  let best: AccentPalette | null = null;
+  for (const foreground of ON_ACCENT_CANDIDATES) {
+    const accentHover = hoverFor(accent, foreground);
+    const contrast = Math.min(
+      contrastRatio(accent, foreground),
+      contrastRatio(accentHover, foreground),
+    );
+    if (!best || contrast > best.contrast) {
+      best = { accent, accentHover, accentForeground: foreground, contrast };
+    }
+  }
+  return best!;
 }

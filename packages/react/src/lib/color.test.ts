@@ -52,9 +52,24 @@ describe("getAccentPalette", () => {
     expect(palette.contrast).toBeGreaterThanOrEqual(4.5);
   });
 
-  it("meets AA for a range of brand colors", () => {
-    for (const color of ["#2563eb", "#16a34a", "#f59e0b", "#e11d48", "#14b8a6", "#64748b"]) {
-      expect(getAccentPalette(color).contrast, color).toBeGreaterThanOrEqual(4.5);
+  it("meets AA for a range of brand colors, including their hover shade", () => {
+    for (const color of ["#2563eb", "#16a34a", "#f59e0b", "#e11d48", "#14b8a6", "#64748b", "#7c3aed", "#059669", "#d97706"]) {
+      const palette = getAccentPalette(color);
+      expect(palette.contrast, color).toBeGreaterThanOrEqual(4.5);
+      expect(contrastRatio(palette.accentHover, palette.accentForeground), color).toBeGreaterThanOrEqual(4.5);
     }
+  });
+
+  it("derives a hover shade that moves away from the foreground", () => {
+    const light = getAccentPalette("#f59e0b"); // dark text, so hover lightens
+    expect(light.accentForeground).toBe("#0a0a0a");
+    expect(relativeLuminance(parseHex(light.accentHover))).toBeGreaterThan(
+      relativeLuminance(parseHex(light.accent)),
+    );
+    const dark = getAccentPalette("#2563eb"); // white text, so hover darkens
+    expect(dark.accentForeground).toBe("#ffffff");
+    expect(relativeLuminance(parseHex(dark.accentHover))).toBeLessThan(
+      relativeLuminance(parseHex(dark.accent)),
+    );
   });
 });

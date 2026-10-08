@@ -69,6 +69,7 @@ export function EasyUIProvider({
       const palette = getAccentPalette(accent);
       v["--eui-color-accent"] = palette.accent;
       v["--eui-color-accent-fg"] = palette.accentForeground;
+      v["--eui-color-accent-hover"] = palette.accentHover;
     }
     if (radius !== undefined) {
       v["--eui-radius-base"] = RADIUS[radius];
