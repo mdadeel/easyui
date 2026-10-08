@@ -1,0 +1,163 @@
+/* Button. Animates only color, background, and transform (compositor-friendly).
+   Sizes and colors come from tokens, so theming needs no changes here. */
+
+.eui-button {
+  --eui-button-h: 36px;
+  --eui-button-px: 14px;
+  --eui-button-fs: 14px;
+  --eui-button-bg: transparent;
+  --eui-button-fg: var(--eui-color-fg);
+  --eui-button-shadow: none;
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: var(--eui-button-h);
+  padding: 0 var(--eui-button-px);
+  border: 0;
+  border-radius: var(--eui-radius-base);
+  background-color: var(--eui-button-bg);
+  color: var(--eui-button-fg);
+  box-shadow: var(--eui-button-shadow);
+  font-family: inherit;
+  font-size: var(--eui-button-fs);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.011em;
+  white-space: nowrap;
+  text-decoration: none;
+  user-select: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  transition:
+    background-color var(--eui-duration-fast) var(--eui-easing-out),
+    color var(--eui-duration-fast) var(--eui-easing-out),
+    box-shadow var(--eui-duration-fast) var(--eui-easing-out),
+    transform var(--eui-duration-fast) var(--eui-easing-out);
+}
+
+/* Sizes */
+.eui-button--sm {
+  --eui-button-h: 32px;
+  --eui-button-px: 12px;
+  --eui-button-fs: 13px;
+}
+.eui-button--md {
+  --eui-button-h: 36px;
+  --eui-button-px: 14px;
+  --eui-button-fs: 14px;
+}
+.eui-button--lg {
+  --eui-button-h: 44px;
+  --eui-button-px: 18px;
+  --eui-button-fs: 15px;
+}
+
+/* Touch targets: grow small sizes on coarse pointers (WCAG 2.2 target size, with headroom). */
+@media (pointer: coarse) {
+  .eui-button--sm {
+    --eui-button-h: 40px;
+  }
+  .eui-button--md {
+    --eui-button-h: 44px;
+  }
+}
+
+/* Variants */
+.eui-button--primary {
+  --eui-button-bg: var(--eui-color-accent);
+  --eui-button-fg: var(--eui-color-accent-fg);
+}
+.eui-button--primary:hover:not(:disabled) {
+  --eui-button-bg: var(--eui-color-accent-hover);
+}
+
+.eui-button--secondary {
+  --eui-button-bg: var(--eui-color-bg);
+  --eui-button-fg: var(--eui-color-fg);
+  --eui-button-shadow: 0 0 0 var(--eui-border-width) var(--eui-color-border), 0 1px 2px rgb(0 0 0 / 0.04);
+}
+.eui-button--secondary:hover:not(:disabled) {
+  --eui-button-bg: var(--eui-color-hover);
+}
+
+.eui-button--ghost {
+  --eui-button-bg: transparent;
+  --eui-button-fg: var(--eui-color-fg);
+}
+.eui-button--ghost:hover:not(:disabled) {
+  --eui-button-bg: var(--eui-color-hover);
+}
+
+.eui-button--danger {
+  --eui-button-bg: var(--eui-color-danger);
+  --eui-button-fg: var(--eui-color-danger-fg);
+}
+.eui-button--danger:hover:not(:disabled) {
+  --eui-button-bg: var(--eui-color-danger-hover);
+}
+
+.eui-button--full {
+  width: 100%;
+}
+
+/* States */
+.eui-button:focus-visible {
+  outline: 2px solid var(--eui-color-ring);
+  outline-offset: 2px;
+}
+
+.eui-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.eui-button__label {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Loading spinner */
+.eui-button__spinner {
+  flex: none;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  animation: eui-spin 0.7s linear infinite;
+}
+
+@keyframes eui-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes eui-pulse {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Motion: press feedback only when motion is allowed. */
+@media (prefers-reduced-motion: no-preference) {
+  .eui-button:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+}
+
+/* Reduced motion: keep color feedback, drop movement, replace spin with a gentle pulse. */
+@media (prefers-reduced-motion: reduce) {
+  .eui-button__spinner {
+    animation: eui-pulse 1.4s ease-in-out infinite;
+    border-right-color: currentColor;
+  }
+}

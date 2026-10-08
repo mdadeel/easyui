@@ -1,0 +1,13 @@
+{
+  "name": "@easyui/tokens",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Source design tokens (DTCG-style JSON) and the CSS build step for easyui.",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "node scripts/build.mjs"
+  }
+}

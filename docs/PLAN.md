@@ -246,6 +246,24 @@ Confirmed by the project owner:
 
 ---
 
+## 8b. Phase 1 progress (current)
+
+Decisions applied: React only; Geist-like calm theme; npm + registry distribution; user-selectable accent.
+
+Built so far:
+- pnpm monorepo: `packages/tokens`, `packages/react`, `apps/playground`
+- Token pipeline: JSON (DTCG-style `$value`/`$type`) -> CSS custom properties, with light, dark, and system-dark modes and `{alias}` references
+- `@easyui/react`: `Button` (primary, secondary, ghost, danger; sm/md/lg; loading; fullWidth), `EasyUIProvider` (accent, radius, font, theme), and color helpers (`getAccentPalette` picks a WCAG-readable foreground for any brand color)
+- Tests: 22 passing (color math, provider, Button, axe checks per variant)
+- CI workflow: typecheck, lint, test, build
+- Playground with live accent, radius, font, and dark-mode controls
+
+Deliberate deviations from §3:
+- **Styling is plain CSS with `--eui-*` variables, not Tailwind.** Library consumers don't need Tailwind, and the shipped CSS can't be broken by a consumer's Tailwind config. Revisit if the registry flow needs it.
+- **Tokens are consolidated under `packages/tokens`**, with the CSS build feeding `@easyui/react/styles.css`.
+- **Primitive layer is not yet built.** The Base UI vs Radix spike is still pending. Button needs no primitive, so the spike comes before Dialog and Select.
+- **Storybook is deferred.** Playground plus tests cover Phase 1 for now.
+
 ## 9. Immediate next steps (once the questions are answered)
 
 1. Scaffold the monorepo and CI skeleton (Phase 1, first half).
