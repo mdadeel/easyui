@@ -1,4 +1,4 @@
-import { useMemo, type CSSProperties, type HTMLAttributes, type ReactNode } from "react";
+import { createContext, useContext, useMemo, useState, type CSSProperties, type HTMLAttributes, type ReactNode } from "react";
 import { cn } from "../lib/cn";
 import { getAccentPalette, isHexColor } from "../lib/color";
 
@@ -31,12 +31,22 @@ const RADIUS: Record<EasyUIRadius, string> = {
   full: "var(--eui-radius-full)",
 };
 
+const EasyUIRootContext = createContext<HTMLElement | null>(null);
+
+/**
+ * The element of the nearest EasyUIProvider, or null outside one.
+ * Portaled components (Dialog, Select) mount here so they inherit the theme.
+ * @internal
+ */
+export function useEasyUIRoot(): HTMLElement | null {
+  return useContext(EasyUIRootContext);
+}
+
 /**
  * Scopes theme customization to a subtree. Wrap your app (or a section of it)
  * once; everything inside picks up the chosen accent, radius, and font.
- *
- * Note: CSS variables inherit through the DOM, so portaled content (dialogs,
- * popovers) must be rendered inside this provider to pick up the theme.
+ * Portaled overlays (dialogs, selects) are mounted inside the provider too,
+ * so they keep the same theme.
  */
 export function EasyUIProvider({
   accent,
@@ -48,6 +58,8 @@ export function EasyUIProvider({
   children,
   ...rest
 }: EasyUIProviderProps) {
+  const [root, setRoot] = useState<HTMLDivElement | null>(null);
+
   const vars = useMemo(() => {
     const v: Record<string, string> = {};
     if (accent !== undefined) {
@@ -68,13 +80,16 @@ export function EasyUIProvider({
   }, [accent, radius, fontFamily]);
 
   return (
-    <div
-      {...rest}
-      className={cn("eui-root", className)}
-      data-theme={theme}
-      style={{ ...vars, ...style } as CSSProperties}
-    >
-      {children}
-    </div>
+    <EasyUIRootContext.Provider value={root}>
+      <div
+        {...rest}
+        ref={setRoot}
+        className={cn("eui-root", className)}
+        data-theme={theme}
+        style={{ ...vars, ...style } as CSSProperties}
+      >
+        {children}
+      </div>
+    </EasyUIRootContext.Provider>
   );
 }

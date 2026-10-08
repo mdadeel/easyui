@@ -1,12 +1,32 @@
 import { useState } from "react";
 import {
   Button,
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogTitle,
+  DialogTrigger,
   EasyUIProvider,
+  Field,
+  Input,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
   getAccentPalette,
   isHexColor,
   type EasyUIRadius,
   type EasyUITheme,
 } from "@easyui/react";
+
+const TEAMS = [
+  { value: "design", label: "Design" },
+  { value: "engineering", label: "Engineering" },
+  { value: "growth", label: "Growth" },
+];
 
 type Preset = { id: string; label: string; accent: string | undefined };
 
@@ -34,6 +54,10 @@ export function App() {
   const [radius, setRadius] = useState<EasyUIRadius>("md");
   const [font, setFont] = useState<FontKey>("geist");
   const [theme, setTheme] = useState<EasyUITheme>("light");
+  const [email, setEmail] = useState("");
+  const [team, setTeam] = useState<string | null>(null);
+  const emailError =
+    email.length > 0 && !/^\S+@\S+\.\S+$/.test(email) ? "Enter an email like name@company.com." : undefined;
 
   const palette = accent ? getAccentPalette(accent) : null;
   const passes = palette ? palette.contrast >= 4.5 : true;
@@ -184,6 +208,61 @@ export function App() {
               <div className="row">
                 <Button loading>Saving</Button>
                 <Button disabled>Disabled</Button>
+              </div>
+            </section>
+
+            <section className="card" aria-labelledby="form-heading">
+              <p className="eyebrow">Invite</p>
+              <h2 id="form-heading" className="card__title">
+                Add a teammate
+              </h2>
+
+              <div className="form-grid">
+                <Field
+                  label="Work email"
+                  description="We'll send the invite here."
+                  error={emailError}
+                >
+                  <Input
+                    type="email"
+                    autoComplete="email"
+                    placeholder="maya@company.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </Field>
+
+                <Field label="Team">
+                  <Select items={TEAMS} value={team} onValueChange={(v) => setTeam(v as string)}>
+                    <SelectTrigger aria-label="Team">
+                      <SelectValue placeholder="Choose a team" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {TEAMS.map((t) => (
+                        <SelectItem key={t.value} value={t.value}>
+                          {t.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </Field>
+              </div>
+
+              <div className="row row--end">
+                <Dialog>
+                  <DialogTrigger render={<Button variant="secondary">Remove access</Button>} />
+                  <DialogContent>
+                    <DialogTitle>Remove access for this team?</DialogTitle>
+                    <DialogDescription>
+                      Members keep their work, but they lose access to the team's projects.
+                    </DialogDescription>
+                    <DialogFooter>
+                      <DialogClose render={<Button variant="ghost">Keep access</Button>} />
+                      <Button variant="danger">Remove access</Button>
+                    </DialogFooter>
+                  </DialogContent>
+                </Dialog>
+                <Button disabled={!email || !!emailError || !team}>Send invite</Button>
               </div>
             </section>
 

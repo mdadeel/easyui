@@ -261,8 +261,14 @@ Built so far:
 Deliberate deviations from §3:
 - **Styling is plain CSS with `--eui-*` variables, not Tailwind.** Library consumers don't need Tailwind, and the shipped CSS can't be broken by a consumer's Tailwind config. Revisit if the registry flow needs it.
 - **Tokens are consolidated under `packages/tokens`**, with the CSS build feeding `@easyui/react/styles.css`.
-- **Primitive layer is not yet built.** The Base UI vs Radix spike is still pending. Button needs no primitive, so the spike comes before Dialog and Select.
-- **Storybook is deferred.** Playground plus tests cover Phase 1 for now.
+- **Storybook is deferred.** Playground plus tests cover the components for now.
+
+### Phase 2 progress
+
+- Primitive spike complete. **Decision: Base UI.** See [SPIKE.md](./SPIKE.md) for the method, results, and fallback.
+- Built: Dialog, Select, Input, Field (label, description, error wiring), and the provider portal fix so overlays inherit the theme.
+- Tested: 36 unit and accessibility tests, plus a headless-browser e2e run covering focus trapping, keyboard use, validation, and mobile layout.
+- Not yet built from the Phase 2 list: Checkbox, Radio, Switch, Textarea, Tooltip, Popover, DropdownMenu, Sheet, AlertDialog, Tabs, Accordion, Card, Avatar, Toast.
 
 ## 9. Immediate next steps (once the questions are answered)
 

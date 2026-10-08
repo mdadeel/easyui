@@ -14,6 +14,10 @@ const parts = [
   path.join(pkgRoot, "..", "tokens", "dist", "tokens.css"),
   path.join(pkgRoot, "src", "styles", "base.css"),
   path.join(pkgRoot, "src", "styles", "button.css"),
+  path.join(pkgRoot, "src", "styles", "field.css"),
+  path.join(pkgRoot, "src", "styles", "input.css"),
+  path.join(pkgRoot, "src", "styles", "dialog.css"),
+  path.join(pkgRoot, "src", "styles", "select.css"),
 ];
 
 const css = parts
