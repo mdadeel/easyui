@@ -26,6 +26,15 @@ const parts = [
   path.join(pkgRoot, "src", "styles", "radio.css"),
   path.join(pkgRoot, "src", "styles", "accordion.css"),
   path.join(pkgRoot, "src", "styles", "avatar.css"),
+  path.join(pkgRoot, "src", "styles", "badge.css"),
+  path.join(pkgRoot, "src", "styles", "link.css"),
+  path.join(pkgRoot, "src", "styles", "separator.css"),
+  path.join(pkgRoot, "src", "styles", "skeleton.css"),
+  path.join(pkgRoot, "src", "styles", "combobox.css"),
+  path.join(pkgRoot, "src", "styles", "popover.css"),
+  path.join(pkgRoot, "src", "styles", "menu.css"),
+  path.join(pkgRoot, "src", "styles", "sheet.css"),
+  path.join(pkgRoot, "src", "styles", "toast.css"),
 ];
 
 const css = parts

@@ -1,0 +1,38 @@
+/* Badge. Pill-shaped by default, with a 1px ring rather than a fill for neutral and outline. */
+
+.eui-badge {
+  --eui-badge-bg: var(--eui-color-hover);
+  --eui-badge-fg: var(--eui-color-fg);
+  --eui-badge-ring: transparent;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 22px;
+  padding: 0 8px;
+  border-radius: var(--eui-radius-full);
+  background-color: var(--eui-badge-bg);
+  color: var(--eui-badge-fg);
+  box-shadow: inset 0 0 0 var(--eui-border-width) var(--eui-badge-ring);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.eui-badge--accent {
+  --eui-badge-bg: var(--eui-color-accent);
+  --eui-badge-fg: var(--eui-color-accent-fg);
+}
+
+.eui-badge--outline {
+  --eui-badge-bg: transparent;
+  --eui-badge-fg: var(--eui-color-fg-muted);
+  --eui-badge-ring: var(--eui-color-border-strong);
+}
+
+.eui-badge--danger {
+  --eui-badge-bg: var(--eui-color-danger);
+  --eui-badge-fg: var(--eui-color-danger-fg);
+}

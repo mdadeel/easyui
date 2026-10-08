@@ -263,15 +263,42 @@ Deliberate deviations from §3:
 - **Tokens are consolidated under `packages/tokens`**, with the CSS build feeding `@easyui/react/styles.css`.
 - **Storybook is deferred.** Playground plus tests cover the components for now.
 
-### Phase 2 progress
+### Phase 2 progress (complete)
 
-- Primitive spike complete. **Decision: Base UI.** Same behavior in both libraries, so the choice rests on direction and ecosystem, with about 16 KB more gzipped for Dialog + Select. Radix is the fallback. See [SPIKE.md](./SPIKE.md) for the method, results, and fallback.
-- Built: Dialog, Select, Input, Field (label, description, error wiring), and the provider portal fix so overlays inherit the theme.
-- Built: Textarea, Checkbox, Switch, Tabs, Tooltip, Card, Radio, Accordion, Avatar, and AlertDialog. Each has unit and accessibility tests, a CSS file, and a playground demo.
-- Accent contrast: text on the accent is chosen against both the accent and its hover shade. The provider sets `--eui-color-accent-hover` from the same palette. Before this, hover dropped below WCAG AA for several presets (Rose light 3.8:1). Now every preset passes 4.5:1 at rest and on hover, in light and dark mode.
-- Tooltip deviation: Base UI 1.8 does not give the popup `role="tooltip"` or link the trigger with `aria-describedby`. Our `Tooltip` wrapper adds both, and the trigger is described while the popup is open.
-- Tested: 76 unit and accessibility tests across 16 files. Headless-browser checks confirm that the new components work and that the page chrome stays fixed when the accent, radius, and mode change.
-- Not yet built from the Phase 2 list: Popover, DropdownMenu, Sheet, Toast.
+All components in the Phase 2 list are built, each with unit and axe tests, a CSS file, and a playground demo.
+
+- Foundations: Button, Link, Badge, Separator, Skeleton.
+- Forms: Input, Textarea, Field (label, description, error wiring), Checkbox, Radio (RadioGroup), Switch, Combobox.
+- Overlays: Tooltip, Popover, DropdownMenu, Dialog, AlertDialog, Sheet (left, right, and bottom), Select.
+- Content: Tabs, Accordion, Card, Avatar, Toast (`toast()` helper and `ToastProvider`).
+
+Decisions and deviations made in this phase:
+- **Base UI over Radix** (see [SPIKE.md](./SPIKE.md)).
+- **Accent contrast covers the hover shade.** The provider sets `--eui-color-accent-hover` from the same palette. Before this fix, hover dropped below WCAG AA for several presets. Now every preset passes 4.5:1 at rest and on hover, in light and dark mode.
+- **Tooltip** adds `role="tooltip"` and `aria-describedby` on the trigger, because Base UI 1.8 omits them.
+- **Toast** uses `role="status"`, because Base UI defaults to `role="dialog"`. The close button also overrides Base UI's `aria-hidden` while the stack is collapsed, so the only dismiss control stays announced.
+- **Touch targets.** Checkbox, Radio, and Switch keep their visual size and widen the hit area to 28px or more.
+
+Tests: 98 unit and accessibility tests across 25 files. Typecheck and lint are clean.
+
+### Phase 3 progress (partial)
+
+Built as playground blocks (`apps/playground/src/blocks.tsx`, open with `#blocks`):
+- **App shell.** A sticky header with a sidebar from 900px up. Below 900px, the sidebar becomes a left sheet opened from the header, and it closes after a choice.
+- **Projects table.** Search, sortable columns with `aria-sort`, pagination, and a loading state with `aria-busy`. Below 640px, the table turns into labelled cards, and the header row is kept for screen readers.
+- **Forms.** Login with validation on submit, a Keep me signed in checkbox, and a full-width submit button.
+- **Feedback.** Empty state, error page with retry, and skeleton loading.
+
+Not yet built: the multi-step form, the settings form, and the marketing sections (hero, feature grid, pricing, footer).
+
+### Phase 4 progress (partial)
+
+- Responsive audit run in headless Chromium at 320, 768, and 1280 px on both pages. Results: no horizontal overflow at any width. No interactive targets under 24px, except one inline text link, which WCAG 2.5.8 exempts. No console errors after the dev server's dependency cache warmed up.
+- Not yet in CI: the audit script, Playwright visual snapshots, and per-component bundle budgets. The audit script is a one-off in the sandbox and is not committed.
+
+### Phase 5 and 6 (not started)
+
+- Storybook, the shadcn-compatible registry, the docs site, and the release checklist remain.
 
 ## 9. Immediate next steps (once the questions are answered)
 

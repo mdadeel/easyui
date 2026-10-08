@@ -59,3 +59,10 @@
     transition: none;
   }
 }
+
+/* Touch target. See choice.css; the hit area is widened without changing the look. */
+.eui-radio::after {
+  content: "";
+  position: absolute;
+  inset: -5px;
+}

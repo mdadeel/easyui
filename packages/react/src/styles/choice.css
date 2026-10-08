@@ -121,3 +121,17 @@
     transition: none;
   }
 }
+
+/* Touch target. The control stays visually small, but its hit area grows to at
+   least 28px so it meets the 24px minimum. The label already toggles it too. */
+.eui-checkbox::after,
+.eui-radio::after,
+.eui-switch::after {
+  content: "";
+  position: absolute;
+  inset: -5px;
+}
+
+.eui-switch::after {
+  inset: -4px -2px;
+}

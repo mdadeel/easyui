@@ -1,0 +1,26 @@
+/* Skeleton. A soft opacity pulse. No layout change, and no pulse when reduced motion is on. */
+
+.eui-skeleton {
+  display: block;
+  width: 100%;
+  height: 1em;
+  border-radius: var(--eui-radius-sm);
+  background-color: var(--eui-color-hover);
+  animation: eui-skeleton-pulse 1.6s var(--eui-easing-out) infinite;
+}
+
+@keyframes eui-skeleton-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eui-skeleton {
+    animation: none;
+  }
+}

@@ -1,0 +1,86 @@
+/* Sheet. Slides in from an edge with a transform. The backdrop fades. On small
+   screens it takes most of the viewport width, and on desktop it stays at a
+   readable width. Respects safe-area insets at the bottom. */
+
+.eui-sheet__backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  background-color: rgb(0 0 0 / 0.4);
+  transition: opacity var(--eui-duration-base) var(--eui-easing-out);
+}
+
+.eui-sheet__backdrop[data-starting-style],
+.eui-sheet__backdrop[data-ending-style] {
+  opacity: 0;
+}
+
+.eui-sheet {
+  --eui-sheet-size: min(380px, 88vw);
+
+  position: fixed;
+  z-index: 80;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-sizing: border-box;
+  padding: 20px;
+  overflow-y: auto;
+  background-color: var(--eui-color-bg);
+  color: var(--eui-color-fg);
+  box-shadow: 0 0 0 var(--eui-border-width) var(--eui-color-border), 0 24px 48px -12px rgb(0 0 0 / 0.25);
+  transition:
+    transform var(--eui-duration-base) var(--eui-easing-out),
+    opacity var(--eui-duration-base) var(--eui-easing-out);
+}
+
+.eui-sheet--right {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: var(--eui-sheet-size);
+  border-radius: var(--eui-radius-base) 0 0 var(--eui-radius-base);
+}
+
+.eui-sheet--left {
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: var(--eui-sheet-size);
+  border-radius: 0 var(--eui-radius-base) var(--eui-radius-base) 0;
+}
+
+.eui-sheet--bottom {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  max-height: 85vh;
+  padding-bottom: calc(20px + env(safe-area-inset-bottom));
+  border-radius: var(--eui-radius-base) var(--eui-radius-base) 0 0;
+}
+
+.eui-sheet--right[data-starting-style],
+.eui-sheet--right[data-ending-style] {
+  transform: translateX(100%);
+}
+
+.eui-sheet--left[data-starting-style],
+.eui-sheet--left[data-ending-style] {
+  transform: translateX(-100%);
+}
+
+.eui-sheet--bottom[data-starting-style],
+.eui-sheet--bottom[data-ending-style] {
+  transform: translateY(100%);
+}
+
+.eui-sheet:focus {
+  outline: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eui-sheet,
+  .eui-sheet__backdrop {
+    transition: none;
+  }
+}

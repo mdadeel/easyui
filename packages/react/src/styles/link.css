@@ -1,0 +1,38 @@
+/* Link. The underline is offset and thin, and it is set with text-decoration
+   so the text keeps its own color. Focus uses the shared ring. */
+
+.eui-link {
+  color: var(--eui-color-accent);
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: color-mix(in oklab, currentColor 40%, transparent);
+  border-radius: var(--eui-radius-sm);
+  transition: text-decoration-color var(--eui-duration-fast) var(--eui-easing-out);
+}
+
+.eui-link--always {
+  text-decoration-color: currentColor;
+}
+
+.eui-link--hover {
+  text-decoration-line: none;
+}
+
+.eui-link--hover:hover {
+  text-decoration-line: underline;
+  text-decoration-color: currentColor;
+}
+
+.eui-link--none {
+  text-decoration-line: none;
+}
+
+.eui-link:hover {
+  text-decoration-color: currentColor;
+}
+
+.eui-link:focus-visible {
+  outline: 2px solid var(--eui-color-ring);
+  outline-offset: 2px;
+}

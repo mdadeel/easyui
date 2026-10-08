@@ -1,0 +1,122 @@
+/* Toast. A stack pinned to the bottom on mobile and the bottom-right on desktop.
+   Entry and exit use transform and opacity. Each toast has a hairline ring. */
+
+.eui-toast-viewport {
+  position: fixed;
+  z-index: 90;
+  left: 16px;
+  right: 16px;
+  bottom: max(16px, env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none;
+}
+
+.eui-toast {
+  --eui-toast-accent: var(--eui-color-border-strong);
+
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 12px 12px 14px;
+  border-radius: var(--eui-radius-base);
+  background-color: var(--eui-color-bg);
+  color: var(--eui-color-fg);
+  box-shadow:
+    0 0 0 var(--eui-border-width) var(--eui-color-border),
+    0 8px 24px -8px rgb(0 0 0 / 0.2);
+  pointer-events: auto;
+  transform: translateY(0);
+  transition:
+    transform var(--eui-duration-base) var(--eui-easing-out),
+    opacity var(--eui-duration-base) var(--eui-easing-out);
+}
+
+.eui-toast--success {
+  --eui-toast-accent: var(--eui-color-accent);
+}
+
+.eui-toast--error {
+  --eui-toast-accent: var(--eui-color-danger);
+}
+
+.eui-toast::before {
+  content: "";
+  flex: none;
+  align-self: stretch;
+  width: 2px;
+  margin: 2px 0;
+  border-radius: 2px;
+  background-color: var(--eui-toast-accent);
+}
+
+.eui-toast[data-starting-style],
+.eui-toast[data-ending-style] {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.eui-toast__content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  flex: 1;
+}
+
+.eui-toast__title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+}
+
+.eui-toast__description {
+  margin: 0;
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--eui-color-fg-muted);
+}
+
+.eui-toast__close {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  margin: -4px -4px 0 0;
+  border: 0;
+  border-radius: var(--eui-radius-sm);
+  background: transparent;
+  color: var(--eui-color-fg-muted);
+  cursor: pointer;
+}
+
+.eui-toast__close:hover {
+  background-color: var(--eui-color-hover);
+  color: var(--eui-color-fg);
+}
+
+.eui-toast__close:focus-visible {
+  outline: 2px solid var(--eui-color-ring);
+  outline-offset: 2px;
+}
+
+@media (min-width: 640px) {
+  .eui-toast-viewport {
+    left: auto;
+    right: 24px;
+    bottom: 24px;
+    width: 360px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eui-toast {
+    transition: none;
+  }
+}

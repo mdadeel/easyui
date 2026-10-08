@@ -70,6 +70,57 @@ export {
   AlertDialogTrigger,
 } from "./components/alert-dialog/alert-dialog";
 
+export { Badge } from "./components/badge/badge";
+export type { BadgeProps, BadgeVariant } from "./components/badge/badge";
+
+export { Link } from "./components/link/link";
+export type { LinkProps } from "./components/link/link";
+
+export { Separator } from "./components/separator/separator";
+export { Skeleton } from "./components/skeleton/skeleton";
+export type { SkeletonProps } from "./components/skeleton/skeleton";
+
+export {
+  Combobox,
+  ComboboxContent,
+  ComboboxEmpty,
+  ComboboxInput,
+  ComboboxItem,
+  ComboboxList,
+} from "./components/combobox/combobox";
+
+export {
+  Popover,
+  PopoverClose,
+  PopoverContent,
+  PopoverDescription,
+  PopoverTitle,
+  PopoverTrigger,
+} from "./components/popover/popover";
+
+export {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "./components/dropdown-menu/dropdown-menu";
+
+export {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetTitle,
+  SheetTrigger,
+} from "./components/sheet/sheet";
+
+export { ToastProvider, toast, useToast } from "./components/toast/toast";
+export type { ToastData, ToastType } from "./components/toast/toast";
+
 export {
   contrastRatio,
   getAccentPalette,

@@ -1,7 +1,35 @@
 import { useState } from "react";
 import {
+  Badge,
   Button,
   Card,
+  Combobox,
+  ComboboxContent,
+  ComboboxEmpty,
+  ComboboxInput,
+  ComboboxItem,
+  ComboboxList,
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+  Link,
+  Popover,
+  PopoverContent,
+  PopoverDescription,
+  PopoverTitle,
+  PopoverTrigger,
+  Separator,
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetTitle,
+  SheetTrigger,
+  Skeleton,
+  ToastProvider,
+  toast,
   CardContent,
   CardDescription,
   CardFooter,
@@ -100,6 +128,8 @@ export function App() {
   const [digest, setDigest] = useState(true);
   const [notify, setNotify] = useState(false);
   const [plan, setPlan] = useState("free");
+  const [teamItem, setTeamItem] = useState<{ value: string; label: string } | null>(null);
+  const [onlyMine, setOnlyMine] = useState(false);
   const emailError =
     email.length > 0 && !/^\S+@\S+\.\S+$/.test(email) ? "Enter an email like name@company.com." : undefined;
 
@@ -118,6 +148,10 @@ export function App() {
           <span className="brand__mark" aria-hidden="true" />
           <span className="brand__name">easyui</span>
         </div>
+        <nav className="page__nav" aria-label="Pages">
+          <a href="#" aria-current="page" className="page__nav-link">Components</a>
+          <a href="#blocks" className="page__nav-link">Blocks</a>
+        </nav>
       </header>
 
       <main className="page__main">
@@ -243,6 +277,7 @@ export function App() {
             theme={mode}
             aria-label="Component preview"
           >
+            <ToastProvider>
             <section className="card" aria-labelledby="buttons-heading">
               <h2 id="buttons-heading" className="card__title">
                 Buttons
@@ -364,6 +399,109 @@ export function App() {
                 <Button size="sm">Save changes</Button>
               </CardFooter>
             </Card>
+            <Card aria-labelledby="overlays-heading">
+              <CardHeader>
+                <CardTitle id="overlays-heading">Overlays and feedback</CardTitle>
+                <CardDescription>
+                  Popovers, menus, sheets, and toasts share the same tokens, focus ring, and motion.
+                </CardDescription>
+              </CardHeader>
+
+              <Combobox
+                items={TEAMS}
+                itemToStringLabel={(t: { label: string }) => t.label}
+                value={teamItem}
+                onValueChange={(v) => setTeamItem(v as { value: string; label: string } | null)}
+              >
+                <Field label="Team to notify" description="Search by name.">
+                  <ComboboxInput placeholder="Search teams" />
+                </Field>
+                <ComboboxContent>
+                  <ComboboxEmpty>No team matches that search.</ComboboxEmpty>
+                  <ComboboxList>
+                    {(team: { value: string; label: string }) => (
+                      <ComboboxItem key={team.value} value={team}>
+                        {team.label}
+                      </ComboboxItem>
+                    )}
+                  </ComboboxList>
+                </ComboboxContent>
+              </Combobox>
+
+              <div className="row">
+                <Popover>
+                  <PopoverTrigger render={<Button variant="secondary">Filters</Button>} />
+                  <PopoverContent align="start">
+                    <PopoverTitle>Filter projects</PopoverTitle>
+                    <PopoverDescription>Changes apply as soon as you pick them.</PopoverDescription>
+                    <div className="stack">
+                      <Checkbox
+                        label="Only my projects"
+                        checked={onlyMine}
+                        onCheckedChange={setOnlyMine}
+                      />
+                    </div>
+                  </PopoverContent>
+                </Popover>
+
+                <DropdownMenu>
+                  <DropdownMenuTrigger render={<Button variant="secondary">More</Button>} />
+                  <DropdownMenuContent>
+                    <DropdownMenuGroup>
+                      <DropdownMenuItem onClick={() => toast({ title: "Renamed", description: "The project now has its new name." })}>
+                        Rename
+                      </DropdownMenuItem>
+                      <DropdownMenuItem>Duplicate</DropdownMenuItem>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem onClick={() => toast({ title: "Project archived", type: "error" })}>
+                        Archive
+                      </DropdownMenuItem>
+                    </DropdownMenuGroup>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+
+                <Sheet>
+                  <SheetTrigger render={<Button variant="ghost">Open menu</Button>} />
+                  <SheetContent side="left">
+                    <SheetTitle>Navigation</SheetTitle>
+                    <SheetDescription>On small screens, the sidebar opens here.</SheetDescription>
+                    <nav className="stack" aria-label="Sheet navigation">
+                      <Link href="#">Projects</Link>
+                      <Link href="#">Members</Link>
+                      <Link href="#">Billing</Link>
+                    </nav>
+                  </SheetContent>
+                </Sheet>
+
+                <Button
+                  variant="primary"
+                  onClick={() =>
+                    toast({
+                      title: "Invite sent",
+                      description: "Maya has 48 hours to join the design team.",
+                      type: "success",
+                    })
+                  }
+                >
+                  Show a toast
+                </Button>
+              </div>
+
+              <Separator />
+
+              <div className="row">
+                <Badge variant="accent">New</Badge>
+                <Badge variant="outline">Beta</Badge>
+                <Badge variant="danger">Failed</Badge>
+                <Link href="#">Read the docs</Link>
+              </div>
+
+              <div className="stack" aria-hidden="true">
+                <Skeleton style={{ width: "70%" }} />
+                <Skeleton style={{ width: "45%" }} />
+              </div>
+            </Card>
+
             <Card aria-labelledby="account-heading">
               <CardHeader>
                 <div className="row">
@@ -409,6 +547,7 @@ export function App() {
                 </AlertDialog>
               </CardFooter>
             </Card>
+            </ToastProvider>
           </EasyUIProvider>
         </div>
       </main>
