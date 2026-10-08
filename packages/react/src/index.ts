@@ -28,6 +28,25 @@ export {
   SelectValue,
 } from "./components/select/select";
 
+export { Textarea } from "./components/textarea/textarea";
+export type { TextareaProps } from "./components/textarea/textarea";
+
+export { Checkbox, Switch } from "./components/choice/choice";
+export type { CheckboxProps, SwitchProps } from "./components/choice/choice";
+
+export { Tabs, TabsList, TabsPanel, TabsTab } from "./components/tabs/tabs";
+
+export { Tooltip, TooltipContent, TooltipTrigger } from "./components/tooltip/tooltip";
+
+export {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "./components/card/card";
+
 export {
   contrastRatio,
   getAccentPalette,

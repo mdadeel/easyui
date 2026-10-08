@@ -18,6 +18,11 @@ const parts = [
   path.join(pkgRoot, "src", "styles", "input.css"),
   path.join(pkgRoot, "src", "styles", "dialog.css"),
   path.join(pkgRoot, "src", "styles", "select.css"),
+  path.join(pkgRoot, "src", "styles", "textarea.css"),
+  path.join(pkgRoot, "src", "styles", "choice.css"),
+  path.join(pkgRoot, "src", "styles", "tabs.css"),
+  path.join(pkgRoot, "src", "styles", "tooltip.css"),
+  path.join(pkgRoot, "src", "styles", "card.css"),
 ];
 
 const css = parts

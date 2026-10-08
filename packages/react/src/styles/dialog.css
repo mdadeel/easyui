@@ -26,7 +26,7 @@
   overflow: auto;
   padding: 24px;
   border: 0;
-  border-radius: calc(var(--eui-radius-base) * 1.5);
+  border-radius: min(calc(var(--eui-radius-base) * 1.5), 1rem);
   background-color: var(--eui-color-bg);
   color: var(--eui-color-fg);
   box-shadow:
@@ -81,7 +81,7 @@
     width: 100%;
     max-height: 85dvh;
     translate: none;
-    border-radius: calc(var(--eui-radius-base) * 2) calc(var(--eui-radius-base) * 2) 0 0;
+    border-radius: min(calc(var(--eui-radius-base) * 2), 1.25rem) min(calc(var(--eui-radius-base) * 2), 1.25rem) 0 0;
     padding-bottom: max(24px, env(safe-area-inset-bottom));
   }
 

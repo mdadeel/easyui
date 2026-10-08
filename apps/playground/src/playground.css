@@ -47,9 +47,8 @@ body {
   width: 22px;
   height: 22px;
   border-radius: 6px;
-  background: var(--eui-color-accent);
-  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--eui-color-fg) 12%, transparent);
-  transition: background-color 200ms var(--eui-easing-out);
+  background: #171717;
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.12);
 }
 
 .page__main {
@@ -108,7 +107,7 @@ body {
   display: grid;
   gap: 28px;
   padding: 20px;
-  border-radius: var(--eui-radius-base);
+  border-radius: 12px;
   background: var(--eui-color-surface);
   box-shadow: 0 0 0 1px var(--eui-color-border);
 }
@@ -197,7 +196,7 @@ body {
   height: 36px;
   padding: 0 10px;
   border: 0;
-  border-radius: var(--eui-radius-sm);
+  border-radius: 6px;
   background: var(--eui-color-bg);
   color: var(--eui-color-fg);
   font-family: var(--eui-font-mono);
@@ -225,7 +224,7 @@ body {
   flex-wrap: wrap;
   gap: 4px;
   padding: 3px;
-  border-radius: var(--eui-radius-base);
+  border-radius: 10px;
   background: var(--eui-color-hover);
 }
 
@@ -233,7 +232,7 @@ body {
   height: 30px;
   padding: 0 10px;
   border: 0;
-  border-radius: calc(var(--eui-radius-base) - 3px);
+  border-radius: 7px;
   background: transparent;
   color: var(--eui-color-fg-muted);
   font: inherit;
@@ -246,9 +245,9 @@ body {
 }
 
 .segmented__item[aria-checked="true"] {
-  background: var(--eui-color-bg);
-  color: var(--eui-color-fg);
-  box-shadow: 0 0 0 1px var(--eui-color-border), 0 1px 2px rgb(0 0 0 / 0.04);
+  background: #ffffff;
+  color: #171717;
+  box-shadow: 0 0 0 1px #ebebeb, 0 1px 2px rgb(0 0 0 / 0.04);
 }
 
 .segmented__item:focus-visible {
@@ -260,11 +259,19 @@ body {
   display: grid;
   gap: 16px;
   min-width: 0;
+  padding: clamp(12px, 2vw, 16px);
+  border-radius: 14px;
+  background: var(--eui-color-surface);
+  box-shadow: 0 0 0 1px var(--eui-color-border);
+}
+
+.preview > .card {
+  background: var(--eui-color-bg);
 }
 
 .card {
   padding: clamp(18px, 3vw, 28px);
-  border-radius: calc(var(--eui-radius-base) * 1.5);
+  border-radius: min(calc(var(--eui-radius-base) * 1.5), 1rem);
   background: var(--eui-color-bg);
   box-shadow: 0 0 0 1px var(--eui-color-border), 0 1px 2px rgb(0 0 0 / 0.03);
   display: grid;
@@ -322,4 +329,8 @@ body {
   .form-grid {
     grid-template-columns: 1fr;
   }
+}
+
+.row--between {
+  justify-content: space-between;
 }

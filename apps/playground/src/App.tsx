@@ -1,6 +1,13 @@
 import { useState } from "react";
 import {
   Button,
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+  Checkbox,
   Dialog,
   DialogClose,
   DialogContent,
@@ -16,17 +23,20 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
+  Switch,
+  Tabs,
+  TabsList,
+  TabsPanel,
+  TabsTab,
+  Textarea,
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
   getAccentPalette,
   isHexColor,
   type EasyUIRadius,
   type EasyUITheme,
 } from "@easyui/react";
-
-const TEAMS = [
-  { value: "design", label: "Design" },
-  { value: "engineering", label: "Engineering" },
-  { value: "growth", label: "Growth" },
-];
 
 type Preset = { id: string; label: string; accent: string | undefined };
 
@@ -48,14 +58,32 @@ const FONTS = {
 
 type FontKey = keyof typeof FONTS;
 
+const TEAMS = [
+  { value: "design", label: "Design" },
+  { value: "engineering", label: "Engineering" },
+  { value: "growth", label: "Growth" },
+];
+
+function normalize(hex: string): string {
+  const v = hex.replace(/^#/, "");
+  return "#" + (v.length === 3 ? v.split("").map((c) => c + c).join("") : v).toLowerCase();
+}
+
+/**
+ * The page itself is NOT themed. Only the preview surface is wrapped in
+ * EasyUIProvider, so the accent, radius, font, and mode you pick affect the
+ * components on the right and nothing else.
+ */
 export function App() {
   const [accent, setAccent] = useState<string | undefined>(undefined);
   const [draft, setDraft] = useState("#171717"); // starts on the default ink accent
   const [radius, setRadius] = useState<EasyUIRadius>("md");
   const [font, setFont] = useState<FontKey>("geist");
-  const [theme, setTheme] = useState<EasyUITheme>("light");
+  const [mode, setMode] = useState<EasyUITheme>("light");
   const [email, setEmail] = useState("");
   const [team, setTeam] = useState<string | null>(null);
+  const [digest, setDigest] = useState(true);
+  const [notify, setNotify] = useState(false);
   const emailError =
     email.length > 0 && !/^\S+@\S+\.\S+$/.test(email) ? "Enter an email like name@company.com." : undefined;
 
@@ -68,25 +96,12 @@ export function App() {
   }
 
   return (
-    <EasyUIProvider
-      className="page"
-      accent={accent}
-      radius={radius}
-      fontFamily={FONTS[font].value}
-      theme={theme}
-    >
+    <div className="page">
       <header className="page__header">
         <div className="brand">
           <span className="brand__mark" aria-hidden="true" />
           <span className="brand__name">easyui</span>
         </div>
-        <Button
-          variant="secondary"
-          size="sm"
-          onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-        >
-          {theme === "light" ? "Dark mode" : "Light mode"}
-        </Button>
       </header>
 
       <main className="page__main">
@@ -94,8 +109,8 @@ export function App() {
           <p className="eyebrow">Playground</p>
           <h1 className="title">Pick a brand color. Everything follows.</h1>
           <p className="lede">
-            Change the accent, radius, or font below. Each component reads these from the theme, so
-            nothing needs to be edited to rebrand.
+            Change the accent, radius, or font. Only the components on the right update. This page
+            keeps its own look.
           </p>
         </section>
 
@@ -115,7 +130,7 @@ export function App() {
                       aria-label={`${p.label} accent`}
                       title={p.label}
                       data-active={active || undefined}
-                      style={{ background: p.accent ?? "var(--eui-color-fg)" }}
+                      style={{ background: p.accent ?? "#171717" }}
                       onClick={() => {
                         setAccent(p.accent);
                         setDraft(p.accent ?? "#171717");
@@ -184,9 +199,34 @@ export function App() {
                 ))}
               </div>
             </fieldset>
+
+            <fieldset className="field">
+              <legend className="field__label">Mode</legend>
+              <div className="segmented" role="radiogroup" aria-label="Mode">
+                {(["light", "dark"] as EasyUITheme[]).map((m) => (
+                  <button
+                    key={m}
+                    type="button"
+                    role="radio"
+                    aria-checked={mode === m}
+                    className="segmented__item"
+                    onClick={() => setMode(m)}
+                  >
+                    {m}
+                  </button>
+                ))}
+              </div>
+            </fieldset>
           </aside>
 
-          <div className="preview">
+          <EasyUIProvider
+            className="preview"
+            accent={accent}
+            radius={radius}
+            fontFamily={FONTS[font].value}
+            theme={mode}
+            aria-label="Component preview"
+          >
             <section className="card" aria-labelledby="buttons-heading">
               <h2 id="buttons-heading" className="card__title">
                 Buttons
@@ -218,11 +258,7 @@ export function App() {
               </h2>
 
               <div className="form-grid">
-                <Field
-                  label="Work email"
-                  description="We'll send the invite here."
-                  error={emailError}
-                >
+                <Field label="Work email" description="We'll send the invite here." error={emailError}>
                   <Input
                     type="email"
                     autoComplete="email"
@@ -265,29 +301,56 @@ export function App() {
                 <Button disabled={!email || !!emailError || !team}>Send invite</Button>
               </div>
             </section>
+            <Card aria-labelledby="workspace-heading">
+              <CardHeader>
+                <div className="row row--between">
+                  <CardTitle id="workspace-heading">Workspace</CardTitle>
+                  <Tooltip>
+                    <TooltipTrigger render={<Button variant="ghost" size="sm">Copy link</Button>} />
+                    <TooltipContent>Copy the invite link</TooltipContent>
+                  </Tooltip>
+                </div>
+                <CardDescription>Choose what this workspace sends and where notes live.</CardDescription>
+              </CardHeader>
 
-            <section className="card" aria-labelledby="sample-heading">
-              <p className="eyebrow">Team</p>
-              <h2 id="sample-heading" className="card__title card__title--lg">
-                Invite Maya to the Ledger workspace
-              </h2>
-              <p className="muted">
-                She'll get editor access to 3 projects. You can change her role after she joins.
-              </p>
-              <div className="row row--end">
-                <Button variant="ghost">Cancel</Button>
-                <Button variant="secondary">Copy link</Button>
-                <Button>Send invite</Button>
-              </div>
-            </section>
-          </div>
+              <Tabs defaultValue="general">
+                <TabsList aria-label="Workspace sections">
+                  <TabsTab value="general">General</TabsTab>
+                  <TabsTab value="notes">Notes</TabsTab>
+                </TabsList>
+                <TabsPanel value="general">
+                  <CardContent>
+                    <Switch
+                      label="Notify on new sign-ins"
+                      description="Email the workspace owner when someone signs in from a new device."
+                      checked={notify}
+                      onCheckedChange={setNotify}
+                    />
+                    <Checkbox
+                      label="Weekly digest"
+                      description="One summary email every Monday."
+                      checked={digest}
+                      onCheckedChange={setDigest}
+                    />
+                  </CardContent>
+                </TabsPanel>
+                <TabsPanel value="notes">
+                  <CardContent>
+                    <Field label="Onboarding notes" description="Shown to new members on their first day.">
+                      <Textarea rows={4} placeholder="Where to start, who to ask, what to read first." />
+                    </Field>
+                  </CardContent>
+                </TabsPanel>
+              </Tabs>
+
+              <CardFooter>
+                <Button variant="secondary" size="sm">Discard</Button>
+                <Button size="sm">Save changes</Button>
+              </CardFooter>
+            </Card>
+          </EasyUIProvider>
         </div>
       </main>
-    </EasyUIProvider>
+    </div>
   );
-}
-
-function normalize(hex: string): string {
-  const v = hex.replace(/^#/, "");
-  return "#" + (v.length === 3 ? v.split("").map((c) => c + c).join("") : v).toLowerCase();
 }

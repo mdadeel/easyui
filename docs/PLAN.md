@@ -265,10 +265,12 @@ Deliberate deviations from §3:
 
 ### Phase 2 progress
 
-- Primitive spike complete. **Decision: Base UI.** See [SPIKE.md](./SPIKE.md) for the method, results, and fallback.
+- Primitive spike complete. **Decision: Base UI.** Same behavior in both libraries, so the choice rests on direction and ecosystem, with about 16 KB more gzipped for Dialog + Select. Radix is the fallback. See [SPIKE.md](./SPIKE.md) for the method, results, and fallback.
 - Built: Dialog, Select, Input, Field (label, description, error wiring), and the provider portal fix so overlays inherit the theme.
-- Tested: 36 unit and accessibility tests, plus a headless-browser e2e run covering focus trapping, keyboard use, validation, and mobile layout.
-- Not yet built from the Phase 2 list: Checkbox, Radio, Switch, Textarea, Tooltip, Popover, DropdownMenu, Sheet, AlertDialog, Tabs, Accordion, Card, Avatar, Toast.
+- Built: Textarea, Checkbox, Switch, Tabs, Tooltip, and Card. Each has unit and accessibility tests, a CSS file, and a playground demo.
+- Tooltip deviation: Base UI 1.8 does not give the popup `role="tooltip"` or link the trigger with `aria-describedby`. Our `Tooltip` wrapper adds both, and the trigger is described while the popup is open.
+- Tested: 60 unit and accessibility tests across 11 files. Headless-browser checks confirm that the new components work and that the page chrome stays fixed when the accent, radius, and mode change.
+- Not yet built from the Phase 2 list: Radio, Popover, DropdownMenu, Sheet, AlertDialog, Accordion, Avatar, Toast.
 
 ## 9. Immediate next steps (once the questions are answered)
 
