@@ -1,0 +1,21 @@
+/* Base layer. Scoped to .eui-root so it never leaks into a host page's styles. */
+
+.eui-root {
+  font-family: var(--eui-font-sans);
+  color: var(--eui-color-fg);
+  background-color: var(--eui-color-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+.eui-root *,
+.eui-root *::before,
+.eui-root *::after {
+  box-sizing: border-box;
+}
+
+.eui-root :focus-visible {
+  outline: 2px solid var(--eui-color-ring);
+  outline-offset: 2px;
+}

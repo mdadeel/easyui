@@ -1,0 +1,29 @@
+/* Field: label, description, and error. Layout only; the control is styled in input.css. */
+
+.eui-field {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+.eui-field__label {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--eui-color-fg);
+  cursor: default;
+}
+
+.eui-field__description {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--eui-color-fg-muted);
+}
+
+.eui-field__error {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--eui-color-danger);
+}

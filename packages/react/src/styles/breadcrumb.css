@@ -1,0 +1,48 @@
+/* Breadcrumb. A single wrapping row. The current page is plain text, not a link. */
+
+.eui-breadcrumb__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 13px;
+}
+
+.eui-breadcrumb__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.eui-breadcrumb__link {
+  min-height: 24px;
+  display: inline-flex;
+  align-items: center;
+  color: var(--eui-color-fg-muted);
+  text-decoration: none;
+  border-radius: var(--eui-radius-sm);
+}
+
+.eui-breadcrumb__link:hover {
+  color: var(--eui-color-fg);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.eui-breadcrumb__link:focus-visible {
+  outline: 2px solid var(--eui-color-ring);
+  outline-offset: 2px;
+}
+
+.eui-breadcrumb__current {
+  color: var(--eui-color-fg);
+  font-weight: 500;
+}
+
+.eui-breadcrumb__separator {
+  color: var(--eui-color-border-strong);
+}

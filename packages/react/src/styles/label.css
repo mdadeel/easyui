@@ -1,0 +1,14 @@
+/* Label. Standalone form label, matching the Field label. */
+
+.eui-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--eui-color-fg);
+}
+
+.eui-label__required {
+  color: var(--eui-color-danger);
+}

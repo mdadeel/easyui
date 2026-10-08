@@ -1,0 +1,68 @@
+/* Radio. Same ring-based look as Checkbox. The dot scales in with transform only. */
+
+.eui-radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.eui-radio {
+  position: relative;
+  flex: none;
+  width: 18px;
+  height: 18px;
+  margin: 1px 0 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--eui-radius-full);
+  background-color: var(--eui-color-bg);
+  box-shadow: 0 0 0 var(--eui-border-width) var(--eui-color-border-strong);
+  cursor: pointer;
+  transition: box-shadow var(--eui-duration-fast) var(--eui-easing-out);
+}
+
+.eui-radio:hover:not(:disabled) {
+  box-shadow: 0 0 0 var(--eui-border-width) var(--eui-color-fg-muted);
+}
+
+.eui-radio[data-checked] {
+  box-shadow: 0 0 0 var(--eui-border-width) var(--eui-color-accent);
+}
+
+.eui-radio:focus-visible {
+  outline: 2px solid var(--eui-color-ring);
+  outline-offset: 2px;
+}
+
+.eui-radio[data-disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.eui-radio__indicator {
+  display: block;
+  position: absolute;
+  inset: 4px;
+  border-radius: var(--eui-radius-full);
+  background-color: var(--eui-color-accent);
+  transform: scale(0);
+  transition: transform var(--eui-duration-fast) var(--eui-easing-out);
+}
+
+.eui-radio__indicator[data-checked] {
+  transform: scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eui-radio,
+  .eui-radio__indicator {
+    transition: none;
+  }
+}
+
+/* Touch target. See choice.css; the hit area is widened without changing the look. */
+.eui-radio::after {
+  content: "";
+  position: absolute;
+  inset: -5px;
+}

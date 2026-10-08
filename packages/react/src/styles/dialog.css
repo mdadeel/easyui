@@ -1,0 +1,116 @@
+/* Dialog. Centered on desktop, a bottom sheet on small screens.
+   Enter/exit uses opacity and transform only. Base UI sets data-starting-style and
+   data-ending-style while the popup mounts and unmounts. */
+
+.eui-dialog__backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background-color: rgb(0 0 0 / 0.45);
+  transition: opacity var(--eui-duration-base) var(--eui-easing-out);
+}
+
+.eui-dialog__backdrop[data-starting-style],
+.eui-dialog__backdrop[data-ending-style] {
+  opacity: 0;
+}
+
+.eui-dialog {
+  position: fixed;
+  z-index: 51;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  width: min(440px, calc(100vw - 32px));
+  max-height: calc(100dvh - 48px);
+  overflow: auto;
+  padding: 24px;
+  border: 0;
+  border-radius: min(calc(var(--eui-radius-base) * 1.5), 1rem);
+  background-color: var(--eui-color-bg);
+  color: var(--eui-color-fg);
+  box-shadow:
+    0 0 0 var(--eui-border-width) var(--eui-color-border),
+    0 24px 48px -12px rgb(0 0 0 / 0.25);
+  transition:
+    opacity var(--eui-duration-base) var(--eui-easing-out),
+    transform var(--eui-duration-base) var(--eui-easing-out);
+}
+
+.eui-dialog[data-starting-style],
+.eui-dialog[data-ending-style] {
+  opacity: 0;
+  transform: scale(0.97);
+}
+
+.eui-dialog:focus {
+  outline: none;
+}
+
+.eui-dialog__title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.eui-dialog__description {
+  margin: 6px 0 0;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--eui-color-fg-muted);
+  text-wrap: pretty;
+}
+
+.eui-dialog__footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+/* Small screens: bottom sheet. */
+@media (max-width: 639px) {
+  .eui-dialog {
+    top: auto;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    max-height: 85dvh;
+    translate: none;
+    border-radius: min(calc(var(--eui-radius-base) * 2), 1.25rem) min(calc(var(--eui-radius-base) * 2), 1.25rem) 0 0;
+    padding-bottom: max(24px, env(safe-area-inset-bottom));
+  }
+
+  .eui-dialog[data-starting-style],
+  .eui-dialog[data-ending-style] {
+    opacity: 1;
+    transform: translateY(100%);
+  }
+
+  .eui-dialog__footer > * {
+    flex: 1 1 auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eui-dialog,
+  .eui-dialog__backdrop {
+    transition: opacity var(--eui-duration-fast) linear;
+  }
+
+  .eui-dialog[data-starting-style],
+  .eui-dialog[data-ending-style] {
+    transform: none;
+  }
+
+  @media (max-width: 639px) {
+    .eui-dialog[data-starting-style],
+    .eui-dialog[data-ending-style] {
+      transform: none;
+    }
+  }
+}

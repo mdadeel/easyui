@@ -1,0 +1,16 @@
+/* Separator. A 1px hairline in the border token. */
+
+.eui-separator {
+  flex: none;
+  margin: 0;
+  border: 0;
+  background-color: var(--eui-color-border);
+  height: var(--eui-border-width);
+  width: 100%;
+}
+
+.eui-separator[aria-orientation="vertical"] {
+  width: var(--eui-border-width);
+  height: auto;
+  align-self: stretch;
+}

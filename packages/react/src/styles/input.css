@@ -1,0 +1,69 @@
+/* Input. The border is a box-shadow ring (no layout cost), so it matches Button's approach.
+   Border color is border-strong so the field boundary meets WCAG 3:1 for UI components. */
+
+.eui-input {
+  --eui-input-h: 36px;
+  --eui-input-fs: 14px;
+
+  display: block;
+  width: 100%;
+  min-width: 0;
+  height: var(--eui-input-h);
+  padding: 0 12px;
+  border: 0;
+  border-radius: var(--eui-radius-base);
+  background-color: var(--eui-color-bg);
+  color: var(--eui-color-fg);
+  box-shadow: 0 0 0 var(--eui-border-width) var(--eui-color-border-strong);
+  font-family: inherit;
+  font-size: var(--eui-input-fs);
+  letter-spacing: -0.006em;
+  appearance: none;
+}
+
+.eui-input--sm {
+  --eui-input-h: 32px;
+  --eui-input-fs: 13px;
+  padding: 0 10px;
+}
+.eui-input--md {
+  --eui-input-h: 36px;
+  --eui-input-fs: 14px;
+}
+.eui-input--lg {
+  --eui-input-h: 44px;
+  --eui-input-fs: 15px;
+  padding: 0 14px;
+}
+
+@media (pointer: coarse) {
+  .eui-input--sm {
+    --eui-input-h: 40px;
+  }
+  .eui-input--md {
+    --eui-input-h: 44px;
+  }
+}
+
+.eui-input::placeholder {
+  color: var(--eui-color-fg-muted);
+  opacity: 1;
+}
+
+.eui-input:hover:not(:disabled):not(:focus) {
+  box-shadow: 0 0 0 var(--eui-border-width) var(--eui-color-fg-muted);
+}
+
+.eui-input:focus-visible {
+  outline: 2px solid var(--eui-color-ring);
+  outline-offset: 2px;
+}
+
+.eui-input[aria-invalid="true"] {
+  box-shadow: 0 0 0 var(--eui-border-width) var(--eui-color-danger);
+}
+
+.eui-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

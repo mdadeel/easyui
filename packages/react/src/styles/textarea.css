@@ -1,0 +1,9 @@
+/* Textarea. Reuses the .eui-input surface; only sizing and resize differ. */
+
+.eui-textarea {
+  height: auto;
+  min-height: 80px;
+  padding: 8px 12px;
+  line-height: 1.5;
+  resize: vertical;
+}

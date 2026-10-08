@@ -1,0 +1,17 @@
+/* AspectRatio. Children fill the box and are clipped to its corners. */
+
+.eui-aspect-ratio {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--eui-radius-base);
+}
+
+.eui-aspect-ratio > img,
+.eui-aspect-ratio > video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

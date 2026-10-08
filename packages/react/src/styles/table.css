@@ -1,0 +1,66 @@
+/* Table. Hairline row dividers, muted headers, and horizontal scroll on the wrapper. */
+
+.eui-table-wrap {
+  position: relative;
+  width: 100%;
+  overflow-x: auto;
+  border-radius: var(--eui-radius-base);
+  box-shadow: inset 0 0 0 var(--eui-border-width) var(--eui-color-border);
+}
+
+.eui-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  color: var(--eui-color-fg);
+  font-variant-numeric: tabular-nums;
+}
+
+.eui-table__caption {
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 13px;
+  color: var(--eui-color-fg-muted);
+  caption-side: bottom;
+}
+
+.eui-table__th {
+  height: 40px;
+  padding: 0 16px;
+  text-align: left;
+  font-weight: 500;
+  font-size: 13px;
+  color: var(--eui-color-fg-muted);
+  background-color: var(--eui-color-surface);
+  border-bottom: var(--eui-border-width) solid var(--eui-color-border);
+  white-space: nowrap;
+}
+
+.eui-table__td {
+  height: 44px;
+  padding: 0 16px;
+  border-bottom: var(--eui-border-width) solid var(--eui-color-border);
+  vertical-align: middle;
+}
+
+.eui-table__body .eui-table__row:last-child > .eui-table__td {
+  border-bottom: 0;
+}
+
+.eui-table__body .eui-table__row {
+  transition: background-color var(--eui-duration-fast) var(--eui-easing-out);
+}
+
+.eui-table__body .eui-table__row:hover {
+  background-color: var(--eui-color-hover);
+}
+
+.eui-table__footer {
+  background-color: var(--eui-color-surface);
+  font-weight: 500;
+}
+
+.eui-table__footer .eui-table__td {
+  border-bottom: 0;
+  border-top: var(--eui-border-width) solid var(--eui-color-border);
+}

@@ -1,0 +1,49 @@
+/* Card. A hairline ring instead of a shadow, so it reads flat and calm.
+   Radius is capped so a "full" radius token can't make the corners balloon. */
+
+.eui-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+  padding: 20px;
+  border-radius: min(calc(var(--eui-radius-base) * 1.5), 1rem);
+  background-color: var(--eui-color-bg);
+  color: var(--eui-color-fg);
+  box-shadow: 0 0 0 var(--eui-border-width) var(--eui-color-border);
+}
+
+.eui-card__header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.eui-card__title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: -0.012em;
+  color: var(--eui-color-fg);
+}
+
+.eui-card__description {
+  margin: 0;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--eui-color-fg-muted);
+}
+
+.eui-card__content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.eui-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}

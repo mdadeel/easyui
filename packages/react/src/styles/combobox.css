@@ -1,0 +1,107 @@
+/* Combobox. The input is the Input look with a chevron trigger on the right.
+   The popup and items match Select, so the two pickers feel like one family. */
+
+.eui-combobox__control {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+.eui-combobox__input {
+  padding-right: 36px;
+}
+
+.eui-combobox__trigger {
+  position: absolute;
+  top: 50%;
+  right: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  margin-top: -14px;
+  border: 0;
+  border-radius: var(--eui-radius-sm);
+  background: transparent;
+  color: var(--eui-color-fg-muted);
+  cursor: pointer;
+}
+
+.eui-combobox__trigger:hover {
+  background-color: var(--eui-color-hover);
+  color: var(--eui-color-fg);
+}
+
+.eui-combobox__trigger:focus-visible {
+  outline: 2px solid var(--eui-color-ring);
+  outline-offset: 2px;
+}
+
+.eui-combobox__popup {
+  box-sizing: border-box;
+  width: var(--anchor-width);
+  max-height: min(320px, var(--available-height));
+  overflow-y: auto;
+  padding: 4px;
+  border-radius: var(--eui-radius-base);
+  background-color: var(--eui-color-bg);
+  color: var(--eui-color-fg);
+  box-shadow:
+    0 0 0 var(--eui-border-width) var(--eui-color-border),
+    0 12px 32px -8px rgb(0 0 0 / 0.18);
+  transform-origin: var(--transform-origin);
+  transition:
+    opacity var(--eui-duration-fast) var(--eui-easing-out),
+    transform var(--eui-duration-fast) var(--eui-easing-out);
+}
+
+.eui-combobox__popup[data-starting-style],
+.eui-combobox__popup[data-ending-style] {
+  opacity: 0;
+  transform: scale(0.96);
+}
+
+.eui-combobox__list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.eui-combobox__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 36px;
+  padding: 0 10px;
+  border-radius: var(--eui-radius-sm);
+  font-size: 14px;
+  cursor: default;
+  user-select: none;
+}
+
+.eui-combobox__item[data-highlighted] {
+  background-color: var(--eui-color-hover);
+}
+
+.eui-combobox__item[data-disabled] {
+  opacity: 0.5;
+}
+
+.eui-combobox__check {
+  display: inline-flex;
+  color: var(--eui-color-fg);
+}
+
+.eui-combobox__empty {
+  padding: 12px 10px;
+  font-size: 14px;
+  color: var(--eui-color-fg-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eui-combobox__popup {
+    transition: none;
+  }
+}

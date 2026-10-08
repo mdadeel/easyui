@@ -1,0 +1,90 @@
+/* Tabs. The active indicator is a single element that Base UI positions;
+   the underline is a box-shadow so it adds no layout height. */
+
+.eui-tabs__list {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  gap: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  border-bottom: var(--eui-border-width) solid var(--eui-color-border);
+}
+
+.eui-tabs__list::-webkit-scrollbar {
+  display: none;
+}
+
+.eui-tabs__tab {
+  position: relative;
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 10px;
+  border: 0;
+  background: transparent;
+  color: var(--eui-color-fg-muted);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.011em;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color var(--eui-duration-fast) var(--eui-easing-out);
+}
+
+.eui-tabs__tab:hover {
+  color: var(--eui-color-fg);
+}
+
+.eui-tabs__tab[data-active] {
+  color: var(--eui-color-fg);
+}
+
+.eui-tabs__tab:focus-visible {
+  outline: 2px solid var(--eui-color-ring);
+  outline-offset: -2px;
+  border-radius: var(--eui-radius-sm);
+}
+
+.eui-tabs__tab[data-disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Active indicator: a 2px bar drawn on the tab's bottom edge. */
+.eui-tabs__tab[data-active]::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(var(--eui-border-width) * -1);
+  height: 2px;
+  background-color: var(--eui-color-fg);
+  border-radius: 2px;
+}
+
+.eui-tabs__panel {
+  padding-top: 16px;
+  animation: eui-tabs-in var(--eui-duration-base) var(--eui-easing-out);
+}
+
+@keyframes eui-tabs-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eui-tabs__tab,
+  .eui-tabs__panel {
+    transition: none;
+    animation: none;
+  }
+}

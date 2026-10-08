@@ -1,0 +1,18 @@
+{
+  "color": {
+    "bg": { "$value": "#ffffff", "$type": "color" },
+    "surface": { "$value": "#fafafa", "$type": "color" },
+    "fg": { "$value": "#171717", "$type": "color" },
+    "fg-muted": { "$value": "#666666", "$type": "color" },
+    "border": { "$value": "#ebebeb", "$type": "color" },
+    "border-strong": { "$value": "#8f8f8f", "$type": "color" },
+    "hover": { "$value": "#f2f2f2", "$type": "color" },
+    "ring": { "$value": "#171717", "$type": "color" },
+    "accent": { "$value": "#171717", "$type": "color" },
+    "accent-fg": { "$value": "#fafafa", "$type": "color" },
+    "accent-hover": { "$value": "color-mix(in oklab, {color.accent} 88%, {color.bg})", "$type": "color" },
+    "danger": { "$value": "#d1242f", "$type": "color" },
+    "danger-fg": { "$value": "#ffffff", "$type": "color" },
+    "danger-hover": { "$value": "color-mix(in oklab, {color.danger} 88%, {color.bg})", "$type": "color" }
+  }
+}

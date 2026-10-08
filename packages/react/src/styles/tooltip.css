@@ -1,0 +1,30 @@
+/* Tooltip. Fades and nudges in on open. Base UI sets data-starting-style and
+   data-ending-style, so the enter and exit motion uses only opacity and transform. */
+
+.eui-tooltip {
+  max-width: 240px;
+  padding: 6px 10px;
+  border-radius: var(--eui-radius-base);
+  background-color: var(--eui-color-fg);
+  color: var(--eui-color-bg);
+  box-shadow: 0 0 0 var(--eui-border-width) var(--eui-color-border);
+  font-size: 13px;
+  line-height: 18px;
+  letter-spacing: -0.006em;
+  transform-origin: var(--transform-origin, center);
+  transition:
+    opacity var(--eui-duration-fast) var(--eui-easing-out),
+    transform var(--eui-duration-fast) var(--eui-easing-out);
+}
+
+.eui-tooltip[data-starting-style],
+.eui-tooltip[data-ending-style] {
+  opacity: 0;
+  transform: scale(0.97);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eui-tooltip {
+    transition: none;
+  }
+}

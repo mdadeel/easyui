@@ -1,0 +1,137 @@
+/* Checkbox and Switch. Both are built on Base UI roots, so state is driven by
+   data-checked / data-disabled attributes, not classes we toggle ourselves.
+   The switch thumb moves with transform only. */
+
+.eui-choice {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.eui-choice__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.eui-choice__label {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--eui-color-fg);
+  cursor: pointer;
+  user-select: none;
+}
+
+.eui-choice__description {
+  margin: 0;
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--eui-color-fg-muted);
+}
+
+/* Checkbox */
+.eui-checkbox {
+  position: relative;
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  margin: 1px 0 0;
+  padding: 0;
+  border: 0;
+  border-radius: calc(var(--eui-radius-base) * 0.5);
+  background-color: var(--eui-color-bg);
+  color: var(--eui-color-accent-fg);
+  box-shadow: 0 0 0 var(--eui-border-width) var(--eui-color-border-strong);
+  cursor: pointer;
+  transition:
+    background-color var(--eui-duration-fast) var(--eui-easing-out),
+    box-shadow var(--eui-duration-fast) var(--eui-easing-out);
+}
+
+.eui-checkbox:hover:not(:disabled) {
+  box-shadow: 0 0 0 var(--eui-border-width) var(--eui-color-fg-muted);
+}
+
+.eui-checkbox[data-checked],
+.eui-checkbox[data-indeterminate] {
+  background-color: var(--eui-color-accent);
+  box-shadow: 0 0 0 var(--eui-border-width) var(--eui-color-accent);
+}
+
+.eui-checkbox:focus-visible,
+.eui-switch:focus-visible {
+  outline: 2px solid var(--eui-color-ring);
+  outline-offset: 2px;
+}
+
+.eui-checkbox__indicator {
+  display: inline-flex;
+  color: inherit;
+}
+
+.eui-checkbox[data-disabled],
+.eui-switch[data-disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Switch */
+.eui-switch {
+  position: relative;
+  flex: none;
+  width: 36px;
+  height: 20px;
+  margin: 1px 0 0;
+  padding: 2px;
+  border: 0;
+  border-radius: var(--eui-radius-full);
+  background-color: var(--eui-color-border-strong);
+  cursor: pointer;
+  transition: background-color var(--eui-duration-base) var(--eui-easing-out);
+}
+
+.eui-switch[data-checked] {
+  background-color: var(--eui-color-accent);
+}
+
+.eui-switch__thumb {
+  display: block;
+  width: 16px;
+  height: 16px;
+  border-radius: var(--eui-radius-full);
+  background-color: var(--eui-color-bg);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.2);
+  transform: translateX(0);
+  transition: transform var(--eui-duration-base) var(--eui-easing-out);
+}
+
+.eui-switch[data-checked] .eui-switch__thumb {
+  transform: translateX(16px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eui-checkbox,
+  .eui-switch,
+  .eui-switch__thumb {
+    transition: none;
+  }
+}
+
+/* Touch target. The control stays visually small, but its hit area grows to at
+   least 28px so it meets the 24px minimum. The label already toggles it too. */
+.eui-checkbox::after,
+.eui-radio::after,
+.eui-switch::after {
+  content: "";
+  position: absolute;
+  inset: -5px;
+}
+
+.eui-switch::after {
+  inset: -4px -2px;
+}
