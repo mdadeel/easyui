@@ -35,6 +35,19 @@ const parts = [
   path.join(pkgRoot, "src", "styles", "menu.css"),
   path.join(pkgRoot, "src", "styles", "sheet.css"),
   path.join(pkgRoot, "src", "styles", "toast.css"),
+  path.join(pkgRoot, "src", "styles", "alert.css"),
+  path.join(pkgRoot, "src", "styles", "label.css"),
+  path.join(pkgRoot, "src", "styles", "kbd.css"),
+  path.join(pkgRoot, "src", "styles", "spinner.css"),
+  path.join(pkgRoot, "src", "styles", "progress.css"),
+  path.join(pkgRoot, "src", "styles", "slider.css"),
+  path.join(pkgRoot, "src", "styles", "toggle.css"),
+  path.join(pkgRoot, "src", "styles", "collapsible.css"),
+  path.join(pkgRoot, "src", "styles", "breadcrumb.css"),
+  path.join(pkgRoot, "src", "styles", "pagination.css"),
+  path.join(pkgRoot, "src", "styles", "aspect-ratio.css"),
+  path.join(pkgRoot, "src", "styles", "table.css"),
+  path.join(pkgRoot, "src", "styles", "empty.css"),
 ];
 
 const css = parts

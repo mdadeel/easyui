@@ -1,0 +1,71 @@
+/* Slider. The track and fill are thin bars. The thumb is a 20px disc that gets a
+   focus ring; its hit area is larger than it looks, for touch. */
+
+.eui-slider {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.eui-slider__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 13px;
+}
+
+.eui-slider__label {
+  font-weight: 500;
+  color: var(--eui-color-fg);
+}
+
+.eui-slider__value {
+  color: var(--eui-color-fg-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.eui-slider__control {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 20px;
+  width: 100%;
+  touch-action: none;
+  cursor: pointer;
+}
+
+.eui-slider__track {
+  position: relative;
+  width: 100%;
+  height: 4px;
+  border-radius: var(--eui-radius-full);
+  background-color: var(--eui-color-hover);
+}
+
+/* Base UI sets position: relative and height: inherit inline. Only the color is ours. */
+.eui-slider__indicator {
+  border-radius: inherit;
+  background-color: var(--eui-color-accent);
+}
+
+/* Base UI sets position, inset-inline-start, top and translate(-50%, -50%) inline.
+   Do not add left or margin offsets here, or the thumb would be shifted twice. */
+.eui-slider__thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: var(--eui-radius-full);
+  background-color: var(--eui-color-bg);
+  box-shadow: 0 0 0 var(--eui-border-width) var(--eui-color-border-strong), 0 1px 2px rgb(0 0 0 / 0.15);
+  cursor: grab;
+}
+
+.eui-slider__thumb:focus-visible {
+  outline: 2px solid var(--eui-color-ring);
+  outline-offset: 3px;
+}
+
+.eui-slider__thumb:active {
+  cursor: grabbing;
+}

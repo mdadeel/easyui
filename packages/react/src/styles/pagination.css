@@ -1,0 +1,62 @@
+/* Pagination. Square buttons with the current page marked by a surface and ring. */
+
+.eui-pagination__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.eui-pagination__control,
+.eui-pagination__page {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  height: 36px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: var(--eui-radius-base);
+  background: transparent;
+  color: var(--eui-color-fg);
+  font-family: inherit;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+}
+
+.eui-pagination__control {
+  box-shadow: inset 0 0 0 var(--eui-border-width) var(--eui-color-border-strong);
+  font-weight: 500;
+}
+
+.eui-pagination__page:hover:not([aria-current="page"]),
+.eui-pagination__control:hover:not(:disabled) {
+  background-color: var(--eui-color-hover);
+}
+
+.eui-pagination__page[aria-current="page"] {
+  background-color: var(--eui-color-surface);
+  font-weight: 600;
+  box-shadow: inset 0 0 0 var(--eui-border-width) var(--eui-color-fg-muted);
+}
+
+.eui-pagination__control:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.eui-pagination__control:focus-visible,
+.eui-pagination__page:focus-visible {
+  outline: 2px solid var(--eui-color-ring);
+  outline-offset: 2px;
+}
+
+.eui-pagination__gap {
+  min-width: 24px;
+  text-align: center;
+  color: var(--eui-color-fg-muted);
+}

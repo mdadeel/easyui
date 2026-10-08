@@ -1,0 +1,50 @@
+/* Progress. Base UI sets the indicator width inline (width: N%), so the fill animates
+   width. Only the width moves; the track and label stay still. */
+
+.eui-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.eui-progress__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 13px;
+}
+
+.eui-progress__label {
+  font-weight: 500;
+  color: var(--eui-color-fg);
+}
+
+.eui-progress__value {
+  color: var(--eui-color-fg-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.eui-progress__track {
+  position: relative;
+  height: 6px;
+  overflow: hidden;
+  border-radius: var(--eui-radius-full);
+  background-color: var(--eui-color-hover);
+}
+
+.eui-progress__indicator {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background-color: var(--eui-color-accent);
+  border-radius: inherit;
+  transition: width var(--eui-duration-base) var(--eui-easing-out);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eui-progress__indicator {
+    transition: none;
+  }
+}

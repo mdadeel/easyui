@@ -1,0 +1,70 @@
+/* Collapsible. The trigger is a full-width row. The panel fades in with a short slide. */
+
+.eui-collapsible__trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  min-height: 40px;
+  padding: 0 4px;
+  border: 0;
+  border-radius: var(--eui-radius-sm);
+  background: transparent;
+  color: var(--eui-color-fg);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+}
+
+.eui-collapsible__trigger:hover {
+  background-color: var(--eui-color-hover);
+}
+
+.eui-collapsible__trigger:focus-visible {
+  outline: 2px solid var(--eui-color-ring);
+  outline-offset: 2px;
+}
+
+.eui-collapsible__trigger::after {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg) translate(-2px, -2px);
+  transition: transform var(--eui-duration-base) var(--eui-easing-out);
+}
+
+.eui-collapsible__trigger[aria-expanded="true"]::after {
+  transform: rotate(-135deg) translate(-2px, -2px);
+}
+
+.eui-collapsible__panel {
+  padding: 0 4px 8px;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--eui-color-fg-muted);
+  animation: eui-collapsible-in var(--eui-duration-base) var(--eui-easing-out);
+}
+
+@keyframes eui-collapsible-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eui-collapsible__trigger::after,
+  .eui-collapsible__panel {
+    transition: none;
+    animation: none;
+  }
+}

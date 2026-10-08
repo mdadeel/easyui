@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { ComponentsDemo } from "./ComponentsDemo";
 import {
   Badge,
   Button,
@@ -547,6 +548,7 @@ export function App() {
                 </AlertDialog>
               </CardFooter>
             </Card>
+            <ComponentsDemo />
             </ToastProvider>
           </EasyUIProvider>
         </div>

@@ -121,6 +121,57 @@ export {
 export { ToastProvider, toast, useToast } from "./components/toast/toast";
 export type { ToastData, ToastType } from "./components/toast/toast";
 
+export { Alert, AlertDescription, AlertTitle } from "./components/alert/alert";
+export type { AlertProps, AlertVariant } from "./components/alert/alert";
+
+export { Label } from "./components/label/label";
+export type { LabelProps } from "./components/label/label";
+
+export { Kbd } from "./components/kbd/kbd";
+
+export { Spinner } from "./components/spinner/spinner";
+export type { SpinnerProps } from "./components/spinner/spinner";
+
+export { Progress } from "./components/progress/progress";
+export type { ProgressProps } from "./components/progress/progress";
+
+export { Slider } from "./components/slider/slider";
+export type { SliderProps } from "./components/slider/slider";
+
+export { Toggle, ToggleGroup } from "./components/toggle/toggle";
+export type { ToggleGroupProps, ToggleProps, ToggleSize, ToggleVariant } from "./components/toggle/toggle";
+
+export { Collapsible, CollapsiblePanel, CollapsibleTrigger } from "./components/collapsible/collapsible";
+
+export {
+  Breadcrumb,
+  BreadcrumbCurrent,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbSeparator,
+} from "./components/breadcrumb/breadcrumb";
+
+export { Pagination, buildRange } from "./components/pagination/pagination";
+export type { PaginationProps } from "./components/pagination/pagination";
+
+export { AspectRatio } from "./components/aspect-ratio/aspect-ratio";
+export type { AspectRatioProps } from "./components/aspect-ratio/aspect-ratio";
+
+export {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "./components/table/table";
+
+export { Empty } from "./components/empty/empty";
+export type { EmptyProps } from "./components/empty/empty";
+
 export {
   contrastRatio,
   getAccentPalette,

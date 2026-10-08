@@ -334,3 +334,16 @@ body {
 .row--between {
   justify-content: space-between;
 }
+
+/* Demo helpers for ComponentsDemo. */
+.demo-ratio {
+  background-color: var(--eui-color-hover);
+}
+
+.demo-ratio__inner {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  font-size: 13px;
+  color: var(--eui-color-fg-muted);
+}
