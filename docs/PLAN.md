@@ -227,13 +227,22 @@ Each component follows the quality bar in §5.
 
 ---
 
-## 8. Open questions (need your decision)
+## 8. Decisions log
 
-1. **Scope of platforms:** React only for v1, or also Vue/Svelte later?
-2. **Primitive layer:** Base UI (newer, MUI-backed), Radix (mature), or let me spike both and pick?
-3. **Distribution:** npm package only, copy-paste registry only, or both (recommended)?
-4. **Visual direction:** Which feel do you want? Examples: calm and minimal (Geist-like), warm and editorial (serif display), or neutral and crisp with one bold accent. Share 2–3 reference sites if you have them.
-5. **Name:** Is `easyui` / `@easyui/react` final?
+Confirmed by the project owner:
+
+| # | Question | Decision |
+|---|---|---|
+| 1 | Platform for v1 | **React only** |
+| 2 | Headless primitive layer | **Spike both** Base UI and Radix (about 1 hour each on Dialog and Select), then pick one |
+| 3 | Distribution | **Both:** npm package and shadcn-style registry |
+| 4 | Visual direction | **Calm and minimal, Geist-like** (neutral palette, restrained color, developer-tool feel) |
+
+## 8a. Open questions (still to confirm)
+
+1. **Name:** Is `easyui` / `@easyui/react` final?
+2. **Accent color:** Any brand color preference, or should the default accent be a neutral ink color (Geist-style)?
+3. **Typeface:** Geist Sans + Geist Mono (open source, recommended for the calm direction), or another face?
 
 ---
 
