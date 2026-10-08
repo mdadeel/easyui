@@ -1,0 +1,84 @@
+/* Accordion. Items are separated by hairlines, not boxes. The chevron rotates
+   and the panel fades in with a small slide. Only transform and opacity animate. */
+
+.eui-accordion {
+  display: flex;
+  flex-direction: column;
+  border-top: var(--eui-border-width) solid var(--eui-color-border);
+}
+
+.eui-accordion__item {
+  border-bottom: var(--eui-border-width) solid var(--eui-color-border);
+}
+
+.eui-accordion__header {
+  margin: 0;
+  font-size: inherit;
+}
+
+.eui-accordion__trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  min-height: 44px;
+  padding: 12px 0;
+  border: 0;
+  border-radius: var(--eui-radius-sm);
+  background: transparent;
+  color: var(--eui-color-fg);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.011em;
+  text-align: left;
+  cursor: pointer;
+}
+
+.eui-accordion__trigger:focus-visible {
+  outline: 2px solid var(--eui-color-ring);
+  outline-offset: 2px;
+}
+
+.eui-accordion__trigger[data-disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.eui-accordion__chevron {
+  flex: none;
+  color: var(--eui-color-fg-muted);
+  transition: transform var(--eui-duration-base) var(--eui-easing-out);
+}
+
+.eui-accordion__trigger[aria-expanded="true"] .eui-accordion__chevron {
+  transform: rotate(180deg);
+}
+
+.eui-accordion__panel {
+  padding: 0 0 14px;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--eui-color-fg-muted);
+  animation: eui-accordion-in var(--eui-duration-base) var(--eui-easing-out);
+}
+
+@keyframes eui-accordion-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eui-accordion__chevron,
+  .eui-accordion__panel {
+    transition: none;
+    animation: none;
+  }
+}

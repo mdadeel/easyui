@@ -267,10 +267,11 @@ Deliberate deviations from §3:
 
 - Primitive spike complete. **Decision: Base UI.** Same behavior in both libraries, so the choice rests on direction and ecosystem, with about 16 KB more gzipped for Dialog + Select. Radix is the fallback. See [SPIKE.md](./SPIKE.md) for the method, results, and fallback.
 - Built: Dialog, Select, Input, Field (label, description, error wiring), and the provider portal fix so overlays inherit the theme.
-- Built: Textarea, Checkbox, Switch, Tabs, Tooltip, and Card. Each has unit and accessibility tests, a CSS file, and a playground demo.
+- Built: Textarea, Checkbox, Switch, Tabs, Tooltip, Card, Radio, Accordion, Avatar, and AlertDialog. Each has unit and accessibility tests, a CSS file, and a playground demo.
+- Accent contrast: text on the accent is chosen against both the accent and its hover shade. The provider sets `--eui-color-accent-hover` from the same palette. Before this, hover dropped below WCAG AA for several presets (Rose light 3.8:1). Now every preset passes 4.5:1 at rest and on hover, in light and dark mode.
 - Tooltip deviation: Base UI 1.8 does not give the popup `role="tooltip"` or link the trigger with `aria-describedby`. Our `Tooltip` wrapper adds both, and the trigger is described while the popup is open.
-- Tested: 60 unit and accessibility tests across 11 files. Headless-browser checks confirm that the new components work and that the page chrome stays fixed when the accent, radius, and mode change.
-- Not yet built from the Phase 2 list: Radio, Popover, DropdownMenu, Sheet, AlertDialog, Accordion, Avatar, Toast.
+- Tested: 76 unit and accessibility tests across 16 files. Headless-browser checks confirm that the new components work and that the page chrome stays fixed when the accent, radius, and mode change.
+- Not yet built from the Phase 2 list: Popover, DropdownMenu, Sheet, Toast.
 
 ## 9. Immediate next steps (once the questions are answered)
 

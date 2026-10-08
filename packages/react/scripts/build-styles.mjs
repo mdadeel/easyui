@@ -23,6 +23,9 @@ const parts = [
   path.join(pkgRoot, "src", "styles", "tabs.css"),
   path.join(pkgRoot, "src", "styles", "tooltip.css"),
   path.join(pkgRoot, "src", "styles", "card.css"),
+  path.join(pkgRoot, "src", "styles", "radio.css"),
+  path.join(pkgRoot, "src", "styles", "accordion.css"),
+  path.join(pkgRoot, "src", "styles", "avatar.css"),
 ];
 
 const css = parts

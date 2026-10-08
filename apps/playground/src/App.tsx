@@ -7,6 +7,19 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
+  Accordion,
+  AccordionItem,
+  AccordionPanel,
+  AccordionTrigger,
+  AlertDialog,
+  AlertDialogClose,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+  Avatar,
+  AvatarFallback,
   Checkbox,
   Dialog,
   DialogClose,
@@ -18,6 +31,8 @@ import {
   EasyUIProvider,
   Field,
   Input,
+  Radio,
+  RadioGroup,
   Select,
   SelectContent,
   SelectItem,
@@ -84,6 +99,7 @@ export function App() {
   const [team, setTeam] = useState<string | null>(null);
   const [digest, setDigest] = useState(true);
   const [notify, setNotify] = useState(false);
+  const [plan, setPlan] = useState("free");
   const emailError =
     email.length > 0 && !/^\S+@\S+\.\S+$/.test(email) ? "Enter an email like name@company.com." : undefined;
 
@@ -346,6 +362,51 @@ export function App() {
               <CardFooter>
                 <Button variant="secondary" size="sm">Discard</Button>
                 <Button size="sm">Save changes</Button>
+              </CardFooter>
+            </Card>
+            <Card aria-labelledby="account-heading">
+              <CardHeader>
+                <div className="row">
+                  <Avatar size="lg">
+                    <AvatarFallback>MR</AvatarFallback>
+                  </Avatar>
+                  <div>
+                    <CardTitle id="account-heading">Maya Rahman</CardTitle>
+                    <CardDescription>maya@company.com</CardDescription>
+                  </div>
+                </div>
+              </CardHeader>
+
+              <RadioGroup aria-label="Plan" value={plan} onValueChange={(v) => setPlan(v as string)}>
+                <Radio value="free" label="Free" description="Up to 3 projects and 2 members." />
+                <Radio value="pro" label="Pro" description="Unlimited projects, roles, and audit logs." />
+              </RadioGroup>
+
+              <Accordion>
+                <AccordionItem value="billing">
+                  <AccordionTrigger>Who receives invoices?</AccordionTrigger>
+                  <AccordionPanel>Invoices go to the workspace owner, with a copy to billing.</AccordionPanel>
+                </AccordionItem>
+                <AccordionItem value="seats">
+                  <AccordionTrigger>What counts as a seat?</AccordionTrigger>
+                  <AccordionPanel>Each person with access counts as one seat. Guests are free.</AccordionPanel>
+                </AccordionItem>
+              </Accordion>
+
+              <CardFooter>
+                <AlertDialog>
+                  <AlertDialogTrigger render={<Button variant="danger" size="sm">Delete account</Button>} />
+                  <AlertDialogContent>
+                    <AlertDialogTitle>Delete your account?</AlertDialogTitle>
+                    <AlertDialogDescription>
+                      Your projects and files are removed after 30 days. You can cancel before then.
+                    </AlertDialogDescription>
+                    <AlertDialogFooter>
+                      <AlertDialogClose render={<Button variant="ghost">Keep account</Button>} />
+                      <Button variant="danger">Delete account</Button>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
               </CardFooter>
             </Card>
           </EasyUIProvider>

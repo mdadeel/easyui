@@ -47,6 +47,29 @@ export {
   CardTitle,
 } from "./components/card/card";
 
+export { RadioGroup, Radio } from "./components/radio/radio";
+export type { RadioProps } from "./components/radio/radio";
+
+export {
+  Accordion,
+  AccordionItem,
+  AccordionPanel,
+  AccordionTrigger,
+} from "./components/accordion/accordion";
+
+export { Avatar, AvatarFallback, AvatarImage } from "./components/avatar/avatar";
+export type { AvatarProps, AvatarSize } from "./components/avatar/avatar";
+
+export {
+  AlertDialog,
+  AlertDialogClose,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "./components/alert-dialog/alert-dialog";
+
 export {
   contrastRatio,
   getAccentPalette,
