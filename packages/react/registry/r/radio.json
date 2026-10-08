@@ -1,0 +1,33 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "radio",
+  "type": "registry:ui",
+  "title": "Radio",
+  "description": "A group of radio buttons with labels and descriptions.",
+  "dependencies": [
+    "@base-ui/react"
+  ],
+  "registryDependencies": [
+    "easyui-tokens"
+  ],
+  "files": [
+    {
+      "path": "src/components/radio/radio.tsx",
+      "type": "registry:file",
+      "target": "components/easyui/components/radio/radio.tsx",
+      "content": "import { RadioGroup as BaseRadioGroup } from \"@base-ui/react/radio-group\";\nimport { Radio as BaseRadio } from \"@base-ui/react/radio\";\nimport { useId, type ComponentPropsWithoutRef, type ElementType, type ReactNode } from \"react\";\nimport { cn } from \"../../lib/cn\";\nimport \"../../styles/radio.css\";\n\ntype StaticClass<T extends ElementType> = Omit<ComponentPropsWithoutRef<T>, \"className\"> & {\n  className?: string;\n};\n\n/**\n * Group of radios where exactly one value is chosen. Arrow keys move the\n * selection, as the ARIA radio pattern requires.\n */\nexport function RadioGroup({ className, ...props }: StaticClass<typeof BaseRadioGroup>) {\n  return <BaseRadioGroup className={cn(\"eui-radio-group\", className)} {...props} />;\n}\n\nexport interface RadioProps extends StaticClass<typeof BaseRadio.Root> {\n  label?: ReactNode;\n  description?: ReactNode;\n}\n\n/** One option inside a RadioGroup. Give each one a unique `value`. */\nexport function Radio({ label, description, className, id, ...props }: RadioProps) {\n  const generated = useId().replace(/:/g, \"\");\n  const radioId = id ?? `eui-radio-${generated}`;\n  const descriptionId = `${radioId}-description`;\n  return (\n    <div className=\"eui-choice\">\n      <BaseRadio.Root\n        id={radioId}\n        className={cn(\"eui-radio\", className)}\n        aria-describedby={description ? descriptionId : undefined}\n        {...props}\n      >\n        <BaseRadio.Indicator className=\"eui-radio__indicator\" />\n      </BaseRadio.Root>\n      {label || description ? (\n        <div className=\"eui-choice__text\">\n          {label ? (\n            <label htmlFor={radioId} className=\"eui-choice__label\">\n              {label}\n            </label>\n          ) : null}\n          {description ? (\n            <p id={descriptionId} className=\"eui-choice__description\">\n              {description}\n            </p>\n          ) : null}\n        </div>\n      ) : null}\n    </div>\n  );\n}\n"
+    },
+    {
+      "path": "src/lib/cn.ts",
+      "type": "registry:file",
+      "target": "components/easyui/lib/cn.ts",
+      "content": "/**\n * Joins class names, skipping falsy values.\n * Kept tiny on purpose: components own their class lists, so no merge step is needed.\n */\nexport function cn(...inputs: Array<string | false | null | undefined>): string {\n  return inputs.filter(Boolean).join(\" \");\n}\n"
+    },
+    {
+      "path": "src/styles/radio.css",
+      "type": "registry:file",
+      "target": "components/easyui/styles/radio.css",
+      "content": "/* Radio. Same ring-based look as Checkbox. The dot scales in with transform only. */\n\n.eui-radio-group {\n  display: flex;\n  flex-direction: column;\n  gap: 12px;\n}\n\n.eui-radio {\n  position: relative;\n  flex: none;\n  width: 18px;\n  height: 18px;\n  margin: 1px 0 0;\n  padding: 0;\n  border: 0;\n  border-radius: var(--eui-radius-full);\n  background-color: var(--eui-color-bg);\n  box-shadow: 0 0 0 var(--eui-border-width) var(--eui-color-border-strong);\n  cursor: pointer;\n  transition: box-shadow var(--eui-duration-fast) var(--eui-easing-out);\n}\n\n.eui-radio:hover:not(:disabled) {\n  box-shadow: 0 0 0 var(--eui-border-width) var(--eui-color-fg-muted);\n}\n\n.eui-radio[data-checked] {\n  box-shadow: 0 0 0 var(--eui-border-width) var(--eui-color-accent);\n}\n\n.eui-radio:focus-visible {\n  outline: 2px solid var(--eui-color-ring);\n  outline-offset: 2px;\n}\n\n.eui-radio[data-disabled] {\n  opacity: 0.5;\n  cursor: not-allowed;\n}\n\n.eui-radio__indicator {\n  display: block;\n  position: absolute;\n  inset: 4px;\n  border-radius: var(--eui-radius-full);\n  background-color: var(--eui-color-accent);\n  transform: scale(0);\n  transition: transform var(--eui-duration-fast) var(--eui-easing-out);\n}\n\n.eui-radio__indicator[data-checked] {\n  transform: scale(1);\n}\n\n@media (prefers-reduced-motion: reduce) {\n  .eui-radio,\n  .eui-radio__indicator {\n    transition: none;\n  }\n}\n\n/* Touch target. See choice.css; the hit area is widened without changing the look. */\n.eui-radio::after {\n  content: \"\";\n  position: absolute;\n  inset: -5px;\n}\n"
+    }
+  ]
+}

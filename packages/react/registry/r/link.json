@@ -1,0 +1,31 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "link",
+  "type": "registry:ui",
+  "title": "Link",
+  "description": "A text link with the accent color and a clear focus ring.",
+  "dependencies": [],
+  "registryDependencies": [
+    "easyui-tokens"
+  ],
+  "files": [
+    {
+      "path": "src/components/link/link.tsx",
+      "type": "registry:file",
+      "target": "components/easyui/components/link/link.tsx",
+      "content": "import type { ComponentPropsWithoutRef } from \"react\";\nimport { cn } from \"../../lib/cn\";\nimport \"../../styles/link.css\";\n\nexport interface LinkProps extends ComponentPropsWithoutRef<\"a\"> {\n  /** When the underline shows. \"hover\" keeps body text calm. */\n  underline?: \"always\" | \"hover\" | \"none\";\n}\n\n/**\n * Inline link. Uses the accent for color and an offset underline, so the\n * text stays readable on any brand color.\n */\nexport function Link({ underline = \"always\", className, children, ...props }: LinkProps) {\n  return (\n    <a className={cn(\"eui-link\", `eui-link--${underline}`, className)} {...props}>\n      {children}\n    </a>\n  );\n}\n"
+    },
+    {
+      "path": "src/lib/cn.ts",
+      "type": "registry:file",
+      "target": "components/easyui/lib/cn.ts",
+      "content": "/**\n * Joins class names, skipping falsy values.\n * Kept tiny on purpose: components own their class lists, so no merge step is needed.\n */\nexport function cn(...inputs: Array<string | false | null | undefined>): string {\n  return inputs.filter(Boolean).join(\" \");\n}\n"
+    },
+    {
+      "path": "src/styles/link.css",
+      "type": "registry:file",
+      "target": "components/easyui/styles/link.css",
+      "content": "/* Link. The underline is offset and thin, and it is set with text-decoration\n   so the text keeps its own color. Focus uses the shared ring. */\n\n.eui-link {\n  color: var(--eui-color-accent);\n  text-decoration-line: underline;\n  text-decoration-thickness: 1px;\n  text-underline-offset: 3px;\n  text-decoration-color: color-mix(in oklab, currentColor 40%, transparent);\n  border-radius: var(--eui-radius-sm);\n  transition: text-decoration-color var(--eui-duration-fast) var(--eui-easing-out);\n}\n\n.eui-link--always {\n  text-decoration-color: currentColor;\n}\n\n.eui-link--hover {\n  text-decoration-line: none;\n}\n\n.eui-link--hover:hover {\n  text-decoration-line: underline;\n  text-decoration-color: currentColor;\n}\n\n.eui-link--none {\n  text-decoration-line: none;\n}\n\n.eui-link:hover {\n  text-decoration-color: currentColor;\n}\n\n.eui-link:focus-visible {\n  outline: 2px solid var(--eui-color-ring);\n  outline-offset: 2px;\n}\n"
+    }
+  ]
+}

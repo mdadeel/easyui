@@ -1,0 +1,31 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "field",
+  "type": "registry:ui",
+  "title": "Field",
+  "description": "Wires a label, description, and error message to a form control.",
+  "dependencies": [],
+  "registryDependencies": [
+    "easyui-tokens"
+  ],
+  "files": [
+    {
+      "path": "src/components/field/field.tsx",
+      "type": "registry:file",
+      "target": "components/easyui/components/field/field.tsx",
+      "content": "import { createContext, useContext, useId, type HTMLAttributes, type ReactNode } from \"react\";\nimport { cn } from \"../../lib/cn\";\nimport \"../../styles/field.css\";\n\ninterface FieldContextValue {\n  id: string;\n  descriptionId: string | undefined;\n  errorId: string | undefined;\n  invalid: boolean;\n}\n\nconst FieldContext = createContext<FieldContextValue | null>(null);\n\n/** @internal Used by Input to wire label, description, and error ids. */\nexport function useFieldContext(): FieldContextValue | null {\n  return useContext(FieldContext);\n}\n\nexport interface FieldProps extends HTMLAttributes<HTMLDivElement> {\n  /** Visible label. Rendered as a real <label> bound to the control. */\n  label?: ReactNode;\n  /** Helper text shown under the control. Linked via aria-describedby. */\n  description?: ReactNode;\n  /** Error message. Shown in place of nothing; also marks the control invalid. */\n  error?: ReactNode;\n  /** Marks the control invalid even without an error message. */\n  invalid?: boolean;\n  /** Overrides the generated control id. */\n  id?: string;\n}\n\n/**\n * Groups a label, control, description, and error so the accessibility wiring\n * (for/id, aria-describedby, aria-invalid) is correct by default.\n */\nexport function Field({\n  label,\n  description,\n  error,\n  invalid,\n  id,\n  className,\n  children,\n  ...rest\n}: FieldProps) {\n  const generated = useId();\n  const baseId = id ?? `eui-field-${generated.replace(/:/g, \"\")}`;\n  const hasError = error !== undefined && error !== null && error !== false && error !== \"\";\n  const isInvalid = invalid ?? hasError;\n\n  const value: FieldContextValue = {\n    id: baseId,\n    descriptionId: description ? `${baseId}-description` : undefined,\n    errorId: hasError ? `${baseId}-error` : undefined,\n    invalid: !!isInvalid,\n  };\n\n  return (\n    <FieldContext.Provider value={value}>\n      <div className={cn(\"eui-field\", className)} {...rest}>\n        {label ? (\n          <label className=\"eui-field__label\" htmlFor={baseId}>\n            {label}\n          </label>\n        ) : null}\n        {children}\n        {description ? (\n          <p id={value.descriptionId} className=\"eui-field__description\">\n            {description}\n          </p>\n        ) : null}\n        {hasError ? (\n          <p id={value.errorId} className=\"eui-field__error\" role=\"alert\">\n            {error}\n          </p>\n        ) : null}\n      </div>\n    </FieldContext.Provider>\n  );\n}\n"
+    },
+    {
+      "path": "src/lib/cn.ts",
+      "type": "registry:file",
+      "target": "components/easyui/lib/cn.ts",
+      "content": "/**\n * Joins class names, skipping falsy values.\n * Kept tiny on purpose: components own their class lists, so no merge step is needed.\n */\nexport function cn(...inputs: Array<string | false | null | undefined>): string {\n  return inputs.filter(Boolean).join(\" \");\n}\n"
+    },
+    {
+      "path": "src/styles/field.css",
+      "type": "registry:file",
+      "target": "components/easyui/styles/field.css",
+      "content": "/* Field: label, description, and error. Layout only; the control is styled in input.css. */\n\n.eui-field {\n  display: grid;\n  gap: 6px;\n  min-width: 0;\n}\n\n.eui-field__label {\n  font-size: 13px;\n  font-weight: 500;\n  line-height: 1.4;\n  color: var(--eui-color-fg);\n  cursor: default;\n}\n\n.eui-field__description {\n  margin: 0;\n  font-size: 13px;\n  line-height: 1.5;\n  color: var(--eui-color-fg-muted);\n}\n\n.eui-field__error {\n  margin: 0;\n  font-size: 13px;\n  line-height: 1.5;\n  color: var(--eui-color-danger);\n}\n"
+    }
+  ]
+}

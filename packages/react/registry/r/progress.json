@@ -1,0 +1,33 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "progress",
+  "type": "registry:ui",
+  "title": "Progress",
+  "description": "A determinate progress bar with an optional label and value.",
+  "dependencies": [
+    "@base-ui/react"
+  ],
+  "registryDependencies": [
+    "easyui-tokens"
+  ],
+  "files": [
+    {
+      "path": "src/components/progress/progress.tsx",
+      "type": "registry:file",
+      "target": "components/easyui/components/progress/progress.tsx",
+      "content": "import { Progress as BaseProgress } from \"@base-ui/react/progress\";\nimport type { ComponentPropsWithoutRef, ElementType } from \"react\";\nimport { cn } from \"../../lib/cn\";\nimport \"../../styles/progress.css\";\n\ntype StaticClass<T extends ElementType> = Omit<ComponentPropsWithoutRef<T>, \"className\"> & {\n  className?: string;\n};\n\nexport interface ProgressProps extends StaticClass<typeof BaseProgress.Root> {\n  /** Visible label above the bar, and the accessible name. */\n  label?: string;\n  /** Show the percentage on the right of the label. */\n  showValue?: boolean;\n}\n\n/** Determinate progress bar. Pass `value` from 0 to 100, or leave it out for indeterminate. */\nexport function Progress({ label, showValue = false, className, value, ...props }: ProgressProps) {\n  return (\n    <BaseProgress.Root value={value} className={cn(\"eui-progress\", className)} {...props}>\n      {label || showValue ? (\n        <div className=\"eui-progress__meta\">\n          {label ? <BaseProgress.Label className=\"eui-progress__label\">{label}</BaseProgress.Label> : null}\n          {showValue ? <BaseProgress.Value className=\"eui-progress__value\" /> : null}\n        </div>\n      ) : null}\n      <BaseProgress.Track className=\"eui-progress__track\">\n        <BaseProgress.Indicator className=\"eui-progress__indicator\" />\n      </BaseProgress.Track>\n    </BaseProgress.Root>\n  );\n}\n"
+    },
+    {
+      "path": "src/lib/cn.ts",
+      "type": "registry:file",
+      "target": "components/easyui/lib/cn.ts",
+      "content": "/**\n * Joins class names, skipping falsy values.\n * Kept tiny on purpose: components own their class lists, so no merge step is needed.\n */\nexport function cn(...inputs: Array<string | false | null | undefined>): string {\n  return inputs.filter(Boolean).join(\" \");\n}\n"
+    },
+    {
+      "path": "src/styles/progress.css",
+      "type": "registry:file",
+      "target": "components/easyui/styles/progress.css",
+      "content": "/* Progress. Base UI sets the indicator width inline (width: N%), so the fill animates\n   width. Only the width moves; the track and label stay still. */\n\n.eui-progress {\n  display: flex;\n  flex-direction: column;\n  gap: 8px;\n  width: 100%;\n}\n\n.eui-progress__meta {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  gap: 12px;\n  font-size: 13px;\n}\n\n.eui-progress__label {\n  font-weight: 500;\n  color: var(--eui-color-fg);\n}\n\n.eui-progress__value {\n  color: var(--eui-color-fg-muted);\n  font-variant-numeric: tabular-nums;\n}\n\n.eui-progress__track {\n  position: relative;\n  height: 6px;\n  overflow: hidden;\n  border-radius: var(--eui-radius-full);\n  background-color: var(--eui-color-hover);\n}\n\n.eui-progress__indicator {\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  background-color: var(--eui-color-accent);\n  border-radius: inherit;\n  transition: width var(--eui-duration-base) var(--eui-easing-out);\n}\n\n@media (prefers-reduced-motion: reduce) {\n  .eui-progress__indicator {\n    transition: none;\n  }\n}\n"
+    }
+  ]
+}

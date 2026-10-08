@@ -1,6 +1,6 @@
 {
   "name": "@easyui/react",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Production-grade, accessible React components with a themeable, Geist-inspired design system.",
   "license": "MIT",
   "type": "module",
@@ -19,15 +19,18 @@
     "./styles.css": "./dist/styles.css"
   },
   "files": [
-    "dist"
+    "dist",
+    "README.md",
+    "CHANGELOG.md"
   ],
   "scripts": {
-    "build": "pnpm --filter @easyui/tokens run build && tsup && node scripts/build-styles.mjs",
+    "build": "pnpm --filter @easyui/tokens run build && tsup && node scripts/build-styles.mjs && node scripts/build-registry.mjs",
     "dev": "tsup --watch",
     "test": "vitest run",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "registry": "node scripts/build-registry.mjs"
   },
   "peerDependencies": {
     "react": ">=18.2.0",
@@ -57,5 +60,28 @@
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.71.1",
     "vitest": "^5.0.3"
+  },
+  "keywords": [
+    "react",
+    "components",
+    "ui",
+    "design-system",
+    "base-ui",
+    "accessible",
+    "tailwind-free",
+    "css-variables",
+    "shadcn"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mdadeel/easyui.git",
+    "directory": "packages/react"
+  },
+  "homepage": "https://github.com/mdadeel/easyui/tree/main/packages/react#readme",
+  "bugs": {
+    "url": "https://github.com/mdadeel/easyui/issues"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

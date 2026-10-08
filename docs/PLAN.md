@@ -296,9 +296,28 @@ Not yet built: the multi-step form, the settings form, and the marketing section
 - Responsive audit run in headless Chromium at 320, 768, and 1280 px on both pages. Results: no horizontal overflow at any width. No interactive targets under 24px, except one inline text link, which WCAG 2.5.8 exempts. No console errors after the dev server's dependency cache warmed up.
 - Not yet in CI: the audit script, Playwright visual snapshots, and per-component bundle budgets. The audit script is a one-off in the sandbox and is not committed.
 
-### Phase 5 and 6 (not started)
+### Phase 5 progress (distribution and docs, mostly done)
 
-- Storybook, the shadcn-compatible registry, the docs site, and the release checklist remain.
+- **npm package.** `@easyui/react` 0.1.0 is prepared: `files` lists dist, README, and CHANGELOG; repository, keywords, and `publishConfig` are set. It is **not published**. See the open items below.
+- **Registry.** `packages/react/scripts/build-registry.mjs` writes `packages/react/registry/r/<name>.json` (36 components plus `easyui-tokens`) and an index, `registry.json`. Each item inlines every local file it imports, and the CSS import is added to the component file. A scratch project compiles all 37 component files under `strict` TypeScript. **Not tested with the shadcn CLI end to end**, because the registry is not hosted yet.
+- **Docs site.** `apps/docs` is a Vite app with hash routes: Home, Get started, Components (38 pages, each with a live example, code, and notes), Theming (a sandbox that changes only its preview), Registry, and Changelog. Built and checked in the browser.
+- **Gap analysis.** `docs/GAP-ANALYSIS.md`. easyui covers 37 of the 64 entries on shadcn's list. 27 are missing, in P0, P1, and P2 tiers.
+
+Decisions made in this phase:
+- Registry items inline their dependencies, instead of depending on a shared `lib` item. Each file keeps its folder layout, so the relative imports still work.
+- The docs chrome never uses the theme sandbox provider. Only the preview is wrapped, so changing the controls leaves the page unchanged.
+- Component CSS is loaded by the registry item's import, not by the package. The package still ships one `styles.css`.
+
+### Phase 6 progress (release prep, partial)
+
+- Changelog: `packages/react/CHANGELOG.md`, starting at 0.1.0 (unreleased), with the known gaps listed.
+- Human review: **not done.** Phase 6 needs a design review pass and feedback from 5 or more developers and designers. This session cannot do that.
+- Publishing and tagging: **not done.** No npm publish, and no `v0.1.0` tag, until the owner confirms.
+- Open items before the tag:
+  1. Add a LICENSE file. `package.json` says MIT, but the repo has no license text.
+  2. Make the contrast audit for accent presets a committed test. Right now it is a one-off.
+  3. Host the registry (for example, copy `packages/react/registry/r` to a static host), then run `npx shadcn@latest add <url>` against it.
+  4. Run the Phase 4 responsive audit on the docs site.
 
 ## 9. Immediate next steps (once the questions are answered)
 

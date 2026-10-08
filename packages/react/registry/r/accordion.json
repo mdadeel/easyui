@@ -1,0 +1,33 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "accordion",
+  "type": "registry:ui",
+  "title": "Accordion",
+  "description": "A vertically stacked set of collapsible sections.",
+  "dependencies": [
+    "@base-ui/react"
+  ],
+  "registryDependencies": [
+    "easyui-tokens"
+  ],
+  "files": [
+    {
+      "path": "src/components/accordion/accordion.tsx",
+      "type": "registry:file",
+      "target": "components/easyui/components/accordion/accordion.tsx",
+      "content": "import { Accordion as BaseAccordion } from \"@base-ui/react/accordion\";\nimport type { ComponentPropsWithoutRef, ElementType } from \"react\";\nimport { cn } from \"../../lib/cn\";\nimport \"../../styles/accordion.css\";\n\ntype StaticClass<T extends ElementType> = Omit<ComponentPropsWithoutRef<T>, \"className\"> & {\n  className?: string;\n};\n\n/**\n * Stacked, collapsible sections. Each item needs a unique `value`.\n * Keyboard support (arrows, Home, End, Enter, Space) comes from Base UI.\n *\n * @example\n * <Accordion>\n *   <AccordionItem value=\"billing\">\n *     <AccordionTrigger>Billing</AccordionTrigger>\n *     <AccordionPanel>Invoices go to the owner.</AccordionPanel>\n *   </AccordionItem>\n * </Accordion>\n */\nexport function Accordion({ className, ...props }: StaticClass<typeof BaseAccordion.Root>) {\n  return <BaseAccordion.Root className={cn(\"eui-accordion\", className)} {...props} />;\n}\n\nexport function AccordionItem({ className, ...props }: StaticClass<typeof BaseAccordion.Item>) {\n  return <BaseAccordion.Item className={cn(\"eui-accordion__item\", className)} {...props} />;\n}\n\n/** The clickable heading. It wraps the trigger in a heading element for screen readers. */\nexport function AccordionTrigger({\n  className,\n  children,\n  ...props\n}: StaticClass<typeof BaseAccordion.Trigger>) {\n  return (\n    <BaseAccordion.Header className=\"eui-accordion__header\">\n      <BaseAccordion.Trigger className={cn(\"eui-accordion__trigger\", className)} {...props}>\n        {children}\n        <svg\n          className=\"eui-accordion__chevron\"\n          width=\"16\"\n          height=\"16\"\n          viewBox=\"0 0 16 16\"\n          fill=\"none\"\n          aria-hidden=\"true\"\n        >\n          <path d=\"M4 6l4 4 4-4\" stroke=\"currentColor\" strokeWidth=\"1.5\" strokeLinecap=\"round\" strokeLinejoin=\"round\" />\n        </svg>\n      </BaseAccordion.Trigger>\n    </BaseAccordion.Header>\n  );\n}\n\nexport function AccordionPanel({ className, ...props }: StaticClass<typeof BaseAccordion.Panel>) {\n  return <BaseAccordion.Panel className={cn(\"eui-accordion__panel\", className)} {...props} />;\n}\n"
+    },
+    {
+      "path": "src/lib/cn.ts",
+      "type": "registry:file",
+      "target": "components/easyui/lib/cn.ts",
+      "content": "/**\n * Joins class names, skipping falsy values.\n * Kept tiny on purpose: components own their class lists, so no merge step is needed.\n */\nexport function cn(...inputs: Array<string | false | null | undefined>): string {\n  return inputs.filter(Boolean).join(\" \");\n}\n"
+    },
+    {
+      "path": "src/styles/accordion.css",
+      "type": "registry:file",
+      "target": "components/easyui/styles/accordion.css",
+      "content": "/* Accordion. Items are separated by hairlines, not boxes. The chevron rotates\n   and the panel fades in with a small slide. Only transform and opacity animate. */\n\n.eui-accordion {\n  display: flex;\n  flex-direction: column;\n  border-top: var(--eui-border-width) solid var(--eui-color-border);\n}\n\n.eui-accordion__item {\n  border-bottom: var(--eui-border-width) solid var(--eui-color-border);\n}\n\n.eui-accordion__header {\n  margin: 0;\n  font-size: inherit;\n}\n\n.eui-accordion__trigger {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  gap: 12px;\n  width: 100%;\n  min-height: 44px;\n  padding: 12px 0;\n  border: 0;\n  border-radius: var(--eui-radius-sm);\n  background: transparent;\n  color: var(--eui-color-fg);\n  font-family: inherit;\n  font-size: 14px;\n  font-weight: 500;\n  letter-spacing: -0.011em;\n  text-align: left;\n  cursor: pointer;\n}\n\n.eui-accordion__trigger:focus-visible {\n  outline: 2px solid var(--eui-color-ring);\n  outline-offset: 2px;\n}\n\n.eui-accordion__trigger[data-disabled] {\n  opacity: 0.5;\n  cursor: not-allowed;\n}\n\n.eui-accordion__chevron {\n  flex: none;\n  color: var(--eui-color-fg-muted);\n  transition: transform var(--eui-duration-base) var(--eui-easing-out);\n}\n\n.eui-accordion__trigger[aria-expanded=\"true\"] .eui-accordion__chevron {\n  transform: rotate(180deg);\n}\n\n.eui-accordion__panel {\n  padding: 0 0 14px;\n  font-size: 14px;\n  line-height: 20px;\n  color: var(--eui-color-fg-muted);\n  animation: eui-accordion-in var(--eui-duration-base) var(--eui-easing-out);\n}\n\n@keyframes eui-accordion-in {\n  from {\n    opacity: 0;\n    transform: translateY(-4px);\n  }\n  to {\n    opacity: 1;\n    transform: none;\n  }\n}\n\n@media (prefers-reduced-motion: reduce) {\n  .eui-accordion__chevron,\n  .eui-accordion__panel {\n    transition: none;\n    animation: none;\n  }\n}\n"
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "slider",
+  "type": "registry:ui",
+  "title": "Slider",
+  "description": "Picks a number, or a range of numbers, on a track.",
+  "dependencies": [
+    "@base-ui/react"
+  ],
+  "registryDependencies": [
+    "easyui-tokens"
+  ],
+  "files": [
+    {
+      "path": "src/components/slider/slider.tsx",
+      "type": "registry:file",
+      "target": "components/easyui/components/slider/slider.tsx",
+      "content": "import { Slider as BaseSlider } from \"@base-ui/react/slider\";\nimport type { ComponentPropsWithoutRef, ElementType } from \"react\";\nimport { cn } from \"../../lib/cn\";\nimport \"../../styles/slider.css\";\n\ntype StaticClass<T extends ElementType> = Omit<ComponentPropsWithoutRef<T>, \"className\"> & {\n  className?: string;\n};\n\nexport interface SliderProps extends StaticClass<typeof BaseSlider.Root> {\n  /** Visible label and accessible name for the slider thumb. */\n  label?: string;\n  /** Show the current value next to the label. */\n  showValue?: boolean;\n}\n\n/**\n * Pick a number inside a range. Arrow keys, Page Up/Down, Home, and End work on\n * the thumb. Pass `value` and `onValueChange` to control it.\n */\nexport function Slider({ label, showValue = false, className, ...props }: SliderProps) {\n  return (\n    <BaseSlider.Root className={cn(\"eui-slider\", className)} {...props}>\n      {label || showValue ? (\n        <div className=\"eui-slider__meta\">\n          {label ? (\n            <BaseSlider.Label className=\"eui-slider__label\">\n              {label}\n            </BaseSlider.Label>\n          ) : null}\n          {showValue ? <BaseSlider.Value className=\"eui-slider__value\" /> : null}\n        </div>\n      ) : null}\n      <BaseSlider.Control className=\"eui-slider__control\">\n        <BaseSlider.Track className=\"eui-slider__track\">\n          <BaseSlider.Indicator className=\"eui-slider__indicator\" />\n        </BaseSlider.Track>\n        <BaseSlider.Thumb className=\"eui-slider__thumb\" aria-label={label} />\n      </BaseSlider.Control>\n    </BaseSlider.Root>\n  );\n}\n"
+    },
+    {
+      "path": "src/lib/cn.ts",
+      "type": "registry:file",
+      "target": "components/easyui/lib/cn.ts",
+      "content": "/**\n * Joins class names, skipping falsy values.\n * Kept tiny on purpose: components own their class lists, so no merge step is needed.\n */\nexport function cn(...inputs: Array<string | false | null | undefined>): string {\n  return inputs.filter(Boolean).join(\" \");\n}\n"
+    },
+    {
+      "path": "src/styles/slider.css",
+      "type": "registry:file",
+      "target": "components/easyui/styles/slider.css",
+      "content": "/* Slider. The track and fill are thin bars. The thumb is a 20px disc that gets a\n   focus ring; its hit area is larger than it looks, for touch. */\n\n.eui-slider {\n  display: flex;\n  flex-direction: column;\n  gap: 10px;\n  width: 100%;\n}\n\n.eui-slider__meta {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  gap: 12px;\n  font-size: 13px;\n}\n\n.eui-slider__label {\n  font-weight: 500;\n  color: var(--eui-color-fg);\n}\n\n.eui-slider__value {\n  color: var(--eui-color-fg-muted);\n  font-variant-numeric: tabular-nums;\n}\n\n.eui-slider__control {\n  position: relative;\n  display: flex;\n  align-items: center;\n  height: 20px;\n  width: 100%;\n  touch-action: none;\n  cursor: pointer;\n}\n\n.eui-slider__track {\n  position: relative;\n  width: 100%;\n  height: 4px;\n  border-radius: var(--eui-radius-full);\n  background-color: var(--eui-color-hover);\n}\n\n/* Base UI sets position: relative and height: inherit inline. Only the color is ours. */\n.eui-slider__indicator {\n  border-radius: inherit;\n  background-color: var(--eui-color-accent);\n}\n\n/* Base UI sets position, inset-inline-start, top and translate(-50%, -50%) inline.\n   Do not add left or margin offsets here, or the thumb would be shifted twice. */\n.eui-slider__thumb {\n  width: 20px;\n  height: 20px;\n  border-radius: var(--eui-radius-full);\n  background-color: var(--eui-color-bg);\n  box-shadow: 0 0 0 var(--eui-border-width) var(--eui-color-border-strong), 0 1px 2px rgb(0 0 0 / 0.15);\n  cursor: grab;\n}\n\n.eui-slider__thumb:focus-visible {\n  outline: 2px solid var(--eui-color-ring);\n  outline-offset: 3px;\n}\n\n.eui-slider__thumb:active {\n  cursor: grabbing;\n}\n"
+    }
+  ]
+}

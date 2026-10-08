@@ -1,0 +1,31 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "label",
+  "type": "registry:ui",
+  "title": "Label",
+  "description": "A form label with an optional required marker.",
+  "dependencies": [],
+  "registryDependencies": [
+    "easyui-tokens"
+  ],
+  "files": [
+    {
+      "path": "src/components/label/label.tsx",
+      "type": "registry:file",
+      "target": "components/easyui/components/label/label.tsx",
+      "content": "import type { ComponentPropsWithoutRef } from \"react\";\nimport { cn } from \"../../lib/cn\";\nimport \"../../styles/label.css\";\n\nexport interface LabelProps extends ComponentPropsWithoutRef<\"label\"> {\n  /** Shows a required marker. Pair it with `required` on the control. */\n  required?: boolean;\n}\n\n/** Standalone label for controls that are not inside a <Field>. Use Field when you can. */\nexport function Label({ required, className, children, ...props }: LabelProps) {\n  return (\n    <label className={cn(\"eui-label\", className)} {...props}>\n      {children}\n      {required ? (\n        <span className=\"eui-label__required\" aria-hidden=\"true\">\n          *\n        </span>\n      ) : null}\n    </label>\n  );\n}\n"
+    },
+    {
+      "path": "src/lib/cn.ts",
+      "type": "registry:file",
+      "target": "components/easyui/lib/cn.ts",
+      "content": "/**\n * Joins class names, skipping falsy values.\n * Kept tiny on purpose: components own their class lists, so no merge step is needed.\n */\nexport function cn(...inputs: Array<string | false | null | undefined>): string {\n  return inputs.filter(Boolean).join(\" \");\n}\n"
+    },
+    {
+      "path": "src/styles/label.css",
+      "type": "registry:file",
+      "target": "components/easyui/styles/label.css",
+      "content": "/* Label. Standalone form label, matching the Field label. */\n\n.eui-label {\n  display: inline-flex;\n  align-items: center;\n  gap: 2px;\n  font-size: 14px;\n  font-weight: 500;\n  color: var(--eui-color-fg);\n}\n\n.eui-label__required {\n  color: var(--eui-color-danger);\n}\n"
+    }
+  ]
+}

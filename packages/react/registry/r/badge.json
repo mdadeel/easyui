@@ -1,0 +1,31 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "badge",
+  "type": "registry:ui",
+  "title": "Badge",
+  "description": "A small status label.",
+  "dependencies": [],
+  "registryDependencies": [
+    "easyui-tokens"
+  ],
+  "files": [
+    {
+      "path": "src/components/badge/badge.tsx",
+      "type": "registry:file",
+      "target": "components/easyui/components/badge/badge.tsx",
+      "content": "import type { ComponentPropsWithoutRef } from \"react\";\nimport { cn } from \"../../lib/cn\";\nimport \"../../styles/badge.css\";\n\nexport type BadgeVariant = \"neutral\" | \"accent\" | \"outline\" | \"danger\";\n\nexport interface BadgeProps extends ComponentPropsWithoutRef<\"span\"> {\n  variant?: BadgeVariant;\n}\n\n/** Small status or count label. Keep the text short: one or two words. */\nexport function Badge({ variant = \"neutral\", className, ...props }: BadgeProps) {\n  return <span className={cn(\"eui-badge\", `eui-badge--${variant}`, className)} {...props} />;\n}\n"
+    },
+    {
+      "path": "src/lib/cn.ts",
+      "type": "registry:file",
+      "target": "components/easyui/lib/cn.ts",
+      "content": "/**\n * Joins class names, skipping falsy values.\n * Kept tiny on purpose: components own their class lists, so no merge step is needed.\n */\nexport function cn(...inputs: Array<string | false | null | undefined>): string {\n  return inputs.filter(Boolean).join(\" \");\n}\n"
+    },
+    {
+      "path": "src/styles/badge.css",
+      "type": "registry:file",
+      "target": "components/easyui/styles/badge.css",
+      "content": "/* Badge. Pill-shaped by default, with a 1px ring rather than a fill for neutral and outline. */\n\n.eui-badge {\n  --eui-badge-bg: var(--eui-color-hover);\n  --eui-badge-fg: var(--eui-color-fg);\n  --eui-badge-ring: transparent;\n\n  display: inline-flex;\n  align-items: center;\n  gap: 4px;\n  height: 22px;\n  padding: 0 8px;\n  border-radius: var(--eui-radius-full);\n  background-color: var(--eui-badge-bg);\n  color: var(--eui-badge-fg);\n  box-shadow: inset 0 0 0 var(--eui-border-width) var(--eui-badge-ring);\n  font-size: 12px;\n  font-weight: 500;\n  line-height: 1;\n  letter-spacing: 0;\n  white-space: nowrap;\n}\n\n.eui-badge--accent {\n  --eui-badge-bg: var(--eui-color-accent);\n  --eui-badge-fg: var(--eui-color-accent-fg);\n}\n\n.eui-badge--outline {\n  --eui-badge-bg: transparent;\n  --eui-badge-fg: var(--eui-color-fg-muted);\n  --eui-badge-ring: var(--eui-color-border-strong);\n}\n\n.eui-badge--danger {\n  --eui-badge-bg: var(--eui-color-danger);\n  --eui-badge-fg: var(--eui-color-danger-fg);\n}\n"
+    }
+  ]
+}

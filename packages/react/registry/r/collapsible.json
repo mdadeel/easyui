@@ -1,0 +1,33 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "collapsible",
+  "type": "registry:ui",
+  "title": "Collapsible",
+  "description": "A single block of content that can be shown or hidden.",
+  "dependencies": [
+    "@base-ui/react"
+  ],
+  "registryDependencies": [
+    "easyui-tokens"
+  ],
+  "files": [
+    {
+      "path": "src/components/collapsible/collapsible.tsx",
+      "type": "registry:file",
+      "target": "components/easyui/components/collapsible/collapsible.tsx",
+      "content": "import { Collapsible as BaseCollapsible } from \"@base-ui/react/collapsible\";\nimport type { ComponentPropsWithoutRef, ElementType } from \"react\";\nimport { cn } from \"../../lib/cn\";\nimport \"../../styles/collapsible.css\";\n\ntype StaticClass<T extends ElementType> = Omit<ComponentPropsWithoutRef<T>, \"className\"> & {\n  className?: string;\n};\n\n/**\n * Shows and hides one block of content. Use it for \"show more\" areas and\n * disclosure sections. For a list of related sections, use Accordion.\n */\nexport const Collapsible = BaseCollapsible.Root;\n\nexport function CollapsibleTrigger({ className, ...props }: StaticClass<typeof BaseCollapsible.Trigger>) {\n  return <BaseCollapsible.Trigger className={cn(\"eui-collapsible__trigger\", className)} {...props} />;\n}\n\nexport function CollapsiblePanel({ className, ...props }: StaticClass<typeof BaseCollapsible.Panel>) {\n  return <BaseCollapsible.Panel className={cn(\"eui-collapsible__panel\", className)} {...props} />;\n}\n"
+    },
+    {
+      "path": "src/lib/cn.ts",
+      "type": "registry:file",
+      "target": "components/easyui/lib/cn.ts",
+      "content": "/**\n * Joins class names, skipping falsy values.\n * Kept tiny on purpose: components own their class lists, so no merge step is needed.\n */\nexport function cn(...inputs: Array<string | false | null | undefined>): string {\n  return inputs.filter(Boolean).join(\" \");\n}\n"
+    },
+    {
+      "path": "src/styles/collapsible.css",
+      "type": "registry:file",
+      "target": "components/easyui/styles/collapsible.css",
+      "content": "/* Collapsible. The trigger is a full-width row. The panel fades in with a short slide. */\n\n.eui-collapsible__trigger {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  gap: 12px;\n  width: 100%;\n  min-height: 40px;\n  padding: 0 4px;\n  border: 0;\n  border-radius: var(--eui-radius-sm);\n  background: transparent;\n  color: var(--eui-color-fg);\n  font-family: inherit;\n  font-size: 14px;\n  font-weight: 500;\n  text-align: left;\n  cursor: pointer;\n}\n\n.eui-collapsible__trigger:hover {\n  background-color: var(--eui-color-hover);\n}\n\n.eui-collapsible__trigger:focus-visible {\n  outline: 2px solid var(--eui-color-ring);\n  outline-offset: 2px;\n}\n\n.eui-collapsible__trigger::after {\n  content: \"\";\n  width: 6px;\n  height: 6px;\n  border-right: 1.5px solid currentColor;\n  border-bottom: 1.5px solid currentColor;\n  transform: rotate(45deg) translate(-2px, -2px);\n  transition: transform var(--eui-duration-base) var(--eui-easing-out);\n}\n\n.eui-collapsible__trigger[aria-expanded=\"true\"]::after {\n  transform: rotate(-135deg) translate(-2px, -2px);\n}\n\n.eui-collapsible__panel {\n  padding: 0 4px 8px;\n  font-size: 14px;\n  line-height: 20px;\n  color: var(--eui-color-fg-muted);\n  animation: eui-collapsible-in var(--eui-duration-base) var(--eui-easing-out);\n}\n\n@keyframes eui-collapsible-in {\n  from {\n    opacity: 0;\n    transform: translateY(-4px);\n  }\n  to {\n    opacity: 1;\n    transform: none;\n  }\n}\n\n@media (prefers-reduced-motion: reduce) {\n  .eui-collapsible__trigger::after,\n  .eui-collapsible__panel {\n    transition: none;\n    animation: none;\n  }\n}\n"
+    }
+  ]
+}

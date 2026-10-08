@@ -1,0 +1,31 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "card",
+  "type": "registry:ui",
+  "title": "Card",
+  "description": "A surface for grouping related content.",
+  "dependencies": [],
+  "registryDependencies": [
+    "easyui-tokens"
+  ],
+  "files": [
+    {
+      "path": "src/components/card/card.tsx",
+      "type": "registry:file",
+      "target": "components/easyui/components/card/card.tsx",
+      "content": "import type { ComponentPropsWithoutRef, ElementType, ReactNode } from \"react\";\nimport { cn } from \"../../lib/cn\";\nimport \"../../styles/card.css\";\n\n/** Surface for grouping related content. A hairline ring instead of a heavy shadow. */\nexport function Card({ className, ...props }: ComponentPropsWithoutRef<\"div\">) {\n  return <div className={cn(\"eui-card\", className)} {...props} />;\n}\n\nexport function CardHeader({ className, ...props }: ComponentPropsWithoutRef<\"div\">) {\n  return <div className={cn(\"eui-card__header\", className)} {...props} />;\n}\n\nexport function CardTitle({\n  className,\n  as: Heading = \"h3\",\n  ...props\n}: ComponentPropsWithoutRef<\"h3\"> & { as?: ElementType }) {\n  return <Heading className={cn(\"eui-card__title\", className)} {...props} />;\n}\n\nexport function CardDescription({ className, ...props }: ComponentPropsWithoutRef<\"p\">) {\n  return <p className={cn(\"eui-card__description\", className)} {...props} />;\n}\n\nexport function CardContent({ className, ...props }: ComponentPropsWithoutRef<\"div\">) {\n  return <div className={cn(\"eui-card__content\", className)} {...props} />;\n}\n\nexport function CardFooter({\n  className,\n  children,\n  ...props\n}: ComponentPropsWithoutRef<\"div\"> & { children?: ReactNode }) {\n  return (\n    <div className={cn(\"eui-card__footer\", className)} {...props}>\n      {children}\n    </div>\n  );\n}\n"
+    },
+    {
+      "path": "src/lib/cn.ts",
+      "type": "registry:file",
+      "target": "components/easyui/lib/cn.ts",
+      "content": "/**\n * Joins class names, skipping falsy values.\n * Kept tiny on purpose: components own their class lists, so no merge step is needed.\n */\nexport function cn(...inputs: Array<string | false | null | undefined>): string {\n  return inputs.filter(Boolean).join(\" \");\n}\n"
+    },
+    {
+      "path": "src/styles/card.css",
+      "type": "registry:file",
+      "target": "components/easyui/styles/card.css",
+      "content": "/* Card. A hairline ring instead of a shadow, so it reads flat and calm.\n   Radius is capped so a \"full\" radius token can't make the corners balloon. */\n\n.eui-card {\n  display: flex;\n  flex-direction: column;\n  gap: 16px;\n  min-width: 0;\n  padding: 20px;\n  border-radius: min(calc(var(--eui-radius-base) * 1.5), 1rem);\n  background-color: var(--eui-color-bg);\n  color: var(--eui-color-fg);\n  box-shadow: 0 0 0 var(--eui-border-width) var(--eui-color-border);\n}\n\n.eui-card__header {\n  display: flex;\n  flex-direction: column;\n  gap: 4px;\n}\n\n.eui-card__title {\n  margin: 0;\n  font-size: 16px;\n  font-weight: 600;\n  line-height: 24px;\n  letter-spacing: -0.012em;\n  color: var(--eui-color-fg);\n}\n\n.eui-card__description {\n  margin: 0;\n  font-size: 14px;\n  line-height: 20px;\n  color: var(--eui-color-fg-muted);\n}\n\n.eui-card__content {\n  display: flex;\n  flex-direction: column;\n  gap: 12px;\n}\n\n.eui-card__footer {\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n  gap: 8px;\n}\n"
+    }
+  ]
+}

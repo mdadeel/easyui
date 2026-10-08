@@ -1,0 +1,33 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "separator",
+  "type": "registry:ui",
+  "title": "Separator",
+  "description": "A thin divider, horizontal or vertical.",
+  "dependencies": [
+    "@base-ui/react"
+  ],
+  "registryDependencies": [
+    "easyui-tokens"
+  ],
+  "files": [
+    {
+      "path": "src/components/separator/separator.tsx",
+      "type": "registry:file",
+      "target": "components/easyui/components/separator/separator.tsx",
+      "content": "import { Separator as BaseSeparator } from \"@base-ui/react/separator\";\nimport type { ComponentPropsWithoutRef, ElementType } from \"react\";\nimport { cn } from \"../../lib/cn\";\nimport \"../../styles/separator.css\";\n\ntype StaticClass<T extends ElementType> = Omit<ComponentPropsWithoutRef<T>, \"className\"> & {\n  className?: string;\n};\n\n/** Hairline divider. Decorative by default, so it is not announced to screen readers. */\nexport function Separator({ className, ...props }: StaticClass<typeof BaseSeparator>) {\n  return <BaseSeparator className={cn(\"eui-separator\", className)} {...props} />;\n}\n"
+    },
+    {
+      "path": "src/lib/cn.ts",
+      "type": "registry:file",
+      "target": "components/easyui/lib/cn.ts",
+      "content": "/**\n * Joins class names, skipping falsy values.\n * Kept tiny on purpose: components own their class lists, so no merge step is needed.\n */\nexport function cn(...inputs: Array<string | false | null | undefined>): string {\n  return inputs.filter(Boolean).join(\" \");\n}\n"
+    },
+    {
+      "path": "src/styles/separator.css",
+      "type": "registry:file",
+      "target": "components/easyui/styles/separator.css",
+      "content": "/* Separator. A 1px hairline in the border token. */\n\n.eui-separator {\n  flex: none;\n  margin: 0;\n  border: 0;\n  background-color: var(--eui-color-border);\n  height: var(--eui-border-width);\n  width: 100%;\n}\n\n.eui-separator[aria-orientation=\"vertical\"] {\n  width: var(--eui-border-width);\n  height: auto;\n  align-self: stretch;\n}\n"
+    }
+  ]
+}

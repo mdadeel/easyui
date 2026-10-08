@@ -17,3 +17,6 @@ coverage/
 !.env.example
 *.log
 .DS_Store
+
+# docs app: copied from packages/react/registry at dev/build time
+apps/docs/public/r/

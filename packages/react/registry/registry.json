@@ -1,0 +1,450 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "easyui",
+  "homepage": "https://github.com/mdadeel/easyui",
+  "items": [
+    {
+      "name": "easyui-tokens",
+      "type": "registry:file",
+      "title": "easyui tokens",
+      "description": "Design tokens (CSS variables) and the base layer. Load once, before any component.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "url": "r/easyui-tokens.json"
+    },
+    {
+      "name": "accordion",
+      "type": "registry:ui",
+      "title": "Accordion",
+      "description": "A vertically stacked set of collapsible sections.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "easyui-tokens"
+      ],
+      "url": "r/accordion.json"
+    },
+    {
+      "name": "alert",
+      "type": "registry:ui",
+      "title": "Alert",
+      "description": "A short inline message with an optional icon, in four tones.",
+      "dependencies": [],
+      "registryDependencies": [
+        "easyui-tokens"
+      ],
+      "url": "r/alert.json"
+    },
+    {
+      "name": "alert-dialog",
+      "type": "registry:ui",
+      "title": "Alert Dialog",
+      "description": "A modal that asks the user to confirm an action before it runs.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "easyui-tokens"
+      ],
+      "url": "r/alert-dialog.json"
+    },
+    {
+      "name": "aspect-ratio",
+      "type": "registry:ui",
+      "title": "Aspect Ratio",
+      "description": "Keeps content at a fixed width-to-height ratio.",
+      "dependencies": [],
+      "registryDependencies": [
+        "easyui-tokens"
+      ],
+      "url": "r/aspect-ratio.json"
+    },
+    {
+      "name": "avatar",
+      "type": "registry:ui",
+      "title": "Avatar",
+      "description": "A user image with a text fallback.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "easyui-tokens"
+      ],
+      "url": "r/avatar.json"
+    },
+    {
+      "name": "badge",
+      "type": "registry:ui",
+      "title": "Badge",
+      "description": "A small status label.",
+      "dependencies": [],
+      "registryDependencies": [
+        "easyui-tokens"
+      ],
+      "url": "r/badge.json"
+    },
+    {
+      "name": "breadcrumb",
+      "type": "registry:ui",
+      "title": "Breadcrumb",
+      "description": "A trail that shows where the current page sits in the app.",
+      "dependencies": [],
+      "registryDependencies": [
+        "easyui-tokens"
+      ],
+      "url": "r/breadcrumb.json"
+    },
+    {
+      "name": "button",
+      "type": "registry:ui",
+      "title": "Button",
+      "description": "A pressable action with primary, secondary, ghost, and danger variants.",
+      "dependencies": [],
+      "registryDependencies": [
+        "easyui-tokens"
+      ],
+      "url": "r/button.json"
+    },
+    {
+      "name": "card",
+      "type": "registry:ui",
+      "title": "Card",
+      "description": "A surface for grouping related content.",
+      "dependencies": [],
+      "registryDependencies": [
+        "easyui-tokens"
+      ],
+      "url": "r/card.json"
+    },
+    {
+      "name": "choice",
+      "type": "registry:ui",
+      "title": "Choice",
+      "description": "Checkbox and switch controls with labels and descriptions.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "easyui-tokens"
+      ],
+      "url": "r/choice.json"
+    },
+    {
+      "name": "collapsible",
+      "type": "registry:ui",
+      "title": "Collapsible",
+      "description": "A single block of content that can be shown or hidden.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "easyui-tokens"
+      ],
+      "url": "r/collapsible.json"
+    },
+    {
+      "name": "combobox",
+      "type": "registry:ui",
+      "title": "Combobox",
+      "description": "A text input that filters a list of options.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "easyui-tokens"
+      ],
+      "url": "r/combobox.json"
+    },
+    {
+      "name": "dialog",
+      "type": "registry:ui",
+      "title": "Dialog",
+      "description": "A modal window with a title, description, and footer.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "easyui-tokens"
+      ],
+      "url": "r/dialog.json"
+    },
+    {
+      "name": "dropdown-menu",
+      "type": "registry:ui",
+      "title": "Dropdown Menu",
+      "description": "A menu of actions opened from a trigger.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "easyui-tokens"
+      ],
+      "url": "r/dropdown-menu.json"
+    },
+    {
+      "name": "empty",
+      "type": "registry:ui",
+      "title": "Empty",
+      "description": "A placeholder for a view with no content yet, with one next step.",
+      "dependencies": [],
+      "registryDependencies": [
+        "easyui-tokens"
+      ],
+      "url": "r/empty.json"
+    },
+    {
+      "name": "field",
+      "type": "registry:ui",
+      "title": "Field",
+      "description": "Wires a label, description, and error message to a form control.",
+      "dependencies": [],
+      "registryDependencies": [
+        "easyui-tokens"
+      ],
+      "url": "r/field.json"
+    },
+    {
+      "name": "input",
+      "type": "registry:ui",
+      "title": "Input",
+      "description": "A single-line text field in two sizes.",
+      "dependencies": [],
+      "registryDependencies": [
+        "easyui-tokens"
+      ],
+      "url": "r/input.json"
+    },
+    {
+      "name": "kbd",
+      "type": "registry:ui",
+      "title": "Kbd",
+      "description": "Shows a keyboard shortcut.",
+      "dependencies": [],
+      "registryDependencies": [
+        "easyui-tokens"
+      ],
+      "url": "r/kbd.json"
+    },
+    {
+      "name": "label",
+      "type": "registry:ui",
+      "title": "Label",
+      "description": "A form label with an optional required marker.",
+      "dependencies": [],
+      "registryDependencies": [
+        "easyui-tokens"
+      ],
+      "url": "r/label.json"
+    },
+    {
+      "name": "link",
+      "type": "registry:ui",
+      "title": "Link",
+      "description": "A text link with the accent color and a clear focus ring.",
+      "dependencies": [],
+      "registryDependencies": [
+        "easyui-tokens"
+      ],
+      "url": "r/link.json"
+    },
+    {
+      "name": "pagination",
+      "type": "registry:ui",
+      "title": "Pagination",
+      "description": "Numbered pages with previous and next controls.",
+      "dependencies": [],
+      "registryDependencies": [
+        "easyui-tokens"
+      ],
+      "url": "r/pagination.json"
+    },
+    {
+      "name": "popover",
+      "type": "registry:ui",
+      "title": "Popover",
+      "description": "A floating panel anchored to a trigger.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "easyui-tokens"
+      ],
+      "url": "r/popover.json"
+    },
+    {
+      "name": "progress",
+      "type": "registry:ui",
+      "title": "Progress",
+      "description": "A determinate progress bar with an optional label and value.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "easyui-tokens"
+      ],
+      "url": "r/progress.json"
+    },
+    {
+      "name": "radio",
+      "type": "registry:ui",
+      "title": "Radio",
+      "description": "A group of radio buttons with labels and descriptions.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "easyui-tokens"
+      ],
+      "url": "r/radio.json"
+    },
+    {
+      "name": "select",
+      "type": "registry:ui",
+      "title": "Select",
+      "description": "A dropdown to choose one option from a list.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "easyui-tokens"
+      ],
+      "url": "r/select.json"
+    },
+    {
+      "name": "separator",
+      "type": "registry:ui",
+      "title": "Separator",
+      "description": "A thin divider, horizontal or vertical.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "easyui-tokens"
+      ],
+      "url": "r/separator.json"
+    },
+    {
+      "name": "sheet",
+      "type": "registry:ui",
+      "title": "Sheet",
+      "description": "A panel that slides in from an edge of the screen.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "easyui-tokens"
+      ],
+      "url": "r/sheet.json"
+    },
+    {
+      "name": "skeleton",
+      "type": "registry:ui",
+      "title": "Skeleton",
+      "description": "A pulsing placeholder for content that is loading.",
+      "dependencies": [],
+      "registryDependencies": [
+        "easyui-tokens"
+      ],
+      "url": "r/skeleton.json"
+    },
+    {
+      "name": "slider",
+      "type": "registry:ui",
+      "title": "Slider",
+      "description": "Picks a number, or a range of numbers, on a track.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "easyui-tokens"
+      ],
+      "url": "r/slider.json"
+    },
+    {
+      "name": "spinner",
+      "type": "registry:ui",
+      "title": "Spinner",
+      "description": "An indeterminate loading indicator with an accessible label.",
+      "dependencies": [],
+      "registryDependencies": [
+        "easyui-tokens"
+      ],
+      "url": "r/spinner.json"
+    },
+    {
+      "name": "table",
+      "type": "registry:ui",
+      "title": "Table",
+      "description": "A styled data table that scrolls sideways on small screens.",
+      "dependencies": [],
+      "registryDependencies": [
+        "easyui-tokens"
+      ],
+      "url": "r/table.json"
+    },
+    {
+      "name": "tabs",
+      "type": "registry:ui",
+      "title": "Tabs",
+      "description": "Switches between panels of related content.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "easyui-tokens"
+      ],
+      "url": "r/tabs.json"
+    },
+    {
+      "name": "textarea",
+      "type": "registry:ui",
+      "title": "Textarea",
+      "description": "A multi-line text field.",
+      "dependencies": [],
+      "registryDependencies": [
+        "easyui-tokens"
+      ],
+      "url": "r/textarea.json"
+    },
+    {
+      "name": "toast",
+      "type": "registry:ui",
+      "title": "Toast",
+      "description": "A short notification that appears and dismisses itself.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "easyui-tokens"
+      ],
+      "url": "r/toast.json"
+    },
+    {
+      "name": "toggle",
+      "type": "registry:ui",
+      "title": "Toggle",
+      "description": "A button that stays pressed, with a group variant for several options.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "easyui-tokens"
+      ],
+      "url": "r/toggle.json"
+    },
+    {
+      "name": "tooltip",
+      "type": "registry:ui",
+      "title": "Tooltip",
+      "description": "A short hint that appears on hover and focus.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "easyui-tokens"
+      ],
+      "url": "r/tooltip.json"
+    }
+  ]
+}

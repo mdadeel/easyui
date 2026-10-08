@@ -1,0 +1,27 @@
+{
+  "name": "@easyui/docs",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "sync-registry": "node --input-type=module -e \"import { cpSync, mkdirSync } from 'node:fs'; mkdirSync('public', { recursive: true }); cpSync('../../packages/react/registry/r', 'public/r', { recursive: true }); cpSync('../../packages/react/registry/registry.json', 'public/r/index.json');\"",
+    "dev": "pnpm run sync-registry && pnpm --filter @easyui/react run build && vite",
+    "build": "pnpm --filter @easyui/react run build && pnpm run sync-registry && tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@easyui/react": "workspace:*",
+    "@fontsource-variable/geist": "^5.3.0",
+    "@fontsource/geist-mono": "^5.3.0",
+    "react": "^19",
+    "react-dom": "^19"
+  },
+  "devDependencies": {
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "typescript": "^5.9.3",
+    "vite": "^8.3.4"
+  }
+}

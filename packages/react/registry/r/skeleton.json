@@ -1,0 +1,31 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "skeleton",
+  "type": "registry:ui",
+  "title": "Skeleton",
+  "description": "A pulsing placeholder for content that is loading.",
+  "dependencies": [],
+  "registryDependencies": [
+    "easyui-tokens"
+  ],
+  "files": [
+    {
+      "path": "src/components/skeleton/skeleton.tsx",
+      "type": "registry:file",
+      "target": "components/easyui/components/skeleton/skeleton.tsx",
+      "content": "import type { ComponentPropsWithoutRef } from \"react\";\nimport { cn } from \"../../lib/cn\";\nimport \"../../styles/skeleton.css\";\n\nexport type SkeletonProps = ComponentPropsWithoutRef<\"span\">;\n\n/**\n * Placeholder for loading content. Decorative, so it is hidden from assistive\n * tech. Put aria-busy on the region and announce loading elsewhere.\n */\nexport function Skeleton({ className, ...props }: SkeletonProps) {\n  return <span aria-hidden=\"true\" className={cn(\"eui-skeleton\", className)} {...props} />;\n}\n"
+    },
+    {
+      "path": "src/lib/cn.ts",
+      "type": "registry:file",
+      "target": "components/easyui/lib/cn.ts",
+      "content": "/**\n * Joins class names, skipping falsy values.\n * Kept tiny on purpose: components own their class lists, so no merge step is needed.\n */\nexport function cn(...inputs: Array<string | false | null | undefined>): string {\n  return inputs.filter(Boolean).join(\" \");\n}\n"
+    },
+    {
+      "path": "src/styles/skeleton.css",
+      "type": "registry:file",
+      "target": "components/easyui/styles/skeleton.css",
+      "content": "/* Skeleton. A soft opacity pulse. No layout change, and no pulse when reduced motion is on. */\n\n.eui-skeleton {\n  display: block;\n  width: 100%;\n  height: 1em;\n  border-radius: var(--eui-radius-sm);\n  background-color: var(--eui-color-hover);\n  animation: eui-skeleton-pulse 1.6s var(--eui-easing-out) infinite;\n}\n\n@keyframes eui-skeleton-pulse {\n  0%,\n  100% {\n    opacity: 1;\n  }\n  50% {\n    opacity: 0.55;\n  }\n}\n\n@media (prefers-reduced-motion: reduce) {\n  .eui-skeleton {\n    animation: none;\n  }\n}\n"
+    }
+  ]
+}

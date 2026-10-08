@@ -1,0 +1,31 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "aspect-ratio",
+  "type": "registry:ui",
+  "title": "Aspect Ratio",
+  "description": "Keeps content at a fixed width-to-height ratio.",
+  "dependencies": [],
+  "registryDependencies": [
+    "easyui-tokens"
+  ],
+  "files": [
+    {
+      "path": "src/components/aspect-ratio/aspect-ratio.tsx",
+      "type": "registry:file",
+      "target": "components/easyui/components/aspect-ratio/aspect-ratio.tsx",
+      "content": "import type { CSSProperties, ComponentPropsWithoutRef } from \"react\";\nimport { cn } from \"../../lib/cn\";\nimport \"../../styles/aspect-ratio.css\";\n\nexport interface AspectRatioProps extends ComponentPropsWithoutRef<\"div\"> {\n  /** Width divided by height. 16 / 9 for video, 1 for square, 4 / 3 for photos. */\n  ratio?: number;\n}\n\n/** Keeps a box at a fixed shape while its content scales. Use it for images and video. */\nexport function AspectRatio({ ratio = 16 / 9, className, style, ...props }: AspectRatioProps) {\n  const merged: CSSProperties = { aspectRatio: String(ratio), ...style };\n  return <div className={cn(\"eui-aspect-ratio\", className)} style={merged} {...props} />;\n}\n"
+    },
+    {
+      "path": "src/lib/cn.ts",
+      "type": "registry:file",
+      "target": "components/easyui/lib/cn.ts",
+      "content": "/**\n * Joins class names, skipping falsy values.\n * Kept tiny on purpose: components own their class lists, so no merge step is needed.\n */\nexport function cn(...inputs: Array<string | false | null | undefined>): string {\n  return inputs.filter(Boolean).join(\" \");\n}\n"
+    },
+    {
+      "path": "src/styles/aspect-ratio.css",
+      "type": "registry:file",
+      "target": "components/easyui/styles/aspect-ratio.css",
+      "content": "/* AspectRatio. Children fill the box and are clipped to its corners. */\n\n.eui-aspect-ratio {\n  position: relative;\n  width: 100%;\n  overflow: hidden;\n  border-radius: var(--eui-radius-base);\n}\n\n.eui-aspect-ratio > img,\n.eui-aspect-ratio > video {\n  position: absolute;\n  inset: 0;\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n}\n"
+    }
+  ]
+}

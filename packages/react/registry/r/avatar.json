@@ -1,0 +1,33 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "avatar",
+  "type": "registry:ui",
+  "title": "Avatar",
+  "description": "A user image with a text fallback.",
+  "dependencies": [
+    "@base-ui/react"
+  ],
+  "registryDependencies": [
+    "easyui-tokens"
+  ],
+  "files": [
+    {
+      "path": "src/components/avatar/avatar.tsx",
+      "type": "registry:file",
+      "target": "components/easyui/components/avatar/avatar.tsx",
+      "content": "import { Avatar as BaseAvatar } from \"@base-ui/react/avatar\";\nimport type { ComponentPropsWithoutRef, ElementType } from \"react\";\nimport { cn } from \"../../lib/cn\";\nimport \"../../styles/avatar.css\";\n\ntype StaticClass<T extends ElementType> = Omit<ComponentPropsWithoutRef<T>, \"className\"> & {\n  className?: string;\n};\n\nexport type AvatarSize = \"sm\" | \"md\" | \"lg\";\n\nexport interface AvatarProps extends StaticClass<typeof BaseAvatar.Root> {\n  size?: AvatarSize;\n}\n\n/**\n * Round user image with a fallback. The image loads in the background, and the\n * fallback (initials) shows until it is ready or if it fails.\n *\n * @example\n * <Avatar>\n *   <AvatarImage src={user.photo} alt={user.name} />\n *   <AvatarFallback>{initials(user.name)}</AvatarFallback>\n * </Avatar>\n */\nexport function Avatar({ size = \"md\", className, ...props }: AvatarProps) {\n  return <BaseAvatar.Root className={cn(\"eui-avatar\", `eui-avatar--${size}`, className)} {...props} />;\n}\n\nexport function AvatarImage({ className, ...props }: StaticClass<typeof BaseAvatar.Image>) {\n  return <BaseAvatar.Image className={cn(\"eui-avatar__image\", className)} {...props} />;\n}\n\nexport function AvatarFallback({ className, ...props }: StaticClass<typeof BaseAvatar.Fallback>) {\n  return <BaseAvatar.Fallback className={cn(\"eui-avatar__fallback\", className)} {...props} />;\n}\n"
+    },
+    {
+      "path": "src/lib/cn.ts",
+      "type": "registry:file",
+      "target": "components/easyui/lib/cn.ts",
+      "content": "/**\n * Joins class names, skipping falsy values.\n * Kept tiny on purpose: components own their class lists, so no merge step is needed.\n */\nexport function cn(...inputs: Array<string | false | null | undefined>): string {\n  return inputs.filter(Boolean).join(\" \");\n}\n"
+    },
+    {
+      "path": "src/styles/avatar.css",
+      "type": "registry:file",
+      "target": "components/easyui/styles/avatar.css",
+      "content": "/* Avatar. Neutral by default; the fallback uses the hover surface so it stays calm. */\n\n.eui-avatar {\n  --eui-avatar-size: 32px;\n  --eui-avatar-fs: 12px;\n\n  position: relative;\n  display: inline-flex;\n  flex: none;\n  align-items: center;\n  justify-content: center;\n  width: var(--eui-avatar-size);\n  height: var(--eui-avatar-size);\n  overflow: hidden;\n  border-radius: var(--eui-radius-full);\n  background-color: var(--eui-color-hover);\n  color: var(--eui-color-fg-muted);\n  font-size: var(--eui-avatar-fs);\n  font-weight: 500;\n  letter-spacing: 0.02em;\n  user-select: none;\n}\n\n.eui-avatar--sm {\n  --eui-avatar-size: 24px;\n  --eui-avatar-fs: 10px;\n}\n.eui-avatar--md {\n  --eui-avatar-size: 32px;\n  --eui-avatar-fs: 12px;\n}\n.eui-avatar--lg {\n  --eui-avatar-size: 48px;\n  --eui-avatar-fs: 16px;\n}\n\n.eui-avatar::after {\n  content: \"\";\n  position: absolute;\n  inset: 0;\n  border-radius: inherit;\n  box-shadow: inset 0 0 0 var(--eui-border-width) var(--eui-color-border);\n  pointer-events: none;\n}\n\n.eui-avatar__image {\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n}\n\n.eui-avatar__fallback {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  width: 100%;\n  height: 100%;\n}\n"
+    }
+  ]
+}

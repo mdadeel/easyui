@@ -1,0 +1,33 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tabs",
+  "type": "registry:ui",
+  "title": "Tabs",
+  "description": "Switches between panels of related content.",
+  "dependencies": [
+    "@base-ui/react"
+  ],
+  "registryDependencies": [
+    "easyui-tokens"
+  ],
+  "files": [
+    {
+      "path": "src/components/tabs/tabs.tsx",
+      "type": "registry:file",
+      "target": "components/easyui/components/tabs/tabs.tsx",
+      "content": "import { Tabs as BaseTabs } from \"@base-ui/react/tabs\";\nimport type { ComponentPropsWithoutRef, ElementType } from \"react\";\nimport { cn } from \"../../lib/cn\";\nimport \"../../styles/tabs.css\";\n\ntype StaticClass<T extends ElementType> = Omit<ComponentPropsWithoutRef<T>, \"className\"> & {\n  className?: string;\n};\n\n/**\n * Tabs with arrow-key navigation and roving focus from Base UI.\n *\n * @example\n * <Tabs defaultValue=\"overview\">\n *   <TabsList aria-label=\"Project sections\">\n *     <TabsTab value=\"overview\">Overview</TabsTab>\n *     <TabsTab value=\"members\">Members</TabsTab>\n *   </TabsList>\n *   <TabsPanel value=\"overview\">…</TabsPanel>\n *   <TabsPanel value=\"members\">…</TabsPanel>\n * </Tabs>\n */\nexport const Tabs = BaseTabs.Root;\n\nexport function TabsList({ className, ...props }: StaticClass<typeof BaseTabs.List>) {\n  return <BaseTabs.List className={cn(\"eui-tabs__list\", className)} {...props} />;\n}\n\nexport function TabsTab({ className, ...props }: StaticClass<typeof BaseTabs.Tab>) {\n  return <BaseTabs.Tab className={cn(\"eui-tabs__tab\", className)} {...props} />;\n}\n\nexport function TabsPanel({ className, ...props }: StaticClass<typeof BaseTabs.Panel>) {\n  return <BaseTabs.Panel className={cn(\"eui-tabs__panel\", className)} {...props} />;\n}\n"
+    },
+    {
+      "path": "src/lib/cn.ts",
+      "type": "registry:file",
+      "target": "components/easyui/lib/cn.ts",
+      "content": "/**\n * Joins class names, skipping falsy values.\n * Kept tiny on purpose: components own their class lists, so no merge step is needed.\n */\nexport function cn(...inputs: Array<string | false | null | undefined>): string {\n  return inputs.filter(Boolean).join(\" \");\n}\n"
+    },
+    {
+      "path": "src/styles/tabs.css",
+      "type": "registry:file",
+      "target": "components/easyui/styles/tabs.css",
+      "content": "/* Tabs. The active indicator is a single element that Base UI positions;\n   the underline is a box-shadow so it adds no layout height. */\n\n.eui-tabs__list {\n  position: relative;\n  display: flex;\n  align-items: stretch;\n  gap: 4px;\n  overflow-x: auto;\n  scrollbar-width: none;\n  border-bottom: var(--eui-border-width) solid var(--eui-color-border);\n}\n\n.eui-tabs__list::-webkit-scrollbar {\n  display: none;\n}\n\n.eui-tabs__tab {\n  position: relative;\n  flex: none;\n  display: inline-flex;\n  align-items: center;\n  height: 36px;\n  padding: 0 10px;\n  border: 0;\n  background: transparent;\n  color: var(--eui-color-fg-muted);\n  font-family: inherit;\n  font-size: 14px;\n  font-weight: 500;\n  letter-spacing: -0.011em;\n  white-space: nowrap;\n  cursor: pointer;\n  transition: color var(--eui-duration-fast) var(--eui-easing-out);\n}\n\n.eui-tabs__tab:hover {\n  color: var(--eui-color-fg);\n}\n\n.eui-tabs__tab[data-active] {\n  color: var(--eui-color-fg);\n}\n\n.eui-tabs__tab:focus-visible {\n  outline: 2px solid var(--eui-color-ring);\n  outline-offset: -2px;\n  border-radius: var(--eui-radius-sm);\n}\n\n.eui-tabs__tab[data-disabled] {\n  opacity: 0.5;\n  cursor: not-allowed;\n}\n\n/* Active indicator: a 2px bar drawn on the tab's bottom edge. */\n.eui-tabs__tab[data-active]::after {\n  content: \"\";\n  position: absolute;\n  left: 0;\n  right: 0;\n  bottom: calc(var(--eui-border-width) * -1);\n  height: 2px;\n  background-color: var(--eui-color-fg);\n  border-radius: 2px;\n}\n\n.eui-tabs__panel {\n  padding-top: 16px;\n  animation: eui-tabs-in var(--eui-duration-base) var(--eui-easing-out);\n}\n\n@keyframes eui-tabs-in {\n  from {\n    opacity: 0;\n    transform: translateY(4px);\n  }\n  to {\n    opacity: 1;\n    transform: none;\n  }\n}\n\n@media (prefers-reduced-motion: reduce) {\n  .eui-tabs__tab,\n  .eui-tabs__panel {\n    transition: none;\n    animation: none;\n  }\n}\n"
+    }
+  ]
+}

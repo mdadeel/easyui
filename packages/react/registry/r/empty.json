@@ -1,0 +1,31 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "empty",
+  "type": "registry:ui",
+  "title": "Empty",
+  "description": "A placeholder for a view with no content yet, with one next step.",
+  "dependencies": [],
+  "registryDependencies": [
+    "easyui-tokens"
+  ],
+  "files": [
+    {
+      "path": "src/components/empty/empty.tsx",
+      "type": "registry:file",
+      "target": "components/easyui/components/empty/empty.tsx",
+      "content": "import type { ComponentPropsWithoutRef, ReactNode } from \"react\";\nimport { cn } from \"../../lib/cn\";\nimport \"../../styles/empty.css\";\n\nexport interface EmptyProps extends Omit<ComponentPropsWithoutRef<\"div\">, \"title\"> {\n  /** Optional icon or illustration shown above the title. */\n  icon?: ReactNode;\n  title: ReactNode;\n  description?: ReactNode;\n  /** Usually a Button that fixes the empty state, such as \"Create project\". */\n  action?: ReactNode;\n}\n\n/** Placeholder for a view with no content yet. Give it one clear next step. */\nexport function Empty({ icon, title, description, action, className, ...props }: EmptyProps) {\n  return (\n    <div className={cn(\"eui-empty\", className)} {...props}>\n      {icon ? <div className=\"eui-empty__icon\">{icon}</div> : null}\n      <p className=\"eui-empty__title\">{title}</p>\n      {description ? <p className=\"eui-empty__description\">{description}</p> : null}\n      {action ? <div className=\"eui-empty__action\">{action}</div> : null}\n    </div>\n  );\n}\n"
+    },
+    {
+      "path": "src/lib/cn.ts",
+      "type": "registry:file",
+      "target": "components/easyui/lib/cn.ts",
+      "content": "/**\n * Joins class names, skipping falsy values.\n * Kept tiny on purpose: components own their class lists, so no merge step is needed.\n */\nexport function cn(...inputs: Array<string | false | null | undefined>): string {\n  return inputs.filter(Boolean).join(\" \");\n}\n"
+    },
+    {
+      "path": "src/styles/empty.css",
+      "type": "registry:file",
+      "target": "components/easyui/styles/empty.css",
+      "content": "/* Empty state. Centered, quiet, and dashed so it reads as a placeholder. */\n\n.eui-empty {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  gap: 8px;\n  padding: 32px 24px;\n  text-align: center;\n  border-radius: var(--eui-radius-lg);\n  box-shadow: inset 0 0 0 var(--eui-border-width) var(--eui-color-border);\n  background-color: var(--eui-color-surface);\n}\n\n.eui-empty__icon {\n  display: grid;\n  place-items: center;\n  width: 40px;\n  height: 40px;\n  margin-bottom: 4px;\n  border-radius: var(--eui-radius-base);\n  color: var(--eui-color-fg-muted);\n  background-color: var(--eui-color-bg);\n  box-shadow: inset 0 0 0 var(--eui-border-width) var(--eui-color-border);\n}\n\n.eui-empty__title {\n  margin: 0;\n  font-size: 15px;\n  font-weight: 600;\n  color: var(--eui-color-fg);\n}\n\n.eui-empty__description {\n  margin: 0;\n  max-width: 36ch;\n  font-size: 14px;\n  line-height: 20px;\n  color: var(--eui-color-fg-muted);\n}\n\n.eui-empty__action {\n  margin-top: 8px;\n}\n"
+    }
+  ]
+}
