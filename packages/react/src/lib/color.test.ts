@@ -60,6 +60,13 @@ describe("getAccentPalette", () => {
     }
   });
 
+  it("uses black when neither white nor near-black reaches AA", () => {
+    const palette = getAccentPalette("#777777");
+    expect(palette.accentForeground).toBe("#000000");
+    expect(palette.contrast).toBeGreaterThanOrEqual(4.5);
+    expect(readableForeground("#777777")).toBe("#000000");
+  });
+
   it("derives a hover shade that moves away from the foreground", () => {
     const light = getAccentPalette("#f59e0b"); // dark text, so hover lightens
     expect(light.accentForeground).toBe("#0a0a0a");
