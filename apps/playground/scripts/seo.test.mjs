@@ -63,3 +63,11 @@ test("rejects unsupported deployment URLs", () => {
     assert.throws(() => normalizeSiteUrl(value), /SITE_URL/);
   }
 });
+
+test("Cloudflare Workers deploys generated static pages with genuine 404s", async () => {
+  const config = JSON.parse(await readFile(new URL("../../../wrangler.json", import.meta.url), "utf8"));
+  assert.ok(typeof config.name === "string" && config.name.trim(), "a Worker name is required");
+  assert.equal(config.assets.directory, "./apps/playground/dist");
+  assert.equal(config.assets.html_handling, "force-trailing-slash");
+  assert.equal(config.assets.not_found_handling, "404-page");
+});
