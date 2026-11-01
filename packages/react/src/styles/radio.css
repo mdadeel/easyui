@@ -66,3 +66,6 @@
   position: absolute;
   inset: -5px;
 }
+/* The selection mark remains visible even when a custom accent matches the background. */
+.eui-radio[data-checked] { box-shadow: 0 0 0 var(--eui-border-width) var(--eui-color-fg); }
+.eui-radio__indicator { background-color: var(--eui-color-fg); }

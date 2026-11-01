@@ -25,13 +25,14 @@ export function Radio({ label, description, className, id, ...props }: RadioProp
   const generated = useId().replace(/:/g, "");
   const radioId = id ?? `eui-radio-${generated}`;
   const descriptionId = `${radioId}-description`;
+  const describedBy = [props["aria-describedby"], description ? descriptionId : undefined].filter(Boolean).join(" ") || undefined;
   return (
     <div className="eui-choice">
       <BaseRadio.Root
         id={radioId}
         className={cn("eui-radio", className)}
-        aria-describedby={description ? descriptionId : undefined}
         {...props}
+        aria-describedby={describedBy}
       >
         <BaseRadio.Indicator className="eui-radio__indicator" />
       </BaseRadio.Root>

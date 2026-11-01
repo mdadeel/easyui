@@ -31,6 +31,11 @@ describe("Checkbox", () => {
     expect(box).toHaveAccessibleDescription("One email on Mondays.");
   });
 
+  it("preserves a caller description alongside the component description", () => {
+    render(<><p id="extra">Additional information.</p><Checkbox label="Updates" description="Weekly." aria-describedby="extra" /></>);
+    expect(screen.getByRole("checkbox", { name: "Updates" })).toHaveAccessibleDescription("Additional information. Weekly.");
+  });
+
   it("does not toggle when disabled", async () => {
     const user = userEvent.setup();
     render(<Checkbox label="Locked" disabled />);
@@ -57,6 +62,11 @@ describe("Switch", () => {
     await user.click(sw);
     expect(onCheckedChange).toHaveBeenCalledWith(true, expect.anything());
     expect(sw).toHaveAttribute("aria-checked", "true");
+  });
+
+  it("preserves a caller description alongside the component description", () => {
+    render(<><p id="extra-switch">Additional information.</p><Switch label="Alerts" description="Push alerts." aria-describedby="extra-switch" /></>);
+    expect(screen.getByRole("switch", { name: "Alerts" })).toHaveAccessibleDescription("Additional information. Push alerts.");
   });
 
   it("respects a controlled checked prop", () => {

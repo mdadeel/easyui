@@ -105,3 +105,5 @@
     transition: none;
   }
 }
+.eui-combobox__popup { max-width: calc(100vw - 24px); }
+@media (pointer: coarse) { .eui-combobox__item { min-height: 44px; } }

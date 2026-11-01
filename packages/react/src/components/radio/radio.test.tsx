@@ -38,6 +38,11 @@ describe("Radio", () => {
     expect(screen.getByRole("radio", { name: "Pro" })).toHaveAccessibleDescription("For teams.");
   });
 
+  it("preserves additional descriptions", () => {
+    render(<><p id="extra-radio">More detail.</p><RadioGroup aria-label="Plan"><Radio value="pro" label="Pro" description="For teams." aria-describedby="extra-radio" /></RadioGroup></>);
+    expect(screen.getByRole("radio", { name: "Pro" })).toHaveAccessibleDescription("More detail. For teams.");
+  });
+
   it("has no axe violations", async () => {
     const { container } = render(<Plan />);
     const results = await axe.run(container, { rules: { "color-contrast": { enabled: false } } });

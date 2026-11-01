@@ -53,7 +53,7 @@ export function contrastRatio(a: string, b: string): number {
 const ON_ACCENT_CANDIDATES = ["#ffffff", "#0a0a0a"] as const;
 
 /**
- * Picks the foreground (white or near-black) with the highest contrast
+ * Picks the foreground (white, near-black, or black when needed) with the highest contrast
  * against the given background. Used for text on custom accent colors.
  */
 export function readableForeground(background: string): string {
@@ -66,7 +66,7 @@ export function readableForeground(background: string): string {
       bestRatio = ratio;
     }
   }
-  return best;
+  return bestRatio >= 4.5 ? best : "#000000";
 }
 
 export interface AccentPalette {
@@ -101,7 +101,7 @@ function hoverFor(accent: string, foreground: string): string {
 
 /**
  * Derives the accent pair from one user-chosen color. Picks the foreground
- * (white or near-black) that gives the best worst-case contrast across the
+ * (white, near-black, or black when needed) that gives the best worst-case contrast across the
  * accent and its hover shade, so text stays readable in both states.
  */
 export function getAccentPalette(input: string): AccentPalette {
@@ -116,6 +116,10 @@ export function getAccentPalette(input: string): AccentPalette {
     if (!best || contrast > best.contrast) {
       best = { accent, accentHover, accentForeground: foreground, contrast };
     }
+  }
+  if (best!.contrast < 4.5) {
+    const accentHover = hoverFor(accent, "#000000");
+    return { accent, accentHover, accentForeground: "#000000", contrast: Math.min(contrastRatio(accent, "#000000"), contrastRatio(accentHover, "#000000")) };
   }
   return best!;
 }

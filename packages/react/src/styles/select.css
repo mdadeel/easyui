@@ -145,3 +145,7 @@
     transition: none;
   }
 }
+
+.eui-select__trigger { min-width: min(180px, 100%); max-width: 100%; }
+.eui-select__popup { max-width: calc(100vw - 24px); }
+@media (pointer: coarse) { .eui-select__trigger { min-height: 44px; } .eui-select__item { min-height: 44px; } }

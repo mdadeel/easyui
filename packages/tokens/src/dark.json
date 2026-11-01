@@ -1,18 +1,64 @@
 {
   "color": {
-    "bg": { "$value": "#000000", "$type": "color" },
-    "surface": { "$value": "#0a0a0a", "$type": "color" },
-    "fg": { "$value": "#ededed", "$type": "color" },
-    "fg-muted": { "$value": "#a1a1a1", "$type": "color" },
-    "border": { "$value": "#1f1f1f", "$type": "color" },
-    "border-strong": { "$value": "#6e6e6e", "$type": "color" },
-    "hover": { "$value": "#1a1a1a", "$type": "color" },
-    "ring": { "$value": "#ededed", "$type": "color" },
-    "accent": { "$value": "#ededed", "$type": "color" },
-    "accent-fg": { "$value": "#0a0a0a", "$type": "color" },
-    "accent-hover": { "$value": "color-mix(in oklab, {color.accent} 88%, {color.bg})", "$type": "color" },
-    "danger": { "$value": "#ff6369", "$type": "color" },
-    "danger-fg": { "$value": "#000000", "$type": "color" },
-    "danger-hover": { "$value": "color-mix(in oklab, {color.danger} 88%, {color.bg})", "$type": "color" }
+    "bg": {
+      "$value": "#111b17",
+      "$type": "color"
+    },
+    "surface": {
+      "$value": "#192720",
+      "$type": "color"
+    },
+    "fg": {
+      "$value": "#edf4ed",
+      "$type": "color"
+    },
+    "fg-muted": {
+      "$value": "#b1c2b6",
+      "$type": "color"
+    },
+    "border": {
+      "$value": "#304039",
+      "$type": "color"
+    },
+    "border-strong": {
+      "$value": "#829488",
+      "$type": "color"
+    },
+    "hover": {
+      "$value": "#26382e",
+      "$type": "color"
+    },
+    "ring": {
+      "$value": "#b5dec8",
+      "$type": "color"
+    },
+    "accent": {
+      "$value": "#b5dec8",
+      "$type": "color"
+    },
+    "accent-fg": {
+      "$value": "#111b17",
+      "$type": "color"
+    },
+    "accent-hover": {
+      "$value": "#d0e9d9",
+      "$type": "color"
+    },
+    "danger": {
+      "$value": "#ff7980",
+      "$type": "color"
+    },
+    "danger-fg": {
+      "$value": "#111b17",
+      "$type": "color"
+    },
+    "danger-hover": {
+      "$value": "#ff9a9e",
+      "$type": "color"
+    },
+    "warning": {
+      "$value": "#ffbe75",
+      "$type": "color"
+    }
   }
 }

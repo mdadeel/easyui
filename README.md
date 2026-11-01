@@ -8,9 +8,13 @@ Customize the accent color, radius, and font at runtime; components update autom
 ```
 packages/tokens   Source design tokens (JSON) -> CSS custom properties
 packages/react    @easyui/react: components, provider, color helpers, styles
-apps/playground   Live theming playground (run with `pnpm dev`)
+apps/playground   Component gallery, interactive patterns, blocks, and theming playground
 docs/PLAN.md      Research findings, stack decisions, and phased roadmap
 ```
+
+## Explore the collection
+
+Run `pnpm dev` to browse live primitives and composed patterns. The preview dialog shows the exact TSX source used by each example; pattern interactions are local demos and do not send data or make purchases. The playground lets you experiment with the theme, and Blocks contains a workspace example.
 
 ## Commands
 

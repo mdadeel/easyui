@@ -17,7 +17,7 @@
 }
 
 .eui-alert--success { --eui-alert-accent: var(--eui-color-accent); }
-.eui-alert--warning { --eui-alert-accent: #b45309; }
+.eui-alert--warning { --eui-alert-accent: var(--eui-color-warning); }
 .eui-alert--danger { --eui-alert-accent: var(--eui-color-danger); }
 
 .eui-alert__icon {

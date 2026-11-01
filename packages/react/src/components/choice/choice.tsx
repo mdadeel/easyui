@@ -48,13 +48,14 @@ export function Checkbox({ label, description, className, id, ...props }: Checkb
   const generated = useId().replace(/:/g, "");
   const boxId = id ?? `eui-checkbox-${generated}`;
   const descriptionId = `${boxId}-description`;
+  const describedBy = [props["aria-describedby"], description ? descriptionId : undefined].filter(Boolean).join(" ") || undefined;
   return (
     <div className={cn("eui-choice", className)}>
       <BaseCheckbox.Root
         id={boxId}
         className="eui-checkbox"
-        aria-describedby={description ? descriptionId : undefined}
         {...props}
+        aria-describedby={describedBy}
       >
         <BaseCheckbox.Indicator className="eui-checkbox__indicator">
           <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true">
@@ -80,13 +81,14 @@ export function Switch({ label, description, className, id, ...props }: SwitchPr
   const generated = useId().replace(/:/g, "");
   const switchId = id ?? `eui-switch-${generated}`;
   const descriptionId = `${switchId}-description`;
+  const describedBy = [props["aria-describedby"], description ? descriptionId : undefined].filter(Boolean).join(" ") || undefined;
   return (
     <div className={cn("eui-choice", className)}>
       <BaseSwitch.Root
         id={switchId}
         className="eui-switch"
-        aria-describedby={description ? descriptionId : undefined}
         {...props}
+        aria-describedby={describedBy}
       >
         <BaseSwitch.Thumb className="eui-switch__thumb" />
       </BaseSwitch.Root>
