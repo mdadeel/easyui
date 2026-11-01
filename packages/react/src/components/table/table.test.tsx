@@ -39,6 +39,11 @@ describe("Table", () => {
     expect(screen.getByRole("cell", { name: "INV-001" })).toBeInTheDocument();
   });
 
+  it("makes the scroll container keyboard focusable", () => {
+    render(<Sample />);
+    expect(screen.getByRole("region", { name: "Scrollable table" })).toHaveAttribute("tabindex", "0");
+  });
+
   it("has no axe violations", async () => {
     const { container } = render(<Sample />);
     const results = await axe.run(container, { rules: { "color-contrast": { enabled: false } } });

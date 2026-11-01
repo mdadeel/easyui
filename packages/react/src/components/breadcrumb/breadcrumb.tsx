@@ -14,8 +14,8 @@ export function BreadcrumbItem({ className, ...props }: ComponentPropsWithoutRef
   return <li className={cn("eui-breadcrumb__item", className)} {...props} />;
 }
 
-export function BreadcrumbLink({ className, ...props }: ComponentPropsWithoutRef<"a">) {
-  return <a className={cn("eui-breadcrumb__link", className)} {...props} />;
+export function BreadcrumbLink({ className, children, ...props }: ComponentPropsWithoutRef<"a">) {
+  return <a className={cn("eui-breadcrumb__link", className)} {...props}>{children}</a>;
 }
 
 export function BreadcrumbCurrent({

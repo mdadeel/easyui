@@ -4,7 +4,8 @@ import { cn } from "../../lib/cn";
 /** Wraps the table so wide content scrolls sideways on small screens instead of breaking the layout. */
 export function Table({ className, ...props }: ComponentPropsWithoutRef<"table">) {
   return (
-    <div className="eui-table-wrap">
+    // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- The overflow region must be keyboard scrollable.
+    <div className="eui-table-wrap" role="region" aria-label="Scrollable table" tabIndex={0}>
       <table className={cn("eui-table", className)} {...props} />
     </div>
   );
