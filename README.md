@@ -92,8 +92,10 @@ deploy command as `npx wrangler deploy`. For branch preview builds, use the
 preview deploy command `npx wrangler preview`; `wrangler.json` includes the required
 `previews` block. The root `wrangler.json` explicitly
 points Wrangler at `apps/playground/dist`, avoiding automatic framework detection
-at the monorepo root. Its `name` is `easyui`: change it to match the existing
-Worker's exact name in the Cloudflare dashboard before deploying if different.
+at the monorepo root. A small Worker routes the Google verification file without a
+redirect; other requests continue to use the static asset routing. Its `name` is
+`easyui`: change it to match the existing Worker's exact name in the Cloudflare
+dashboard before deploying if different.
 Use Node 22 or newer for current Wrangler releases.
 
 Set `SITE_URL` in the Cloudflare **build environment variables** to the final

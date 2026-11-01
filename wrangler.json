@@ -5,6 +5,11 @@
   "assets": {
     "directory": "./apps/playground/dist",
     "html_handling": "force-trailing-slash",
-    "not_found_handling": "404-page"
-  }
+    "not_found_handling": "404-page",
+    "binding": "ASSETS",
+    "run_worker_first": [
+      "/google7ecf99f475b9e5b2.html"
+    ]
+  },
+  "main": "apps/playground/worker.mjs"
 }
