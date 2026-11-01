@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ComponentsDemo } from "./ComponentsDemo";
+import { SiteHeader } from "./SiteHeader";
 import {
   Badge,
   Button,
@@ -85,7 +86,7 @@ import {
 type Preset = { id: string; label: string; accent: string | undefined };
 
 const PRESETS: Preset[] = [
-  { id: "ink", label: "Ink", accent: undefined },
+  { id: "ink", label: "Forest", accent: undefined },
   { id: "blue", label: "Blue", accent: "#2563eb" },
   { id: "violet", label: "Violet", accent: "#7c3aed" },
   { id: "emerald", label: "Emerald", accent: "#059669" },
@@ -120,7 +121,7 @@ function normalize(hex: string): string {
  */
 export function App() {
   const [accent, setAccent] = useState<string | undefined>(undefined);
-  const [draft, setDraft] = useState("#171717"); // starts on the default ink accent
+  const [draft, setDraft] = useState("#315f49"); // starts on the default forest accent
   const [radius, setRadius] = useState<EasyUIRadius>("md");
   const [font, setFont] = useState<FontKey>("geist");
   const [mode, setMode] = useState<EasyUITheme>("light");
@@ -143,17 +144,8 @@ export function App() {
   }
 
   return (
-    <div className="page">
-      <header className="page__header">
-        <div className="brand">
-          <span className="brand__mark" aria-hidden="true" />
-          <span className="brand__name">easyui</span>
-        </div>
-        <nav className="page__nav" aria-label="Pages">
-          <a href="#" aria-current="page" className="page__nav-link">Components</a>
-          <a href="#blocks" className="page__nav-link">Blocks</a>
-        </nav>
-      </header>
+    <div className="page" data-theme="light">
+      <SiteHeader />
 
       <main className="page__main">
         <section className="intro">
@@ -181,10 +173,10 @@ export function App() {
                       aria-label={`${p.label} accent`}
                       title={p.label}
                       data-active={active || undefined}
-                      style={{ background: p.accent ?? "#171717" }}
+                      style={{ background: p.accent ?? "#315f49" }}
                       onClick={() => {
                         setAccent(p.accent);
-                        setDraft(p.accent ?? "#171717");
+                        setDraft(p.accent ?? "#315f49");
                       }}
                     />
                   );
@@ -211,7 +203,7 @@ export function App() {
                   ? `Text on accent: ${palette.accentForeground} · contrast ${palette.contrast.toFixed(
                       1,
                     )}:1${passes ? "" : " (below AA)"}`
-                  : "Default ink. Enter a hex value or choose a preset."}
+                  : "Default forest. Enter a hex value or choose a preset."}
               </p>
             </fieldset>
 

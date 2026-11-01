@@ -1,4 +1,5 @@
 import { useMemo, useState, type ReactNode } from "react";
+import { SiteHeader } from "./SiteHeader";
 import {
   Avatar,
   AvatarFallback,
@@ -392,7 +393,9 @@ export function BlocksPage() {
   }
 
   return (
-    <EasyUIProvider className="blocks-root">
+    <EasyUIProvider className="blocks-root" theme="light">
+      <SiteHeader />
+      <div className="blocks-return"><span>BLOCK EXAMPLE</span><strong>Workspace dashboard</strong><a href="#">← Back to collection</a></div>
       <ToastProvider>
         <AppShell active={section} onSelect={setSection}>
           {section === "projects" && (
