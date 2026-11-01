@@ -19,3 +19,10 @@
   outline: 2px solid var(--eui-color-ring);
   outline-offset: 2px;
 }
+/* Preserve recognizable controls when the OS replaces authored colors. */
+@media (forced-colors: active) {
+  .eui-button, .eui-input, .eui-checkbox, .eui-radio, .eui-switch, .eui-select__trigger, .eui-badge { border: 1px solid ButtonText; }
+  .eui-checkbox[data-checked], .eui-switch[data-checked] { background: Highlight; color: HighlightText; }
+  .eui-switch__thumb { background: ButtonText; }
+  .eui-radio__indicator { background: Highlight; }
+}

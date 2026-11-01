@@ -76,3 +76,5 @@
     transition: none;
   }
 }
+.eui-menu { max-width: calc(100vw - 24px); }
+@media (pointer: coarse) { .eui-menu__item { min-height: 44px; } }

@@ -135,3 +135,9 @@
 .eui-switch::after {
   inset: -4px -2px;
 }
+/* Keep the thumb readable on light and dark custom accent colors. */
+.eui-switch[data-checked] .eui-switch__thumb { background-color: var(--eui-color-accent-fg); }
+.eui-choice__text { overflow-wrap: anywhere; }
+.eui-choice:has([data-disabled]) .eui-choice__label { cursor: not-allowed; }
+/* A stable outline keeps custom light accents visible against light surfaces. */
+.eui-checkbox[data-checked], .eui-checkbox[data-indeterminate], .eui-switch[data-checked] { box-shadow: 0 0 0 var(--eui-border-width) var(--eui-color-border-strong); }

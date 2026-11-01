@@ -64,3 +64,5 @@
   border-bottom: 0;
   border-top: var(--eui-border-width) solid var(--eui-color-border);
 }
+.eui-table-wrap:focus-visible { outline: 2px solid var(--eui-color-ring); outline-offset: 2px; }
+.eui-table__td { overflow-wrap: anywhere; }

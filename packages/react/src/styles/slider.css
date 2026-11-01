@@ -69,3 +69,6 @@
 .eui-slider__thumb:active {
   cursor: grabbing;
 }
+/* Expand the thumb's hit area without changing its visual size. */
+.eui-slider__thumb::after { content: ""; position: absolute; inset: -12px; }
+@media (pointer: coarse) { .eui-slider__control { height: 44px; } }

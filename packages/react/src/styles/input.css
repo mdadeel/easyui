@@ -67,3 +67,8 @@
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+/* Prevent mobile Safari from zooming into text entry. */
+@media (max-width: 639px) {
+  .eui-input, .eui-input--sm, .eui-input--md, .eui-input--lg { font-size: 16px; }
+}
