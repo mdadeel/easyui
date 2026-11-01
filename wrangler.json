@@ -1,6 +1,7 @@
 {
   "name": "easyui",
   "compatibility_date": "2025-01-01",
+  "previews": {},
   "assets": {
     "directory": "./apps/playground/dist",
     "html_handling": "force-trailing-slash",

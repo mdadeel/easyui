@@ -88,7 +88,9 @@ engines and the deployed site's configuration.
 
 For a Cloudflare **Worker with static assets**, keep the project root at the
 repository root and configure the build command as `pnpm run build` and the
-deploy command as `npx wrangler deploy`. The root `wrangler.json` explicitly
+deploy command as `npx wrangler deploy`. For branch preview builds, use the
+preview deploy command `npx wrangler preview`; `wrangler.json` includes the required
+`previews` block. The root `wrangler.json` explicitly
 points Wrangler at `apps/playground/dist`, avoiding automatic framework detection
 at the monorepo root. Its `name` is `easyui`: change it to match the existing
 Worker's exact name in the Cloudflare dashboard before deploying if different.
