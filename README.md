@@ -45,3 +45,35 @@ export function App() {
 
 Fonts are not bundled. Load your own (the playground uses `@fontsource-variable/geist`)
 and pass `fontFamily` to `EasyUIProvider` if you want to override the default.
+
+## SEO and deployment
+
+The playground build generates static HTML with page-specific titles, descriptions,
+Open Graph metadata, and meaningful content for the collection, each component, the
+setup guide, playground, and blocks. Search engines can follow normal links to these
+pages without executing JavaScript; the interactive site loads on top. Existing
+`#component/...`, `#getting-started`, `#playground`, and `#blocks` bookmarks redirect
+in the browser to their new paths.
+
+For production, build with the public site origin (no path or trailing route):
+
+```bash
+SITE_URL=https://your-domain.example pnpm build
+```
+
+Publish `apps/playground/dist` at the **root of that origin**. `SITE_URL` supplies
+canonical URLs, Open Graph URLs, structured data, and `sitemap.xml`; point search
+engines to `/sitemap.xml` or use the reference in `/robots.txt`. Do not use the
+example domain above in a real deployment. Builds without `SITE_URL` work locally
+but intentionally omit canonical/absolute social URLs, structured data, and the
+sitemap. Rebuild with the correct origin whenever the public domain changes.
+
+Configure the host to serve the generated directory indexes (for example,
+`/components/button/` from `components/button/index.html`) and assets directly.
+Redirect directory URLs without trailing slashes to the trailing-slash version.
+Serve `404.html` with HTTP status 404 for unknown paths; do **not** rewrite all
+unknown requests to `index.html`, which produces soft 404s. Configure the host's
+HTTPS and preferred-domain redirects consistently with `SITE_URL`. Vite's dev and
+preview servers use SPA fallbacks and are not a substitute for testing the production
+host's status codes or redirect rules. Actual indexing and ranking depend on search
+engines and the deployed site's configuration.

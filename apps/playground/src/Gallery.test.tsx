@@ -4,8 +4,8 @@ import userEvent from "@testing-library/user-event";
 import { Gallery } from "./Gallery";
 
 describe("component discovery", () => {
-  beforeEach(() => { window.location.hash = ""; localStorage.clear(); });
-  afterEach(() => { cleanup(); vi.restoreAllMocks(); });
+  beforeEach(() => { window.history.replaceState(null, "", "/"); localStorage.clear(); });
+  afterEach(() => { cleanup(); vi.restoreAllMocks(); window.history.replaceState(null, "", "/"); });
 
   it("filters actual examples by search and category and can recover from no results", async () => {
     const user = userEvent.setup();
@@ -31,6 +31,19 @@ describe("component discovery", () => {
     await user.click(screen.getByRole("button", { name: /Saved \(1\)/ }));
     expect(screen.getByRole("heading", { name: /Button/ })).toBeInTheDocument();
     expect(screen.queryByRole("heading", { name: /^Card/ })).not.toBeInTheDocument();
+  });
+
+  it("renders a clean component URL with a crawlable details link", () => {
+    window.history.replaceState(null, "", "/components/button/");
+    render(<Gallery />);
+    expect(screen.getByRole("heading", { name: "Button", level: 1 })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /Read the setup guide/ })).toHaveAttribute("href", "/getting-started/");
+  });
+
+  it("provides component links directly in the collection", () => {
+    render(<Gallery />);
+    const card = screen.getByRole("heading", { name: /^Button/ }).closest("article")!;
+    expect(within(card).getByRole("link", { name: /View details/ })).toHaveAttribute("href", "/components/button/");
   });
 
   it("shows the same example source in a deep-linked detail page", async () => {
