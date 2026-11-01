@@ -77,3 +77,22 @@ HTTPS and preferred-domain redirects consistently with `SITE_URL`. Vite's dev an
 preview servers use SPA fallbacks and are not a substitute for testing the production
 host's status codes or redirect rules. Actual indexing and ranking depend on search
 engines and the deployed site's configuration.
+
+### Cloudflare Workers Builds
+
+For a Cloudflare **Worker with static assets**, keep the project root at the
+repository root and configure the build command as `pnpm run build` and the
+deploy command as `npx wrangler deploy`. The root `wrangler.json` explicitly
+points Wrangler at `apps/playground/dist`, avoiding automatic framework detection
+at the monorepo root. Its `name` is `easyui`: change it to match the existing
+Worker's exact name in the Cloudflare dashboard before deploying if different.
+Use Node 22 or newer for current Wrangler releases.
+
+Set `SITE_URL` in the Cloudflare **build environment variables** to the final
+production origin, such as `https://your-domain.example`; do not include a path.
+Use the appropriate preview origin or omit `SITE_URL` for preview builds so they
+are not mistakenly canonicalized to the production domain. The assets settings
+serve generated HTML routes and the generated `404.html` with a 404 status rather
+than falling back to the home page. Verify the domain and routing settings in your
+Cloudflare account after deployment. This configuration targets Workers Builds,
+not the separate Cloudflare Pages build pipeline.

@@ -17,3 +17,6 @@ coverage/
 !.env.example
 *.log
 .DS_Store
+
+# Cloudflare local state
+.wrangler/
