@@ -45,7 +45,7 @@
 .live-label > span, .detail-live-label > span { width: 6px; height: 6px; border-radius: 50%; background: #9b83df; }
 .stage-code { display: inline-flex; align-items: center; justify-content: center; gap: 6px; border: 1px solid #e7e4ed; background: #fff; border-radius: 6px; color: #625b70; font-size: 11px!important; font-weight: 600!important; padding: 7px 9px; white-space: nowrap; }
 .stage-code:hover { border-color: #cfc1ed; color: #6e50c2; }
-.discovery .stage-content { flex: 1 1 auto; min-width: 0; min-height: 0; height: auto; display: flex; align-items: safe center; justify-content: safe center; overflow: auto; overscroll-behavior: contain; padding: 18px 20px 24px; }
+.discovery .stage-content { flex: 1 1 auto; min-width: 0; min-height: 0; height: auto; display: flex; align-items: safe center; justify-content: safe center; overflow: auto; overscroll-behavior: auto; padding: 18px 20px 24px; }
 .discovery .stage-content .example-inner { flex: 0 1 260px; min-width: 0; max-width: 100%; margin: auto; }
 .discovery .stage-button .example-inner, .discovery .stage-badge .example-inner, .discovery .stage-avatar .example-inner, .discovery .stage-dialog .example-inner, .discovery .stage-tooltip .example-inner, .discovery .stage-spinner .example-inner { flex-basis: auto; }
 .card-title-button, .card-preview-link { padding: 0; border: 0; background: transparent; text-align: left; }
@@ -249,3 +249,86 @@
 .site-header a:focus-visible { outline: 2px solid #315f49; outline-offset: 3px; }
 .card-detail-link { display: inline-block; margin-top: 9px; color: #315f49!important; font-size: 11px; font-weight: 650; }
 .card-detail-link:hover { text-decoration: underline; }
+
+/* Documentation and discovery refinements */
+.card-title-link { display: inline-flex; align-items: baseline; gap: 6px; font-size: 15px; font-weight: 700; }
+.card-title-link:hover { color: #315f49; text-decoration: underline; text-underline-offset: 3px; }
+.card-title-link span { color: #718579; font-size: 11px; }
+.card-detail-hint { display: inline-block; margin-top: 3px; color: #526f5b; font-size: 11px; font-weight: 650; }
+.card-info p { margin-bottom: 8px; }
+@media (min-width: 851px) {
+  /* The sticky sidebar owns category navigation on desktop. */
+  .filter-pills { display: none; }
+  .filter-row { flex-direction: row; }
+  .filter-actions { width: 100%; }
+  .search-box { width: min(360px, 100%); flex: 1; }
+}
+.detail-content { min-width: 0; }
+.example-note a { color: #315f49; font-weight: 650; }
+.example-note a:hover { text-decoration: underline; }
+.detail-section { scroll-margin-top: 90px; }
+.state-examples { display: grid; gap: 22px; padding: 24px; border: 1px solid #dfe8dd; border-radius: 12px; background: var(--eui-color-bg); }
+.state-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.api-table-wrap { max-width: 100%; overflow-x: auto; border: 1px solid #dce6da; border-radius: 10px; background: #fffefb; }
+.api-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 13px; line-height: 1.5; }
+.api-table th, .api-table td { padding: 12px 14px; border-bottom: 1px solid #e6ece3; vertical-align: top; }
+.api-table thead th { color: #617366; font-size: 11px; text-transform: uppercase; letter-spacing: .06em; }
+.api-table tbody tr:last-child > * { border-bottom: 0; }
+.api-table tbody th { white-space: nowrap; }
+.api-table code { font-size: 12px; }
+.related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr)); gap: 10px; }
+.discovery .related-grid a { display: grid; gap: 8px; align-content: start; border: 1px solid #dde7dc; background: #fffefb; border-radius: 10px; padding: 16px; }
+.related-grid a:hover { border-color: #9bb8a1; box-shadow: 0 6px 18px #284c350d; }
+.related-grid strong { color: #284d3b; font-size: 14px; }
+.related-grid strong span { float: right; }
+.related-grid a > span { color: #5d7063; font-size: 12px; line-height: 1.5; }
+.eui-root .component-modal { background: #fffefb; color: #19261f; }
+.component-modal__header .eui-dialog__title { color: #19261f; }
+.code-workspace { min-width: 0; background: #011627; }
+.code-filebar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; padding: 10px 20px; color: #c2d3d0; border-bottom: 1px solid #294652; font-size: 12px; }
+.code-filebar > span { display: inline-flex; align-items: center; gap: 8px; font-family: 'Geist Mono', monospace; }
+.code-filebar label { display: flex; align-items: center; gap: 8px; }
+.code-filebar select { color: #e4eee9; background: #173743; border: 1px solid #41606a; border-radius: 6px; padding: 6px; }
+.component-modal__code { background: #011627; color: #d6deeb; font-size: 12px; }
+.code-context { margin: 0; padding: 12px 20px; color: #c2d3d0; border-top: 1px solid #294652; font-size: 12px; line-height: 1.5; }
+.code-context a { color: #b4e2c4; text-decoration: underline; }
+.eui-root[data-theme="dark"] .card-stage,
+.eui-root[data-theme="dark"] .detail-preview,
+.eui-root[data-theme="dark"] .component-modal__preview { background-color: #17211d; background-image: radial-gradient(#3c5043 .7px, transparent .7px); }
+.eui-root[data-theme="dark"] .live-label,
+.eui-root[data-theme="dark"] .detail-live-label { color: #c4dbc8; }
+/* Detail preview toolbar remains light, unlike the canvas. */
+.eui-root[data-theme="dark"] .detail-live-label { color: #526c59; }
+@media (max-width: 580px) {
+  .top-nav a { font-size: 12px; }
+  .github-link { min-width: 36px; min-height: 36px; justify-content: center; padding: 8px; }
+  .github-link .github-text { display: none; }
+  .github-link svg { width: 17px; height: 17px; flex: none; }
+  .code-filebar { padding: 10px 16px; }
+  .api-table th, .api-table td { padding: 10px 12px; }
+}
+.theme-reset { min-height: 40px; border: 1px solid #cbdacd; border-radius: 7px; color: #315f49; background: #f4f8f2; font-weight: 650; cursor: pointer; }
+.theme-reset:hover { background: #e7f0e5; }
+.theme-reset:focus-visible { outline: 2px solid #315f49; outline-offset: 3px; }
+.page .panel .hint a { color: #315f49; font-weight: 650; }
+/* Preview theme must not change the contrast of the surrounding card chrome. */
+.discovery .gallery-card { color: #19261f; }
+.discovery .stage-content { color: var(--eui-color-fg); }
+.state-inputs { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr)); gap: 16px; }
+.state-inputs label { display: grid; gap: 7px; color: var(--eui-color-fg); font-size: 12px; font-weight: 600; }
+.state-choices { display: flex; flex-wrap: wrap; gap: 18px 28px; }
+@media (max-width: 580px) {
+  .top-nav { scrollbar-width: thin; scrollbar-color: #a7b9aa transparent; }
+  .top-nav::-webkit-scrollbar { display: block; height: 3px; }
+  .top-nav::-webkit-scrollbar-thumb { background: #a7b9aa; border-radius: 3px; }
+}
+
+/* Useful answers remain visible to readers and search engines. */
+.faq-section { padding: 56px 0 12px; border-top: 1px solid #dfe6dd; margin-top: 56px; }
+.faq-section h2 { margin: 12px 0 24px; font-family: Georgia, 'Times New Roman', serif; color: #1b3024; font-weight: 400; font-size: clamp(28px, 3vw, 38px); letter-spacing: -.03em; }
+.faq-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-bottom: 24px; }
+.faq-grid article { border: 1px solid #dfe7dc; background: #fffefb; border-radius: 12px; padding: 20px; }
+.faq-grid h3 { margin: 0 0 8px; font-size: 15px; line-height: 1.4; }
+.faq-grid p { margin: 0; color: #52665a; font-size: 13px; line-height: 1.65; }
+.faq-section > a { display: inline-flex; gap: 6px; align-items: center; font-weight: 650; }
+@media (max-width: 639px) { .faq-grid { grid-template-columns: 1fr; } .faq-section { padding-top: 40px; margin-top: 40px; } }

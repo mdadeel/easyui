@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 
 const appDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const catalog = JSON.parse(await readFile(path.join(appDir, "src/catalog.json"), "utf8"));
+const faq = JSON.parse(await readFile(path.join(appDir, "src/faq.json"), "utf8"));
 const escapeHtml = (value) => String(value).replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char]);
 
 /** SITE_URL must be the origin where this root-hosted build is deployed. */
@@ -36,14 +37,20 @@ function seoHead(page, origin) {
   const lines = [
     `<title>${title}</title>`, `<meta name="description" content="${description}" />`,
     '<meta name="robots" content="index, follow" />', '<meta property="og:type" content="website" />',
-    '<meta property="og:site_name" content="EasyUI" />', `<meta property="og:title" content="${title}" />`,
-    `<meta property="og:description" content="${description}" />`, '<meta name="twitter:card" content="summary" />',
+    '<meta property="og:site_name" content="EasyUI" />', '<meta property="og:locale" content="en_US" />', `<meta property="og:title" content="${title}" />`,
+    `<meta property="og:description" content="${description}" />`, `<meta name="twitter:card" content="${origin ? "summary_large_image" : "summary"}" />`,
     `<meta name="twitter:title" content="${title}" />`, `<meta name="twitter:description" content="${description}" />`,
   ];
   if (canonical) {
-    lines.push(`<link rel="canonical" href="${escapeHtml(canonical)}" />`, `<meta property="og:url" content="${escapeHtml(canonical)}" />`);
+    const image = `${origin}/social-card.png`;
+    lines.push(`<link rel="canonical" href="${escapeHtml(canonical)}" />`, `<meta property="og:url" content="${escapeHtml(canonical)}" />`,
+      `<meta property="og:image" content="${escapeHtml(image)}" />`, '<meta property="og:image:width" content="1200" />', '<meta property="og:image:height" content="630" />',
+      '<meta property="og:image:alt" content="EasyUI: React components and interface patterns" />', `<meta name="twitter:image" content="${escapeHtml(image)}" />`);
     const graph = [{ "@type": "WebPage", "@id": canonical, url: canonical, name: page.title, description: page.description, isPartOf: { "@id": `${origin}/#website` } }];
-    if (page.kind === "home") graph.push({ "@type": "WebSite", "@id": `${origin}/#website`, url: `${origin}/`, name: "EasyUI", description: page.description });
+    if (page.kind === "home") {
+      graph.push({ "@type": "WebSite", "@id": `${origin}/#website`, url: `${origin}/`, name: "EasyUI", description: page.description });
+      graph.push({ "@type": "SoftwareSourceCode", name: "EasyUI", description: page.description, url: "https://github.com/mdadeel/easyui", codeRepository: "https://github.com/mdadeel/easyui", programmingLanguage: "TypeScript", runtimePlatform: "React" });
+    }
     if (page.kind === "component") graph.push({ "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Discover", item: `${origin}/` }, { "@type": "ListItem", position: 2, name: page.item.title, item: canonical }] });
     const json = JSON.stringify({ "@context": "https://schema.org", "@graph": graph }).replace(/</g, "\\u003c");
     lines.push(`<script type="application/ld+json">${json}</script>`);
@@ -56,7 +63,8 @@ async function fallbackContent(page) {
   let content;
   if (page.kind === "home") {
     const list = catalog.map((item) => `<li><a href="/components/${escapeHtml(item.id)}/">${escapeHtml(item.title)}</a><span>${escapeHtml(item.description)}</span></li>`).join("\n");
-    content = `<h1>The details make the difference.</h1><p>Explore React UI components and interface patterns. Thoughtful building blocks for interfaces that feel considered. Explore, experiment, and make them yours.</p><h2>Discover components</h2><ul class="seo-list">${list}</ul>`;
+    const answers = faq.map((entry) => `<article><h3>${escapeHtml(entry.question)}</h3><p>${escapeHtml(entry.answer)}</p></article>`).join("\n");
+    content = `<h1>React components, ready to make yours.</h1><p>Explore accessible building blocks and ready-to-use patterns. Try every example, inspect its code, and customize your theme.</p><h2>Discover components</h2><ul class="seo-list">${list}</ul><section><h2>Questions, answered.</h2>${answers}<p><a href="/getting-started/">Read the setup guide</a></p></section>`;
   } else if (page.kind === "component") {
     const item = page.item;
     const source = await readFile(path.join(appDir, "src/examples", `${item.id}.tsx`), "utf8");

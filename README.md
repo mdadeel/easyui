@@ -1,7 +1,13 @@
 # easyui
 
-A production-grade, accessible React UI library with a Geist-inspired design system.
-Customize the accent color, radius, and font at runtime; components update automatically.
+A themeable React UI component library with interactive examples and interface patterns.
+Explore the collection, inspect the example source, and customize the accent color,
+radius, font, and theme at runtime.
+
+**[Explore the live site](https://easyui.mdadeel125.workers.dev/)** ·
+[Component example: Button](https://easyui.mdadeel125.workers.dev/components/button/) ·
+[Getting started](https://easyui.mdadeel125.workers.dev/getting-started/) ·
+[Theme playground](https://easyui.mdadeel125.workers.dev/playground/)
 
 ## Repository layout
 
@@ -14,7 +20,7 @@ docs/PLAN.md      Research findings, stack decisions, and phased roadmap
 
 ## Explore the collection
 
-Run `pnpm dev` to browse live primitives and composed patterns. The preview dialog shows the exact TSX source used by each example; pattern interactions are local demos and do not send data or make purchases. The playground lets you experiment with the theme, and Blocks contains a workspace example.
+Run `pnpm dev` to browse live primitives and composed patterns. The preview dialog shows the exact TSX source used by each example; pattern interactions are local demos and do not send data or make purchases. The playground lets you experiment with the theme; your choices are saved on this device and applied to collection and component previews. Reset them in the playground. Blocks contains a workspace dashboard example. Component pages link to related examples; selected components include verified API and accessibility notes, while other pages link to their implementation for the complete reference.
 
 ## Commands
 
@@ -58,13 +64,13 @@ in the browser to their new paths.
 For production, build with the public site origin (no path or trailing route):
 
 ```bash
-SITE_URL=https://your-domain.example pnpm build
+SITE_URL=https://easyui.mdadeel125.workers.dev pnpm build
 ```
 
 Publish `apps/playground/dist` at the **root of that origin**. `SITE_URL` supplies
 canonical URLs, Open Graph URLs, structured data, and `sitemap.xml`; point search
-engines to `/sitemap.xml` or use the reference in `/robots.txt`. Do not use the
-example domain above in a real deployment. Builds without `SITE_URL` work locally
+engines to `/sitemap.xml` or use the reference in `/robots.txt`. The current production
+origin is `https://easyui.mdadeel125.workers.dev`. Builds without `SITE_URL` work locally
 but intentionally omit canonical/absolute social URLs, structured data, and the
 sitemap. Rebuild with the correct origin whenever the public domain changes.
 
@@ -89,10 +95,18 @@ Worker's exact name in the Cloudflare dashboard before deploying if different.
 Use Node 22 or newer for current Wrangler releases.
 
 Set `SITE_URL` in the Cloudflare **build environment variables** to the final
-production origin, such as `https://your-domain.example`; do not include a path.
+production origin `https://easyui.mdadeel125.workers.dev`; do not include a path.
 Use the appropriate preview origin or omit `SITE_URL` for preview builds so they
 are not mistakenly canonicalized to the production domain. The assets settings
 serve generated HTML routes and the generated `404.html` with a 404 status rather
 than falling back to the home page. Verify the domain and routing settings in your
 Cloudflare account after deployment. This configuration targets Workers Builds,
 not the separate Cloudflare Pages build pipeline.
+
+
+### Search Console and discovery
+
+See [Search Console setup](docs/SEARCH_CONSOLE.md) for the exact URL-prefix
+property, ownership verification, production build settings, and sitemap submission.
+The repository also includes an [ethical discovery and backlink plan](docs/DISCOVERY.md).
+Neither setup guarantees indexing, rankings, backlinks, or inclusion in AI answers.

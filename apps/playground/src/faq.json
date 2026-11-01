@@ -1,0 +1,18 @@
+[
+  {
+    "question": "What is EasyUI?",
+    "answer": "EasyUI is a React UI component library and collection of interface patterns. You can explore live examples, inspect their source, and customize the theme in the playground."
+  },
+  {
+    "question": "How do I get started with EasyUI?",
+    "answer": "Clone the repository, install dependencies with pnpm, and run pnpm dev. The setup guide explains workspace usage and how to add the provider and stylesheet."
+  },
+  {
+    "question": "Can I customize EasyUI components?",
+    "answer": "Yes. EasyUIProvider supports an accent color, corner radius, font family, and light or dark theme. The playground saves preview choices on your device."
+  },
+  {
+    "question": "Do the interactive examples send data or make purchases?",
+    "answer": "The gallery's pattern interactions are local demonstrations. They do not send invitations or make purchases."
+  }
+]

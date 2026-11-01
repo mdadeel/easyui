@@ -2,10 +2,19 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { cleanup, render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Gallery } from "./Gallery";
+import buttonSource from "./examples/button.tsx?raw";
 
 describe("component discovery", () => {
   beforeEach(() => { window.history.replaceState(null, "", "/"); localStorage.clear(); });
   afterEach(() => { cleanup(); vi.restoreAllMocks(); window.history.replaceState(null, "", "/"); });
+
+  it("shows useful, readable answers about the project", () => {
+    render(<Gallery />);
+    const faq = within(screen.getByRole("region", { name: "Questions, answered." }));
+    expect(faq.getByRole("heading", { name: "What is EasyUI?" })).toBeInTheDocument();
+    expect(faq.getByText(/Clone the repository, install dependencies/)).toBeInTheDocument();
+    expect(faq.getByRole("link", { name: /Read the setup guide/ })).toHaveAttribute("href", "/getting-started/");
+  });
 
   it("filters actual examples by search and category and can recover from no results", async () => {
     const user = userEvent.setup();
@@ -43,7 +52,37 @@ describe("component discovery", () => {
   it("provides component links directly in the collection", () => {
     render(<Gallery />);
     const card = screen.getByRole("heading", { name: /^Button/ }).closest("article")!;
-    expect(within(card).getByRole("link", { name: /View details/ })).toHaveAttribute("href", "/components/button/");
+    expect(within(card).getByRole("link", { name: "Button details" })).toHaveAttribute("href", "/components/button/");
+  });
+
+  it("provides verified API guidance, states and related component links", () => {
+    window.history.replaceState(null, "", "/components/button/");
+    render(<Gallery />);
+    expect(screen.getByRole("heading", { name: "Variants and states" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Disabled" })).toBeDisabled();
+    expect(screen.getByRole("heading", { name: "API reference" })).toBeInTheDocument();
+    expect(screen.getByRole("rowheader", { name: "loading" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Accessibility" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /Toggle/ })).toHaveAttribute("href", "/components/toggle/");
+  });
+
+  it("offers minimal usage while preserving the full live example and copy", async () => {
+    const user = userEvent.setup();
+    render(<Gallery />);
+    await user.click(screen.getByRole("button", { name: "View Button code" }));
+    const dialog = await screen.findByRole("dialog", { name: "Button" });
+    const code = within(dialog).getByLabelText("Button example source");
+    expect(code).toHaveTextContent("Learn more");
+    expect(code.textContent).toBe(buttonSource);
+    await user.selectOptions(within(dialog).getByLabelText("Example source"), "minimal");
+    expect(within(dialog).getByLabelText("Button example source")).toHaveTextContent("Get started");
+    expect(within(dialog).getByLabelText("Button example source")).not.toHaveTextContent("Learn more");
+    const writeText = vi.spyOn(navigator.clipboard, "writeText").mockResolvedValue();
+    await user.click(within(dialog).getByRole("button", { name: "Copy code" }));
+    expect(writeText).toHaveBeenCalledWith(expect.stringContaining("return <Button>Get started</Button>"));
+    await user.selectOptions(within(dialog).getByLabelText("Example source"), "full");
+    expect(within(dialog).getByLabelText("Button example source")).toHaveTextContent("Learn more");
+    expect(within(dialog).getByRole("button", { name: "Copy code" })).toBeInTheDocument();
   });
 
   it("shows the same example source in a deep-linked detail page", async () => {
@@ -54,7 +93,7 @@ describe("component discovery", () => {
     expect(screen.getByRole("switch", { name: "Push notifications" })).toBeChecked();
     await user.click(screen.getByRole("button", { name: "View code" }));
     expect(await screen.findByRole("dialog", { name: "Switch" })).toBeInTheDocument();
-    const code = screen.getByText(/import \{ Switch \} from/);
+    const code = screen.getByLabelText("Switch example source");
     expect(code.textContent).toContain('label="Push notifications"');
     expect(code.textContent).toContain("defaultChecked");
   });
@@ -80,8 +119,9 @@ describe("component discovery", () => {
     const card = screen.getByRole("heading", { name: /Textarea/ }).closest("article")!;
     const preview = card.querySelector(".stage-content")!;
     expect(within(preview as HTMLElement).queryByRole("button", { name: /View Textarea code/ })).not.toBeInTheDocument();
-    await user.click(within(card).getByRole("button", { name: "Open Textarea preview" }));
+    await user.click(within(card).getByRole("button", { name: "View Textarea code" }));
     const dialog = await screen.findByRole("dialog", { name: "Textarea" });
+    await user.click(within(dialog).getByRole("button", { name: "Preview" }));
     const input = within(dialog).getByLabelText("Message");
     await user.type(input, "Hello");
     expect(input).toHaveValue("Hello");
