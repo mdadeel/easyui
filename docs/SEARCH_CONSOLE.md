@@ -53,10 +53,26 @@ google-site-verification=Yc5EANhdp0wcUR4ek6zZZTvXrQjpRQovQx6hYk4fWn4
 It must be added to DNS for the exact property in Search Console. This is a Cloudflare
 `workers.dev` hostname; you may not control DNS records for it. Do not add a TXT record
 to an unrelated zone. Use URL-prefix verification instead, or use a custom domain you
-control and follow Search Console's DNS instructions. If you prefer the **HTML file**
-method, download the exact file Search Console provides and place it in
-`apps/playground/public/` at its original filename before rebuilding and deploying. A
-DNS token alone does not determine that filename or file content.
+control and follow Search Console's DNS instructions.
+
+### HTML file verification (provided file)
+
+For the URL-prefix property above, choose **HTML file**. The file you supplied is
+included in `apps/playground/public/google7ecf99f475b9e5b2.html`. After merging and
+deploying, check this exact URL before clicking Verify:
+
+```text
+https://easyui.mdadeel125.workers.dev/google7ecf99f475b9e5b2.html
+```
+
+It must return HTTP 200 without redirecting, with the exact content
+`google-site-verification: google7ecf99f475b9e5b2.html`. The Worker routes only this
+URL through `apps/playground/worker.mjs` so Cloudflare's HTML pretty-URL behavior
+does not redirect it. Leave the verification file and route in place after verification.
+If Google supplies a different file, add that exact file and update both the Worker
+route and Wrangler's `assets.run_worker_first` pattern; merely placing an `.html`
+file in `public/` causes Cloudflare to redirect its URL under the current configuration.
+A DNS token alone does not determine an HTML verification filename or content.
 
 ## 3. Submit the sitemap
 
