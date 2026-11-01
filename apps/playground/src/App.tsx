@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { readPreviewTheme, savePreviewTheme, systemFont } from "./previewTheme";
 import { ComponentsDemo } from "./ComponentsDemo";
 import { SiteHeader } from "./SiteHeader";
 import {
@@ -98,7 +99,7 @@ const RADII: EasyUIRadius[] = ["none", "sm", "md", "lg", "full"];
 
 const FONTS = {
   geist: { label: "Geist", value: undefined },
-  system: { label: "System", value: "ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif" },
+  system: { label: "System", value: systemFont },
 } as const;
 
 type FontKey = keyof typeof FONTS;
@@ -120,11 +121,13 @@ function normalize(hex: string): string {
  * components on the right and nothing else.
  */
 export function App() {
-  const [accent, setAccent] = useState<string | undefined>(undefined);
-  const [draft, setDraft] = useState("#315f49"); // starts on the default forest accent
-  const [radius, setRadius] = useState<EasyUIRadius>("md");
-  const [font, setFont] = useState<FontKey>("geist");
-  const [mode, setMode] = useState<EasyUITheme>("light");
+  const [initialTheme] = useState(readPreviewTheme);
+  const [accent, setAccent] = useState<string | undefined>(initialTheme.accent);
+  const [draft, setDraft] = useState(initialTheme.accent ?? "#315f49");
+  const [radius, setRadius] = useState<EasyUIRadius>(initialTheme.radius);
+  const [font, setFont] = useState<FontKey>(initialTheme.font);
+  const [mode, setMode] = useState<EasyUITheme>(initialTheme.mode);
+  useEffect(() => { savePreviewTheme({ accent, radius, font, mode }); }, [accent, radius, font, mode]);
   const [email, setEmail] = useState("");
   const [team, setTeam] = useState<string | null>(null);
   const [digest, setDigest] = useState(true);
@@ -152,8 +155,7 @@ export function App() {
           <p className="eyebrow">Playground</p>
           <h1 className="title">Pick a brand color. Everything follows.</h1>
           <p className="lede">
-            Change the accent, radius, or font. Only the components on the right update. This page
-            keeps its own look.
+            Change the accent, radius, font, or mode. Your choices are saved on this device and follow you to the collection previews.
           </p>
         </section>
 
@@ -260,6 +262,8 @@ export function App() {
                 ))}
               </div>
             </fieldset>
+            <button type="button" className="theme-reset" onClick={() => { setAccent(undefined); setDraft("#315f49"); setRadius("md"); setFont("geist"); setMode("light"); }}>Reset theme</button>
+            <p className="hint">Theme choices are saved on this device. <a href="/">Explore them in the collection →</a></p>
           </aside>
 
           <EasyUIProvider

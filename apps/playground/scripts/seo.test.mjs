@@ -23,9 +23,15 @@ test("generates crawlable, unique pages and an absolute sitemap for a configured
     const sitemap = await readFile(path.join(dir, "sitemap.xml"), "utf8");
     const robots = await readFile(path.join(dir, "robots.txt"), "utf8");
     assert.match(home, /href="\/components\/button\/"/);
-    assert.match(home, /<h1>The details make the difference\.<\/h1>/);
-    assert.match(home, /React UI components and interface patterns/);
+    assert.match(home, /<h1>React components, ready to make yours\.<\/h1>/);
+    assert.match(home, /accessible building blocks and ready-to-use patterns/);
     assert.match(home, /Profile &amp; connect/);
+    assert.match(home, /What is EasyUI\?/);
+    assert.match(home, /How do I get started with EasyUI\?/);
+    assert.match(home, /property="og:image" content="https:\/\/ui\.example\.com\/social-card\.png"/);
+    assert.match(home, /name="twitter:card" content="summary_large_image"/);
+    const graph = JSON.parse(home.match(/<script type="application\/ld\+json">(.*?)<\/script>/s)[1]);
+    assert.ok(graph["@graph"].some((entry) => entry["@type"] === "SoftwareSourceCode" && entry.codeRepository === "https://github.com/mdadeel/easyui"));
     assert.match(button, /<title>Button — EasyUI React component<\/title>/);
     assert.match(button, /<h1>Button<\/h1>/);
     assert.match(button, /import \{ Button \} from/);
@@ -70,4 +76,22 @@ test("Cloudflare Workers deploys generated static pages with genuine 404s", asyn
   assert.equal(config.assets.directory, "./apps/playground/dist");
   assert.equal(config.assets.html_handling, "force-trailing-slash");
   assert.equal(config.assets.not_found_handling, "404-page");
+});
+
+
+test("preserves the supplied verification meta tag in generated pages", async () => {
+  const dir = await fixture();
+  try {
+    const source = await readFile(new URL("../index.html", import.meta.url), "utf8");
+    await writeFile(path.join(dir, "index.html"), source);
+    await generateSeo({ distDir: dir, siteUrl: "https://easyui.mdadeel125.workers.dev" });
+    const home = await readFile(path.join(dir, "index.html"), "utf8");
+    const component = await readFile(path.join(dir, "components/button/index.html"), "utf8");
+    for (const html of [home, component]) {
+      assert.match(html, /<meta name="google-site-verification" content="Yc5EANhdp0wcUR4ek6zZZTvXrQjpRQovQx6hYk4fWn4"/);
+    }
+    const image = await readFile(new URL("../public/social-card.png", import.meta.url));
+    assert.equal(image.readUInt32BE(16), 1200);
+    assert.equal(image.readUInt32BE(20), 630);
+  } finally { await rm(dir, { recursive: true, force: true }); }
 });
