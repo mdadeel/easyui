@@ -395,7 +395,7 @@ export function BlocksPage() {
   return (
     <EasyUIProvider className="blocks-root" theme="light">
       <SiteHeader />
-      <div className="blocks-return"><span>BLOCK EXAMPLE</span><strong>Workspace dashboard</strong><a href="#">← Back to collection</a></div>
+      <div className="blocks-return"><span>BLOCK EXAMPLE</span><strong>Workspace dashboard</strong><a href="/">← Back to collection</a></div>
       <ToastProvider>
         <AppShell active={section} onSelect={setSection}>
           {section === "projects" && (

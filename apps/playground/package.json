@@ -5,10 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "pnpm --filter @easyui/react run build && vite",
-    "build": "pnpm --filter @easyui/react run build && tsc --noEmit && vite build",
+    "build": "pnpm --filter @easyui/react run build && tsc --noEmit && vite build && node scripts/seo.mjs",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run"
+    "test": "vitest run && node --test scripts/seo.test.mjs"
   },
   "dependencies": {
     "@easyui/react": "workspace:*",

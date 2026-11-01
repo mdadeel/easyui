@@ -6,17 +6,23 @@ import "@easyui/react/styles.css";
 import "./playground.css";
 import "./blocks.css";
 import { Gallery } from "./Gallery";
+import { legacyDestination, resolveRoute } from "./routing";
 const App = lazy(() => import("./App").then(module => ({ default: module.App })));
 const BlocksPage = lazy(() => import("./blocks").then(module => ({ default: module.BlocksPage })));
 
 function Root() {
-  const [hash, setHash] = useState(() => window.location.hash);
+  const [route, setRoute] = useState(() => resolveRoute(window.location.pathname, window.location.hash));
   useEffect(() => {
-    const onChange = () => setHash(window.location.hash);
+    const destination = legacyDestination(window.location.pathname, window.location.hash);
+    if (destination) window.location.replace(destination);
+  }, [route]);
+  useEffect(() => {
+    const onChange = () => setRoute(resolveRoute(window.location.pathname, window.location.hash));
     window.addEventListener("hashchange", onChange);
-    return () => window.removeEventListener("hashchange", onChange);
+    window.addEventListener("popstate", onChange);
+    return () => { window.removeEventListener("hashchange", onChange); window.removeEventListener("popstate", onChange); };
   }, []);
-  return <Suspense fallback={<p role="status" style={{ padding: 24 }}>Loading…</p>}>{hash === "#blocks" ? <BlocksPage /> : hash === "#playground" ? <App /> : <Gallery />}</Suspense>;
+  return <Suspense fallback={<p role="status" style={{ padding: 24 }}>Loading…</p>}>{route.type === "blocks" ? <BlocksPage /> : route.type === "playground" ? <App /> : <Gallery />}</Suspense>;
 }
 
 createRoot(document.getElementById("root")!).render(

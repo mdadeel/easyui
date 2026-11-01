@@ -1,0 +1,312 @@
+[
+  {
+    "id": "project-overview",
+    "title": "Project overview",
+    "category": "Patterns",
+    "description": "A little clarity for work in progress.",
+    "guidance": "Combine status, progress, and people in a compact project summary. The details action is local to this example."
+  },
+  {
+    "id": "profile-connect",
+    "title": "Profile & connect",
+    "category": "Patterns",
+    "description": "A considered introduction to your people.",
+    "guidance": "Use an avatar, a short description, and one clear action to introduce a person. Follow is a local preview state."
+  },
+  {
+    "id": "team-invite",
+    "title": "Team invite",
+    "category": "Patterns",
+    "description": "Make room for the people you work with.",
+    "guidance": "Pair a clearly labelled email field with a direct action. This example validates locally and does not send email."
+  },
+  {
+    "id": "storage-usage",
+    "title": "Storage overview",
+    "category": "Patterns",
+    "description": "Make usage feel easy to understand.",
+    "guidance": "Show an accessible progress value together with the amount used. The breakdown is demo data."
+  },
+  {
+    "id": "notification-preferences",
+    "title": "Notification preferences",
+    "category": "Patterns",
+    "description": "Give people control over the noise.",
+    "guidance": "Use clearly labelled switches for immediate preferences. These controls are local to the preview."
+  },
+  {
+    "id": "pricing-plan",
+    "title": "Pricing plan",
+    "category": "Patterns",
+    "description": "A more thoughtful way to choose a plan.",
+    "guidance": "Show the price and billing period clearly. The billing toggle and selection are demonstration states only."
+  },
+  {
+    "id": "activity-feed",
+    "title": "Activity feed",
+    "category": "Patterns",
+    "description": "The important little updates, in one place.",
+    "guidance": "Use clear names, actions, and timestamps to help people scan recent activity. Marking items read is local to this preview."
+  },
+  {
+    "id": "feedback-survey",
+    "title": "Feedback survey",
+    "category": "Patterns",
+    "description": "A simple moment to listen and learn.",
+    "guidance": "Label each rating and provide a clear selected state. This example stores a local selection only."
+  },
+  {
+    "id": "release-note",
+    "title": "Release highlight",
+    "category": "Patterns",
+    "description": "A warmer welcome to what's new.",
+    "guidance": "Use a concise headline and a clear next action. This example expands locally to show more detail."
+  },
+  {
+    "id": "button",
+    "title": "Button",
+    "category": "Actions",
+    "description": "Trigger actions with clear visual hierarchy.",
+    "guidance": "Use a primary button for the main action, and secondary or ghost buttons for supporting actions."
+  },
+  {
+    "id": "card",
+    "title": "Card",
+    "category": "Layout",
+    "description": "Group related content in a contained surface.",
+    "guidance": "Use the header, content, and footer parts to structure related information."
+  },
+  {
+    "id": "switch",
+    "title": "Switch",
+    "category": "Forms",
+    "description": "Turn a setting on or off immediately.",
+    "source": "choice/choice",
+    "guidance": "Give every switch a clear label. Use it for settings that take effect immediately."
+  },
+  {
+    "id": "input",
+    "title": "Input",
+    "category": "Forms",
+    "description": "Collect a single line of text.",
+    "guidance": "Pair Input with Field to associate its label, description, and validation message."
+  },
+  {
+    "id": "dialog",
+    "title": "Dialog",
+    "category": "Overlay",
+    "description": "Focus attention on a task or message.",
+    "guidance": "Include a title and description. The dialog manages focus and supports Escape to close."
+  },
+  {
+    "id": "badge",
+    "title": "Badge",
+    "category": "Feedback",
+    "description": "Give a status or label a little emphasis.",
+    "guidance": "Keep labels short and make sure status is understandable without relying on color alone."
+  },
+  {
+    "id": "tabs",
+    "title": "Tabs",
+    "category": "Navigation",
+    "description": "Organize related content into views.",
+    "guidance": "Label the tab list and provide a panel for each tab. Use arrow keys to move between tabs."
+  },
+  {
+    "id": "accordion",
+    "title": "Accordion",
+    "category": "Layout",
+    "description": "Reveal information progressively.",
+    "guidance": "Use concise headings so people can scan and expand the content they need."
+  },
+  {
+    "id": "checkbox",
+    "title": "Checkbox",
+    "category": "Forms",
+    "description": "Select one or more independent options.",
+    "source": "choice/choice",
+    "guidance": "Use checkboxes for independent choices and give each one a descriptive label."
+  },
+  {
+    "id": "select",
+    "title": "Select",
+    "category": "Forms",
+    "description": "Choose an option from a compact list.",
+    "guidance": "Provide an accessible name for the trigger and descriptive labels for each option."
+  },
+  {
+    "id": "alert",
+    "title": "Alert",
+    "category": "Feedback",
+    "description": "Communicate important inline messages.",
+    "guidance": "Choose a variant that matches the message and explain what happened in text."
+  },
+  {
+    "id": "avatar",
+    "title": "Avatar",
+    "category": "Layout",
+    "description": "Represent a person with an image or initials.",
+    "guidance": "Provide meaningful alternative text for images and a fallback for missing images."
+  },
+  {
+    "id": "progress",
+    "title": "Progress",
+    "category": "Feedback",
+    "description": "Show the progress of a task.",
+    "guidance": "Use a descriptive label and a value from 0 to 100 for determinate progress."
+  },
+  {
+    "id": "slider",
+    "title": "Slider",
+    "category": "Forms",
+    "description": "Choose a value within a range.",
+    "guidance": "Give the slider a label and useful minimum and maximum values. Arrow keys adjust the value."
+  },
+  {
+    "id": "radio",
+    "title": "Radio group",
+    "category": "Forms",
+    "description": "Choose one option from a visible set.",
+    "guidance": "Label the group and describe each option so the choice is easy to understand."
+  },
+  {
+    "id": "textarea",
+    "title": "Textarea",
+    "category": "Forms",
+    "description": "Make room for longer responses.",
+    "guidance": "Always associate the textarea with a visible label."
+  },
+  {
+    "id": "tooltip",
+    "title": "Tooltip",
+    "category": "Overlay",
+    "description": "Add a useful hint on hover or focus.",
+    "guidance": "Keep hints brief and avoid placing essential information only in a tooltip."
+  },
+  {
+    "id": "pagination",
+    "title": "Pagination",
+    "category": "Navigation",
+    "description": "Move through a set of pages.",
+    "guidance": "Pagination is controlled: keep the current page in state and update it with onPageChange."
+  },
+  {
+    "id": "skeleton",
+    "title": "Skeleton",
+    "category": "Feedback",
+    "description": "Indicate that content is loading.",
+    "guidance": "Use placeholders that resemble the content being loaded and provide an accessible loading label."
+  },
+  {
+    "id": "spinner",
+    "title": "Spinner",
+    "category": "Feedback",
+    "description": "Indicate an ongoing operation.",
+    "guidance": "Provide a meaningful label so the loading state is communicated to assistive technology."
+  },
+  {
+    "id": "empty",
+    "title": "Empty state",
+    "category": "Feedback",
+    "description": "Make an empty view feel like a beginning.",
+    "guidance": "Explain why the view is empty and offer a useful next action when appropriate."
+  },
+  {
+    "id": "popover",
+    "title": "Popover",
+    "category": "Overlay",
+    "description": "Show contextual content near a trigger.",
+    "guidance": "Use a clear trigger and keep contextual content focused and concise."
+  },
+  {
+    "id": "dropdown-menu",
+    "title": "Dropdown menu",
+    "category": "Overlay",
+    "description": "Offer a compact list of actions.",
+    "guidance": "Group related actions, label the trigger, and use separators sparingly."
+  },
+  {
+    "id": "collapsible",
+    "title": "Collapsible",
+    "category": "Layout",
+    "description": "Show or hide supplementary content.",
+    "guidance": "Use a descriptive trigger that makes the hidden content easy to understand."
+  },
+  {
+    "id": "combobox",
+    "title": "Combobox",
+    "category": "Forms",
+    "description": "Search and select from a list.",
+    "guidance": "Use a visible label and provide an empty state when no results match."
+  },
+  {
+    "id": "toggle",
+    "title": "Toggle",
+    "category": "Actions",
+    "description": "Turn a pressed state on or off.",
+    "guidance": "Use a descriptive accessible label for icon-only toggles."
+  },
+  {
+    "id": "table",
+    "title": "Table",
+    "category": "Layout",
+    "description": "Present structured information in rows.",
+    "guidance": "Use table headers and a caption to give data context."
+  },
+  {
+    "id": "alert-dialog",
+    "title": "Alert dialog",
+    "category": "Overlay",
+    "description": "Ask for confirmation before an action.",
+    "guidance": "Use for consequential decisions and provide a clear way to cancel."
+  },
+  {
+    "id": "sheet",
+    "title": "Sheet",
+    "category": "Overlay",
+    "description": "Open a panel from the edge of the screen.",
+    "guidance": "Give the sheet a title and description, and provide a way to close it."
+  },
+  {
+    "id": "kbd",
+    "title": "Keyboard shortcut",
+    "category": "Layout",
+    "description": "Display a keyboard shortcut.",
+    "guidance": "Combine key labels with text that explains the action."
+  },
+  {
+    "id": "aspect-ratio",
+    "title": "Aspect ratio",
+    "category": "Layout",
+    "description": "Keep media at a consistent proportion.",
+    "guidance": "Set the ratio to match the media you want to display."
+  },
+  {
+    "id": "separator",
+    "title": "Separator",
+    "category": "Layout",
+    "description": "Separate groups of related content.",
+    "guidance": "Use sparingly to add structure without adding visual noise."
+  },
+  {
+    "id": "link",
+    "title": "Link",
+    "category": "Navigation",
+    "description": "Connect people to another destination.",
+    "guidance": "Use descriptive link text so the destination is clear."
+  },
+  {
+    "id": "breadcrumb",
+    "title": "Breadcrumb",
+    "category": "Navigation",
+    "description": "Show where you are in a hierarchy.",
+    "guidance": "Use a labelled navigation trail and mark the current page clearly."
+  },
+  {
+    "id": "toast",
+    "title": "Toast",
+    "category": "Feedback",
+    "description": "Offer a brief, non-blocking update.",
+    "guidance": "Use toasts for brief status messages, not important information that needs a permanent home."
+  }
+]
