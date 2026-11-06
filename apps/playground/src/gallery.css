@@ -332,3 +332,89 @@
 .faq-grid p { margin: 0; color: #52665a; font-size: 13px; line-height: 1.65; }
 .faq-section > a { display: inline-flex; gap: 6px; align-items: center; font-weight: 650; }
 @media (max-width: 639px) { .faq-grid { grid-template-columns: 1fr; } .faq-section { padding-top: 40px; margin-top: 40px; } }
+
+/* ---- scrollbars ------------------------------------------------------------
+   Preview tiles scroll without chrome (they are thumbnails; the scrollable ones
+   are focusable regions, so wheel, touch, and keyboard all work). Functional
+   panes — code, data, dialogs — get thin, theme-matched bars instead of the
+   default chunky ones. Covers both scrollbar engines. */
+
+.discovery .stage-content,
+.filter-pills {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.discovery .stage-content::-webkit-scrollbar,
+.discovery .stage-content *::-webkit-scrollbar,
+.filter-pills::-webkit-scrollbar {
+  display: none;
+}
+
+.discovery .stage-content *,
+.filter-pills * {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.eui-root .component-modal,
+.component-modal__preview,
+.api-table-wrap,
+.blocks-root .shell__sidebar {
+  scrollbar-width: thin;
+  scrollbar-color: #b7c4b5 transparent;
+}
+
+.eui-root .component-modal::-webkit-scrollbar,
+.component-modal__preview::-webkit-scrollbar,
+.api-table-wrap::-webkit-scrollbar,
+.blocks-root .shell__sidebar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.eui-root .component-modal::-webkit-scrollbar-thumb,
+.component-modal__preview::-webkit-scrollbar-thumb,
+.api-table-wrap::-webkit-scrollbar-thumb,
+.blocks-root .shell__sidebar::-webkit-scrollbar-thumb {
+  background: #b7c4b5;
+  border-radius: 999px;
+}
+
+.eui-root .component-modal::-webkit-scrollbar-track,
+.component-modal__preview::-webkit-scrollbar-track,
+.api-table-wrap::-webkit-scrollbar-track,
+.blocks-root .shell__sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.component-modal__code,
+.code-workspace pre,
+.detail-code,
+.guide-code pre {
+  scrollbar-width: thin;
+  scrollbar-color: #3c5261 transparent;
+}
+
+.component-modal__code::-webkit-scrollbar,
+.code-workspace pre::-webkit-scrollbar,
+.detail-code::-webkit-scrollbar,
+.guide-code pre::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.component-modal__code::-webkit-scrollbar-thumb,
+.code-workspace pre::-webkit-scrollbar-thumb,
+.detail-code::-webkit-scrollbar-thumb,
+.guide-code pre::-webkit-scrollbar-thumb {
+  background: #3c5261;
+  border-radius: 999px;
+}
+
+.component-modal__code::-webkit-scrollbar-track,
+.code-workspace pre::-webkit-scrollbar-track,
+.detail-code::-webkit-scrollbar-track,
+.guide-code pre::-webkit-scrollbar-track {
+  background: transparent;
+}

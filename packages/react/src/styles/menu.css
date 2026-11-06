@@ -78,3 +78,22 @@
 }
 .eui-menu { max-width: calc(100vw - 24px); }
 @media (pointer: coarse) { .eui-menu__item { min-height: 44px; } }
+
+/* Thin, token-tinted scrollbar (both engines). */
+.eui-menu {
+  scrollbar-width: thin;
+  scrollbar-color: var(--eui-color-border-strong) transparent;
+}
+
+.eui-menu::-webkit-scrollbar {
+  width: 6px;
+}
+
+.eui-menu::-webkit-scrollbar-thumb {
+  background: var(--eui-color-border-strong);
+  border-radius: 999px;
+}
+
+.eui-menu::-webkit-scrollbar-track {
+  background: transparent;
+}

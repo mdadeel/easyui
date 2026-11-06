@@ -149,3 +149,22 @@
 .eui-select__trigger { min-width: min(180px, 100%); max-width: 100%; }
 .eui-select__popup { max-width: calc(100vw - 24px); }
 @media (pointer: coarse) { .eui-select__trigger { min-height: 44px; } .eui-select__item { min-height: 44px; } }
+
+/* Thin, token-tinted scrollbar (both engines). */
+.eui-select__popup {
+  scrollbar-width: thin;
+  scrollbar-color: var(--eui-color-border-strong) transparent;
+}
+
+.eui-select__popup::-webkit-scrollbar {
+  width: 6px;
+}
+
+.eui-select__popup::-webkit-scrollbar-thumb {
+  background: var(--eui-color-border-strong);
+  border-radius: 999px;
+}
+
+.eui-select__popup::-webkit-scrollbar-track {
+  background: transparent;
+}

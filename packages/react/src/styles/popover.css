@@ -47,3 +47,22 @@
     transition: none;
   }
 }
+
+/* Thin, token-tinted scrollbar (both engines). */
+.eui-popover {
+  scrollbar-width: thin;
+  scrollbar-color: var(--eui-color-border-strong) transparent;
+}
+
+.eui-popover::-webkit-scrollbar {
+  width: 6px;
+}
+
+.eui-popover::-webkit-scrollbar-thumb {
+  background: var(--eui-color-border-strong);
+  border-radius: 999px;
+}
+
+.eui-popover::-webkit-scrollbar-track {
+  background: transparent;
+}

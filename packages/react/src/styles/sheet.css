@@ -92,3 +92,22 @@
     transition: none;
   }
 }
+
+/* Thin, token-tinted scrollbar (both engines). */
+.eui-sheet {
+  scrollbar-width: thin;
+  scrollbar-color: var(--eui-color-border-strong) transparent;
+}
+
+.eui-sheet::-webkit-scrollbar {
+  width: 6px;
+}
+
+.eui-sheet::-webkit-scrollbar-thumb {
+  background: var(--eui-color-border-strong);
+  border-radius: 999px;
+}
+
+.eui-sheet::-webkit-scrollbar-track {
+  background: transparent;
+}

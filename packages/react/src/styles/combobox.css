@@ -107,3 +107,22 @@
 }
 .eui-combobox__popup { max-width: calc(100vw - 24px); }
 @media (pointer: coarse) { .eui-combobox__item { min-height: 44px; } }
+
+/* Thin, token-tinted scrollbar (both engines). */
+.eui-combobox__popup {
+  scrollbar-width: thin;
+  scrollbar-color: var(--eui-color-border-strong) transparent;
+}
+
+.eui-combobox__popup::-webkit-scrollbar {
+  width: 6px;
+}
+
+.eui-combobox__popup::-webkit-scrollbar-thumb {
+  background: var(--eui-color-border-strong);
+  border-radius: 999px;
+}
+
+.eui-combobox__popup::-webkit-scrollbar-track {
+  background: transparent;
+}

@@ -47,6 +47,19 @@ label-less form controls. Remaining issues were small and are fixed below.
    after focusing), guarded so it never hijacks typing in a field. Hint and behavior
    now agree everywhere.
 
+6. **Scrollbars in component boxes** — preview tiles, code panes, and popup panels
+   all showed default chunky scrollbars. Now: preview tiles scroll without chrome
+   (`.stage-content` and its subtree; the scrollable tiles are focusable regions, so
+   wheel, touch, and keyboard still work — same idiom as `.top-nav`/`.eui-tabs__list`);
+   functional panes get thin, theme-matched bars instead — code blocks
+   (`.component-modal__code`, `.detail-code`, `.guide-code pre`) on their dark
+   backgrounds, `.api-table-wrap`, the preview dialog shell/preview area, the blocks
+   sidebar, and the library's `.eui-table-wrap`, `.eui-select__popup`, `.eui-menu`,
+   `.eui-popover`, `.eui-combobox__popup`, `.eui-dialog`, `.eui-sheet` (6px bars
+   tinted with `--eui-color-border-strong`). Filter pills row hides its bar like the
+   top nav. Both scrollbar engines covered (`scrollbar-width`/`scrollbar-color` +
+   `::-webkit-scrollbar`).
+
 ## Verified strong (no change needed)
 
 - **Accessibility**: `aria-label` on icon-only buttons, `aria-pressed` on toggles/saved,
@@ -70,9 +83,9 @@ label-less form controls. Remaining issues were small and are fixed below.
 ## Notes (deliberately not changed — would alter the design or scope)
 
 1. `apps/playground/src/gallery.css:1` — `.view-toggle` / `.icon-button` rules
-   (hover-reveal `opacity: 0`) are dead CSS; no element uses those classes. Remove on
-   the next cleanup, or if they are ever used, gate the reveal behind
-   `@media (hover: hover)` so touch users can always see them.
+   (hover-reveal `opacity: 0`) and `.code-preview` are dead CSS; no element uses
+   those classes. Remove on the next cleanup, or if they are ever used, gate the
+   reveal behind `@media (hover: hover)` so touch users can always see them.
 2. Demo copy uses `href="#"` links (`App.tsx`, `ComponentsDemo.tsx`, `blocks.tsx`) —
    they demonstrate Link/Breadcrumb and scroll to top when clicked. Fine for demos;
    use real destinations in production copy.
