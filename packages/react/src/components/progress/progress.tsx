@@ -15,6 +15,9 @@ export interface ProgressProps extends StaticClass<typeof BaseProgress.Root> {
 
 /** Determinate progress bar. Pass `value` from 0 to 100, or leave it out for indeterminate. */
 export function Progress({ label, showValue = false, className, value, ...props }: ProgressProps) {
+  // The fill animates transform: scaleX, so Base UI's inline width is pinned to
+  // the track and the value scales it. Clamping keeps the bar inside the track.
+  const scale = value == null ? 0 : Math.min(100, Math.max(0, value)) / 100;
   return (
     <BaseProgress.Root value={value} className={cn("eui-progress", className)} {...props}>
       {label || showValue ? (
@@ -24,7 +27,10 @@ export function Progress({ label, showValue = false, className, value, ...props 
         </div>
       ) : null}
       <BaseProgress.Track className="eui-progress__track">
-        <BaseProgress.Indicator className="eui-progress__indicator" />
+        <BaseProgress.Indicator
+          className="eui-progress__indicator"
+          style={{ width: "100%", transform: `scaleX(${scale})` }}
+        />
       </BaseProgress.Track>
     </BaseProgress.Root>
   );

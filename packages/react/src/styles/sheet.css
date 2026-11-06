@@ -1,6 +1,6 @@
 /* Sheet. Slides in from an edge with a transform. The backdrop fades. On small
    screens it takes most of the viewport width, and on desktop it stays at a
-   readable width. Respects safe-area insets at the bottom. */
+   readable width. Respects safe-area insets on every edge it touches. */
 
 .eui-sheet__backdrop {
   position: fixed;
@@ -39,6 +39,9 @@
   right: 0;
   bottom: 0;
   width: var(--eui-sheet-size);
+  padding-top: calc(20px + env(safe-area-inset-top));
+  padding-right: calc(20px + env(safe-area-inset-right));
+  padding-bottom: calc(20px + env(safe-area-inset-bottom));
   border-radius: var(--eui-radius-base) 0 0 var(--eui-radius-base);
 }
 
@@ -47,6 +50,9 @@
   left: 0;
   bottom: 0;
   width: var(--eui-sheet-size);
+  padding-top: calc(20px + env(safe-area-inset-top));
+  padding-left: calc(20px + env(safe-area-inset-left));
+  padding-bottom: calc(20px + env(safe-area-inset-bottom));
   border-radius: 0 var(--eui-radius-base) var(--eui-radius-base) 0;
 }
 
@@ -54,7 +60,9 @@
   left: 0;
   right: 0;
   bottom: 0;
-  max-height: 85vh;
+  max-height: 85dvh;
+  padding-inline-start: calc(20px + env(safe-area-inset-left));
+  padding-inline-end: calc(20px + env(safe-area-inset-right));
   padding-bottom: calc(20px + env(safe-area-inset-bottom));
   border-radius: var(--eui-radius-base) var(--eui-radius-base) 0 0;
 }

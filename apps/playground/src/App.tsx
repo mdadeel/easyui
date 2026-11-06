@@ -128,6 +128,17 @@ export function App() {
   const [font, setFont] = useState<FontKey>(initialTheme.font);
   const [mode, setMode] = useState<EasyUITheme>(initialTheme.mode);
   useEffect(() => { savePreviewTheme({ accent, radius, font, mode }); }, [accent, radius, font, mode]);
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (!(e.metaKey || e.ctrlKey) || e.key.toLowerCase() !== "k") return;
+      const el = e.target instanceof HTMLElement ? e.target : null;
+      if (el && (el instanceof HTMLInputElement || el instanceof HTMLTextAreaElement || el instanceof HTMLSelectElement || el.isContentEditable)) return;
+      e.preventDefault();
+      window.location.assign("/?focus=search");
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, []);
   const [email, setEmail] = useState("");
   const [team, setTeam] = useState<string | null>(null);
   const [digest, setDigest] = useState(true);

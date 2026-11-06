@@ -1,5 +1,6 @@
-/* Progress. Base UI sets the indicator width inline (width: N%), so the fill animates
-   width. Only the width moves; the track and label stay still. */
+/* Progress. The fill animates transform: scaleX, so it stays on the compositor;
+   the width is pinned to the track and the value scales it. The track and label
+   stay still. */
 
 .eui-progress {
   display: flex;
@@ -36,11 +37,18 @@
 
 .eui-progress__indicator {
   position: absolute;
-  top: 0;
-  bottom: 0;
+  inset-block: 0;
+  inset-inline-start: 0;
+  width: 100%;
   background-color: var(--eui-color-accent);
   border-radius: inherit;
-  transition: width var(--eui-duration-base) var(--eui-easing-out);
+  transform-origin: left center;
+  transform: scaleX(0);
+  transition: transform var(--eui-duration-base) var(--eui-easing-out);
+}
+
+[dir="rtl"] .eui-progress__indicator {
+  transform-origin: right center;
 }
 
 @media (prefers-reduced-motion: reduce) {

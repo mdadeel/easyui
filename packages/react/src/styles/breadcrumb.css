@@ -46,3 +46,10 @@
 .eui-breadcrumb__separator {
   color: var(--eui-color-border-strong);
 }
+
+/* Touch targets: grow links on coarse pointers (WCAG 2.2 target size, with headroom). */
+@media (pointer: coarse) {
+  .eui-breadcrumb__link {
+    min-height: 40px;
+  }
+}

@@ -74,3 +74,14 @@
   background-color: var(--eui-color-bg);
   box-shadow: 0 0 0 var(--eui-border-width) var(--eui-color-border), 0 1px 2px rgb(0 0 0 / 0.06);
 }
+
+/* Touch targets: grow small sizes on coarse pointers (WCAG 2.2 target size, with headroom). */
+@media (pointer: coarse) {
+  .eui-toggle--sm {
+    height: 40px;
+    min-width: 40px;
+  }
+  .eui-toggle-group--joined .eui-toggle {
+    height: 40px;
+  }
+}

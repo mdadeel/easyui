@@ -450,3 +450,17 @@
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+@media (pointer: coarse) {
+  .nav__item {
+    min-height: 44px;
+  }
+
+  .page__nav-link {
+    min-height: 44px;
+  }
+
+  .data__sort {
+    min-height: 44px;
+  }
+}
